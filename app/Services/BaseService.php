@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Repositories\BaseRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class BaseService
 {
@@ -19,6 +20,10 @@ class BaseService
 
     public function create(Request $request): array
     {
+        $data = $request->all();
+
+        Validator::make($data, $this->repository->getModelRules())->validate();
+
         return $this->repository->create($request->all());
     }
 }

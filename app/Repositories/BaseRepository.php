@@ -23,4 +23,9 @@ class BaseRepository
     {
         return $this->query->create($data)->toArray();
     }
+
+    public function getModelRules(): array
+    {
+        return $this->model->getRules();
+    }
 }

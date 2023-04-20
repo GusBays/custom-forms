@@ -3,11 +3,26 @@
 namespace App\Models;
 
 use App\Models\BaseModel;
+use Illuminate\Auth\Authenticatable;
+use Illuminate\Foundation\Auth\Access\Authorizable;
+use Illuminate\Notifications\Notifiable;
 
 class User extends BaseModel
 {
+    use Notifiable;
+    use Authenticatable;
+    use Authorizable;
+
+    protected array $rules = [
+        'first_name' => 'required|max:255',
+        'last_name' => 'nullable|max:255',
+        'email' => 'required|unique_custom:users',
+        'password' => 'min:6|max:255',
+    ];
+
     protected $fillable = [
-        'name',
+        'first_name',
+        'last_name',
         'email',
         'password',
     ];
@@ -15,9 +30,5 @@ class User extends BaseModel
     protected $hidden = [
         'password',
         'remember_token',
-    ];
-
-    protected $casts = [
-        'email_verified_at' => 'datetime',
     ];
 }
