@@ -10,6 +10,7 @@ class Validator
 {
     private array $data;
     private array $rules;
+    private ?int $id = null;
 
     public function __construct(
         Request $request)
@@ -29,9 +30,16 @@ class Validator
         return $this;
     }
 
+    public function setId(int $id): self
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
     public function validateOrFail(): void
     {
-        $validation = FacadesValidator::make($this->data, $this->rules);
+        $validation = FacadesValidator::make($this->data, $this->rules, [], ['id' => $this->id]);
 
         if ($validation->fails()) {
             $errors = $validation->getMessageBag()->all();
