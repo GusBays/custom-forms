@@ -6,13 +6,18 @@ use App\Http\Controllers\BaseController;
 
 class HomeController extends BaseController
 {
-    public function __construct()
-    {
-        
-    }
-
     public function home()
     {
         return view('home');
+    }
+
+    public function entrar()
+    {
+        return view('login');
+    }
+
+    public function cadastro()
+    {
+        return view('register');
     }
 }
