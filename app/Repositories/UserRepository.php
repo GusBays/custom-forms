@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\User;
 use App\Repositories\BaseRepository;
+use Firebase\JWT\JWT;
 
 class UserRepository extends BaseRepository
 {
@@ -15,5 +16,16 @@ class UserRepository extends BaseRepository
     )
     {
         parent::__construct($model);
+    }
+
+    public function createJwtToken(User $user): string
+    {
+        return (new JWT)->encode([
+            'first_name' => $user->first_name,
+            'last_name' => $user->last_name,
+            'email' => $user->email,
+        ], 
+        env('APP_KEY'),
+        'HS256');
     }
 }
