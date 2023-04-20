@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="container">
-        <form class="row justify-content-center align-items-center form form-login mt-4" method="POST" action="/users">
+        <form class="row justify-content-center align-items-center form form-login mt-4" method="POST" action="/api/users">
             <div class="col-12 text-center">
                 <p class="form-text">Nome</p>
             </div>
