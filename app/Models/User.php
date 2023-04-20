@@ -16,8 +16,8 @@ class User extends BaseModel
     protected array $rules = [
         'first_name' => 'required|max:255',
         'last_name' => 'nullable|max:255',
-        'email' => 'required|unique_custom:users',
-        'password' => 'min:6|max:255',
+        'email' => 'required|unique:users',
+        'password' => 'required|min:6|max:255',
     ];
 
     protected $fillable = [
