@@ -29,6 +29,6 @@ class User extends BaseModel
 
     protected $hidden = [
         'password',
-        'remember_token',
+        'token',
     ];
 }
