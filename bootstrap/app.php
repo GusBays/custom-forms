@@ -58,4 +58,10 @@ if (!function_exists('env')) {
     }
 }
 
+if (!function_exists('addCookie')) {
+    function addCookie(string $name, string $value, int $time = 0) {
+        return setCookie($name, $value, $time);
+    }
+}
+
 return $app;

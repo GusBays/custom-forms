@@ -19,9 +19,9 @@ class BaseRepository
         $this->query = $this->model->query();
     }
 
-    public function create(array $data): array
+    public function create(array $data): Model
     {
-        return $this->query->create($data)->toArray();
+        return $this->query->create($data);
     }
 
     public function getModelRules(): array
