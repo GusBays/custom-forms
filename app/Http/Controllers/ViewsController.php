@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-class HomeController
+class ViewsController
 {
     public function home()
     {

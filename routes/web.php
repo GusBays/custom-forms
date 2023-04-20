@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ViewsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::controller(HomeController::class)->group(function () {
+Route::controller(ViewsController::class)->group(function () {
     Route::get('/', 'home');
     Route::get('/entrar', 'entrar');
     Route::get('/cadastro', 'cadastro');
