@@ -21,14 +21,18 @@ class UserController extends BaseController
         $this->service = $service;
     }
 
-    public function login(Request $request)
-    {
-        dd($request->getMethod());
-    }
-
     public function create(Request $request)
     {
         $resource = parent::create($request);
+
+        if ($this->isBladeRequest()) return redirect($this->to);
+
+        return $resource;
+    }
+
+    public function login(Request $request)
+    {
+        $resource = $this->service->login($request);
 
         if ($this->isBladeRequest()) return redirect($this->to);
 

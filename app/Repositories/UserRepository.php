@@ -18,6 +18,11 @@ class UserRepository extends BaseRepository
         parent::__construct($model);
     }
 
+    public function getByEmail(string $email): ?User
+    {
+        return $this->getOneByOrFail('email', $email);
+    }
+
     public function createJwtToken(User $user): string
     {
         return (new JWT)->encode([
