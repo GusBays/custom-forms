@@ -31,4 +31,11 @@ class User extends BaseModel
         'password',
         'token',
     ];
+
+    public function setPasswordAttribute($value): void
+    {
+        if (blank($value)) return;
+
+        $this->attributes['password'] = app('hash')->make($value);
+    }
 }
