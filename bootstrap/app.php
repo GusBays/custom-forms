@@ -11,6 +11,8 @@
 |
 */
 
+use App\Contracts\RedirectEnum;
+
 $app = new Illuminate\Foundation\Application(
     $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__)
 );
@@ -52,15 +54,15 @@ $app->singleton(
 |
 */
 
-if (!function_exists('env')) {
-    function env(string $field, $default = null) {
-        return $_ENV[$field] ?? $default;
-    }
-}
-
 if (!function_exists('addCookie')) {
     function addCookie(string $name, string $value, int $time = 0) {
         return setCookie($name, $value, $time);
+    }
+}
+
+if (!function_exists('getCookie')) {
+    function getCookie(string $cookie) {
+        return $_COOKIE[$cookie] ?? null;
     }
 }
 
