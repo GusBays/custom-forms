@@ -23,7 +23,7 @@
                 <button type="submit" class="btn btn-secondary btn-block btn-lg">Entrar</button>
             </div>
         </form>
-        <form class="row justify-content-center align-items-center form form-login mt-4" method="GET" action="/cadastro">
+        <form class="row justify-content-center align-items-center form form-login mt-4" method="GET" action="/admin/cadastro">
             <button type="submit" class="btn btn-secondary btn-block btn-lg">Cadastrar-se</button>
         </form>
     </div>

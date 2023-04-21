@@ -7,12 +7,12 @@
 @section('content')
 
     <div class="container">
-        <form class="row justify-content-center align-items-center form form-login mt-4" method="GET" action="/cadastro">
+        <form class="row justify-content-center align-items-center form form-login mt-4" method="GET" action="/admin/cadastro">
             <div class="col-6">
                 <button type="submit" class="btn btn-secondary btn-block btn-lg">Criar conta</button>
             </div>
         </form>
-        <form class="row justify-content-center align-items-center form form-login mt-4" method="GET" action="/entrar">
+        <form class="row justify-content-center align-items-center form form-login mt-4" method="GET" action="/admin/entrar">
             <div class="col-6 text-center">
                 <button type="submit" class="btn btn-secondary btn-block btn-lg">Entrar</button>
             </div>

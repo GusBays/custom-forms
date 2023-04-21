@@ -1,5 +1,6 @@
 <?php
 
+use App\Contracts\RedirectEnum;
 use App\Http\Controllers\ViewsController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,8 +15,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// open routes
 Route::controller(ViewsController::class)->group(function () {
-    Route::get('/', 'home');
-    Route::get('/entrar', 'entrar');
-    Route::get('/cadastro', 'cadastro');
+    Route::get(RedirectEnum::HOME, 'home');
+    Route::get(RedirectEnum::ENTRAR, 'entrar');
+    Route::get(RedirectEnum::CADASTRO, 'cadastro');
+});
+
+Route::middleware('auth:web')->group(function () {
+
+    Route::controller(ViewsController::class)->group(function () {
+        Route::get(RedirectEnum::ADMIN, 'admin');
+    });
+
 });
