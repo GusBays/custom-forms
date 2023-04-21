@@ -2,7 +2,13 @@
 
 namespace App\Http\Middleware;
 
+use App\Contracts\CookieEnum;
+use App\Contracts\RedirectEnum;
+use App\Helpers\Routes;
+use Exception;
+use Illuminate\Auth\AuthenticationException;
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
+use Symfony\Component\HttpFoundation\Response;
 
 class Authenticate extends Middleware
 {
@@ -14,8 +20,8 @@ class Authenticate extends Middleware
      */
     protected function redirectTo($request)
     {
-        if (! $request->expectsJson()) {
-            return route('login');
-        }
+        if (Routes::isAuthWebMiddleware($request->getPathInfo()) && blank(getCookie(CookieEnum::ADM_TOKEN))) throw new AuthenticationException('Unauthenticated', [], RedirectEnum::HOME);
+        
+        if (Routes::isAuthApiMiddleware($request->getPathInfo()) && blank($request->bearerToken())) throw new AuthenticationException();
     }
 }

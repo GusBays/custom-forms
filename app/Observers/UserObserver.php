@@ -19,7 +19,7 @@ class UserObserver
 
     public function saving(User $user): void
     {
-        if ($user->exists) return;
+        if ($user->exists || !$user->wasChanged(['first_name', 'last_name', 'email'])) return;
 
         $user->token = $this->userRepository->createJwtToken($user);
     }

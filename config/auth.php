@@ -37,9 +37,12 @@ return [
 
     'guards' => [
         'web' => [
-            'driver' => 'session',
+            'driver' => 'cookie-token',
             'provider' => 'users',
         ],
+        'api' => [
+            'driver' => 'jwt-token',
+        ]
     ],
 
     /*
