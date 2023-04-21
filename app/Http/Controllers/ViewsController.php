@@ -18,4 +18,9 @@ class ViewsController
     {
         return view('register');
     }
+
+    public function admin()
+    {
+        return view('admin');
+    }
 }
