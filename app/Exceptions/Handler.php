@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use App\Helpers\Routes;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,7 +32,7 @@ class Handler extends ExceptionHandler
 
     protected function unauthenticated($request, AuthenticationException $exception)
     {
-        return $request->expectsJson() ? 
+        return Routes::isAuthApiMiddleware() ? 
             response()->json(
                 [
                     'code' => 'authentication_required',
