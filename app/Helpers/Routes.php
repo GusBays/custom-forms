@@ -6,21 +6,13 @@ use App\Contracts\RedirectEnum;
 
 class Routes
 {
-    public static function isAuthWebMiddleware(string $route): bool
+    public static function isAuthWebMiddleware(): bool
     {
-        $routes = [
-            RedirectEnum::ADMIN
-        ];
-
-        return (in_array($route, $routes));
+        return request()->is('admin');
     }
 
-    public static function isAuthApiMiddleware(string $route): bool
+    public static function isAuthApiMiddleware(): bool
     {
-        $routes = [
-            
-        ];
-
-        return (in_array($route, $routes));
+        return request()->is('api/*');
     }
 }
