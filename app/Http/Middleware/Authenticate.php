@@ -20,8 +20,6 @@ class Authenticate extends Middleware
      */
     protected function redirectTo($request)
     {
-        if (Routes::isAuthWebMiddleware($request->getPathInfo()) && blank(getCookie(CookieEnum::ADM_TOKEN))) throw new AuthenticationException('Unauthenticated', [], RedirectEnum::HOME);
-        
-        if (Routes::isAuthApiMiddleware($request->getPathInfo()) && blank($request->bearerToken())) throw new AuthenticationException();
+        //
     }
 }
