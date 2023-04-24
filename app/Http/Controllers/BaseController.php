@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Contracts\RedirectEnum;
 use App\Services\BaseService;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class BaseController
@@ -23,6 +22,11 @@ class BaseController
     public function create(Request $request)
     {
         return $this->service->create($request);
+    }
+
+    public function show(int $id)
+    {
+        return $this->service->getOne($id);
     }
 
     protected function isBladeRequest(): bool

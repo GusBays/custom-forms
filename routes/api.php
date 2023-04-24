@@ -15,7 +15,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// open routes
 Route::controller(UserController::class)->group(function () {
     Route::post(ApiRoutesEnum::LOGIN, 'login');
     Route::post(ApiRoutesEnum::USERS, 'create');
+});
+
+Route::middleware('auth:api')->group(function() {
+    Route::controller(UserController::class)->group(function () {
+        Route::get(ApiRoutesEnum::USERS_ID, 'show')->whereNumber('id');
+    });
+    
 });

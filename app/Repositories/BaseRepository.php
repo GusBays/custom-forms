@@ -22,7 +22,25 @@ class BaseRepository
 
     public function create(array $data): Model
     {
-        return $this->query->create($data);
+        $model = $this->query->create($data);
+
+        $this->resetModelInstance();
+
+        return $model;
+    }
+
+    public function getOne(int $id): Model
+    {
+        $model = $this->query->findOrFail($id);
+
+        $this->getNewQuery();
+
+        return $model;
+    }
+
+    protected function resetModelInstance(): void
+    {
+        $this->model = $this->model->newInstance();
     }
 
     public function getModelRules(): array

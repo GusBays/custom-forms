@@ -27,4 +27,9 @@ class BaseService
 
         return $this->repository->create($request->all());
     }
+
+    public function getOne(int $id): Model
+    {
+        return $this->repository->getOne($id);
+    }
 }
