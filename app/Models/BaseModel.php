@@ -8,9 +8,11 @@ class BaseModel extends Model
 {
     protected array $rules;
 
-    protected array $filters;
+    protected array $filters = [];
 
-    protected array $sorts;
+    protected array $sorts = [];
+
+    protected array $search = [];
 
     /** @var int */
     protected $perPage = 25;
@@ -28,5 +30,10 @@ class BaseModel extends Model
     public function getSorts(): array
     {
         return $this->sorts;
+    }
+
+    public function getSearch(): array
+    {
+        return $this->search;
     }
 }

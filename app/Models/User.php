@@ -43,6 +43,10 @@ class User extends BaseModel
         'id'
     ];
 
+    protected array $search = [
+        'first_name'
+    ];
+
     public function setPasswordAttribute($value): void
     {
         if (blank($value)) return;

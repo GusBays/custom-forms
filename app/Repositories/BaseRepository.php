@@ -42,6 +42,7 @@ class BaseRepository
     {
         $models = $this->filter()
             ->sort()
+            ->search()
             ->query
             ->simplePaginate($this->model->getPerPage());
 
@@ -130,6 +131,20 @@ class BaseRepository
         if (blank($sortField)) return $this;
 
         $this->query->orderBy($sortField, $sortDirection);
+
+        return $this;
+    }
+
+    private function search(): self
+    {
+        $search = request()->query('q');
+
+        if (blank($search)) return $this;
+
+        $modelSearchableFields = collect($this->model->getSearch());
+
+        $toAddOrWhere = fn (string $field) => $this->query->orWhere($field, 'LIKE', "%$search%");
+        $modelSearchableFields->map($toAddOrWhere);
 
         return $this;
     }
