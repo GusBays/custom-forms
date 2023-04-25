@@ -41,10 +41,10 @@ class BaseRepository
     public function getPaginate(): Paginator
     {
         $models = $this->filter()
-            ->sort()
             ->search()
+            ->sort()
             ->query
-            ->simplePaginate($this->model->getPerPage());
+            ->paginate($this->perPage());
 
         $this->getNewQuery();
 
@@ -147,5 +147,18 @@ class BaseRepository
         $modelSearchableFields->map($toAddOrWhere);
 
         return $this;
+    }
+
+    private function perPage(): int
+    {
+        $limit = request()->query('limit');
+
+        if (blank($limit)) return $this->model->getPerPage();
+
+        $minPerPage = $this->model->getMinPerPage();
+
+        $minResultsAccepted = max($limit, $minPerPage);
+
+        return min($minResultsAccepted, $this->model->getMaxPerPage());
     }
 }

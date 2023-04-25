@@ -17,6 +17,9 @@ class BaseModel extends Model
     /** @var int */
     protected $perPage = 25;
 
+    protected int $minPerPage = 15;
+    protected int $maxPerPage = 150;
+
     public function getRules(): array
     {
         return $this->rules;
@@ -35,5 +38,15 @@ class BaseModel extends Model
     public function getSearch(): array
     {
         return $this->search;
+    }
+
+    public function getMinPerPage(): int
+    {
+        return $this->minPerPage;
+    }
+
+    public function getMaxPerPage(): int
+    {
+        return $this->maxPerPage;
     }
 }
