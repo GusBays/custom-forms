@@ -72,5 +72,7 @@ class Handler extends ExceptionHandler
                 $th->validator->errors()->getMessages()
             ], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
+
+        parent::render($request, $th);
     }
 }
