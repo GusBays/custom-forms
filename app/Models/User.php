@@ -39,6 +39,10 @@ class User extends BaseModel
         'email'
     ];
 
+    protected array $sorts = [
+        'id'
+    ];
+
     public function setPasswordAttribute($value): void
     {
         if (blank($value)) return;

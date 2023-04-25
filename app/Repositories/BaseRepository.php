@@ -4,7 +4,6 @@ namespace App\Repositories;
 
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 
 class BaseRepository
@@ -42,6 +41,7 @@ class BaseRepository
     public function getPaginate(): Paginator
     {
         $models = $this->filter()
+            ->sort()
             ->query
             ->simplePaginate($this->model->getPerPage());
 
@@ -96,6 +96,9 @@ class BaseRepository
     private function filter(): self
     {
         $queryParams = collect(request()->query());
+
+        if (blank($queryParams)) return $this;
+
         $modelFilterableFields = $this->model->getFilters();
         
         $byAllowedFilters = fn (string $value, string $field) => in_array($field, $modelFilterableFields);
@@ -103,6 +106,30 @@ class BaseRepository
         $fieldsToFilter = $queryParams->filter($byAllowedFilters)->mapWithKeys($toWhereClauses)->all();
 
         $this->query->where($fieldsToFilter);
+
+        return $this;
+    }
+
+    private function sort(): self
+    {
+        $sort = request()->query('sort');
+
+        if (blank($sort)) return $this;
+
+        $modelSortableFields = collect($this->model->getSorts());
+
+        $isDesc = 0 === strpos($sort, '-');
+
+        $sortDirection = $isDesc ? 'desc' : 'asc';
+
+        $formattedRequestSortField = $isDesc ? str_replace('-', '', $sort) : $sort;
+
+        $byEqualField = fn (string $field) => $field === $formattedRequestSortField;
+        $sortField = $modelSortableFields->first($byEqualField);
+
+        if (blank($sortField)) return $this;
+
+        $this->query->orderBy($sortField, $sortDirection);
 
         return $this;
     }

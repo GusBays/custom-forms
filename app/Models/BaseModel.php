@@ -10,6 +10,8 @@ class BaseModel extends Model
 
     protected array $filters;
 
+    protected array $sorts;
+
     /** @var int */
     protected $perPage = 25;
 
@@ -21,5 +23,10 @@ class BaseModel extends Model
     public function getFilters(): array
     {
         return $this->filters;
+    }
+
+    public function getSorts(): array
+    {
+        return $this->sorts;
     }
 }
