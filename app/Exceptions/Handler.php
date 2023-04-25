@@ -73,6 +73,17 @@ class Handler extends ExceptionHandler
             ], Response::HTTP_UNPROCESSABLE_ENTITY);
         }
 
+        if ($th instanceof \Throwable) {
+
+            $message = env('APP_DEBUG') ? $th->getMessage() : 'looks_like_something_wrong';
+            $trace = env('APP_DEBUG') ? $th->getTrace() : 'internal_server_error';
+
+            return response()->json([
+                'error' => $message,
+                'trace' => $trace
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+
         parent::render($request, $th);
     }
 }
