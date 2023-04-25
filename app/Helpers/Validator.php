@@ -2,9 +2,10 @@
 
 namespace App\Helpers;
 
-use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator as FacadesValidator;
+use Illuminate\Validation\ValidationException;
+use Symfony\Component\HttpFoundation\Response;
 
 class Validator
 {
@@ -42,12 +43,7 @@ class Validator
         $validation = FacadesValidator::make($this->data, $this->rules, [], ['id' => $this->id]);
 
         if ($validation->fails()) {
-            $errors = $validation->getMessageBag()->all();
-            $toAddEndOfLine = fn (string $error) => $error . PHP_EOL;
-            $formattedErrors = collect($errors)->map($toAddEndOfLine)->all();
-            $errorsString = implode($formattedErrors);
-            
-            throw new Exception('model_validation_error: [ ' . PHP_EOL . $errorsString . ']');
+            throw new ValidationException($validation, Response::HTTP_UNPROCESSABLE_ENTITY, $validation->getMessageBag());
         }
     }
 }

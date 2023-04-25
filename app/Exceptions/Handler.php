@@ -7,6 +7,7 @@ use Illuminate\Auth\AuthenticationException;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Str;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpFoundation\Response;
 use Throwable;
 
@@ -66,6 +67,10 @@ class Handler extends ExceptionHandler
             return response()->json(['error' => $message], Response::HTTP_NOT_FOUND);
         }
 
-
+        if ($th instanceof ValidationException) {
+            return response()->json([
+                $th->validator->errors()->getMessages()
+            ], Response::HTTP_UNPROCESSABLE_ENTITY);
+        }
     }
 }
