@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -36,6 +37,17 @@ class BaseRepository
         $this->getNewQuery();
 
         return $model;
+    }
+
+    public function getPaginate(): Paginator
+    {
+        $models = $this->filter()
+            ->query
+            ->simplePaginate($this->model->getPerPage());
+
+        $this->getNewQuery();
+
+        return $models;
     }
 
     protected function resetModelInstance(): void
@@ -79,5 +91,19 @@ class BaseRepository
     protected function whereBy(string $field, $value = null)
     {
         $this->query->where($field, $value);
+    }
+
+    private function filter(): self
+    {
+        $queryParams = collect(request()->query());
+        $modelFilterableFields = $this->model->getFilters();
+        
+        $byAllowedFilters = fn (string $value, string $field) => in_array($field, $modelFilterableFields);
+        $toWhereClauses = fn (string $value, string $field) => [$field => $value];
+        $fieldsToFilter = $queryParams->filter($byAllowedFilters)->mapWithKeys($toWhereClauses)->all();
+
+        $this->query->where($fieldsToFilter);
+
+        return $this;
     }
 }

@@ -32,6 +32,13 @@ class User extends BaseModel
         'token',
     ];
 
+    protected array $filters = [
+        'id',
+        'first_name',
+        'last_name',
+        'email'
+    ];
+
     public function setPasswordAttribute($value): void
     {
         if (blank($value)) return;

@@ -4,6 +4,8 @@ namespace App\Services;
 
 use App\Helpers\Validator;
 use App\Repositories\BaseRepository;
+use Illuminate\Contracts\Pagination\Paginator;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
@@ -31,5 +33,10 @@ class BaseService
     public function getOne(int $id): Model
     {
         return $this->repository->getOne($id);
+    }
+
+    public function getPaginate(): Paginator
+    {
+        return $this->repository->getPaginate();
     }
 }

@@ -29,6 +29,11 @@ class BaseController
         return $this->service->getOne($id);
     }
 
+    public function index()
+    {
+        return $this->service->getPaginate();
+    }
+
     protected function isBladeRequest(): bool
     {
         $host = request()->header('referer');
