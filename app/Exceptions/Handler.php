@@ -4,6 +4,8 @@ namespace App\Exceptions;
 
 use App\Helpers\Routes;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Str;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Symfony\Component\HttpFoundation\Response;
 use Throwable;
@@ -30,18 +32,6 @@ class Handler extends ExceptionHandler
         'password_confirmation',
     ];
 
-    protected function unauthenticated($request, AuthenticationException $exception)
-    {
-        return Routes::isAuthApiMiddleware() ? 
-            response()->json(
-                [
-                    'code' => 'authentication_required',
-                    'error' => 'This resource requires authentication',
-                ],
-                Response::HTTP_UNAUTHORIZED, ['WWW-Authenticate' => 'Bearer'])
-            :   response()->view('login', ['Unauthenticated' => true]);
-    }
-
     /**
      * Register the exception handling callbacks for the application.
      *
@@ -52,5 +42,30 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    public function render($request, Throwable $th)
+    {
+        if ($th instanceof AuthenticationException) {
+            return Routes::isAuthApiMiddleware() ? 
+                response()->json(
+                    [
+                        'code' => 'authentication_required',
+                        'error' => 'This resource requires authentication',
+                    ],
+                Response::HTTP_UNAUTHORIZED, ['WWW-Authenticate' => 'Bearer'])
+                :   response()->view('login', ['Unauthenticated' => true]);
+        }
+
+        if ($th instanceof ModelNotFoundException) {
+            $model = Str::kebab(class_basename($th->getModel()));
+            $ids = $th->getIds();
+            $formattedIds = is_array($ids) ? implode(',', $ids) : $ids;
+            $message =  "$model not found with id: " . $formattedIds;
+
+            return response()->json(['error' => $message], Response::HTTP_NOT_FOUND);
+        }
+
+
     }
 }
