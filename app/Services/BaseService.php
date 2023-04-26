@@ -39,4 +39,14 @@ class BaseService
     {
         return $this->repository->getPaginate();
     }
+
+    public function update(int $id, Request $request): Model
+    {
+        Validator::make($request)
+            ->rules($this->repository->getModelRules())
+            ->setId($id)
+            ->validateOrFail();
+
+        return $this->repository->update($id, $request->all());
+    }
 }

@@ -12,11 +12,14 @@ class Validator
     private array $data;
     private array $rules;
     private ?int $id = null;
+    private bool $isUpdate = false;
 
     public function __construct(
-        Request $request)
+        Request $request
+    )
     {
         $this->data = $request->all();
+        $this->isUpdate = 'PUT' === $request->getMethod();
     }
 
     public static function make(Request $request): self
@@ -40,10 +43,16 @@ class Validator
 
     public function validateOrFail(): void
     {
+        if ($this->isUpdate) $this->addRulesToUpdateModels();
+
         $validation = FacadesValidator::make($this->data, $this->rules, [], ['id' => $this->id]);
 
-        if ($validation->fails()) {
-            throw new ValidationException($validation, Response::HTTP_UNPROCESSABLE_ENTITY, $validation->getMessageBag());
-        }
+        if ($validation->fails()) throw new ValidationException($validation, Response::HTTP_UNPROCESSABLE_ENTITY, $validation->getMessageBag());
+    }
+
+    private function addRulesToUpdateModels(): void
+    {
+        $toAddSometimes = fn (string $rules) => $rules . '|sometimes';
+        $this->rules = collect($this->rules)->map($toAddSometimes)->all();
     }
 }

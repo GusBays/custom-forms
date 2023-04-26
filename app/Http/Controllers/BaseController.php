@@ -34,6 +34,11 @@ class BaseController
         return $this->service->getPaginate();
     }
 
+    public function update(int $id, Request $request)
+    {
+        return $this->service->update($id, $request);
+    }
+
     protected function isBladeRequest(): bool
     {
         $host = request()->header('referer');

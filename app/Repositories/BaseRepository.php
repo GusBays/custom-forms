@@ -51,6 +51,15 @@ class BaseRepository
         return $models;
     }
 
+    public function update(int $id, array $data): Model
+    {
+        $model = $this->query->findOrFail($id);
+        
+        $model->fill($data)->save();
+
+        return $model;
+    }
+
     protected function resetModelInstance(): void
     {
         $this->model = $this->model->newInstance();

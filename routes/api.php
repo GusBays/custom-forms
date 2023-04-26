@@ -23,8 +23,9 @@ Route::controller(UserController::class)->group(function () {
 
 Route::middleware('auth:api')->group(function() {
     Route::controller(UserController::class)->group(function () {
-        Route::get(ApiRoutesEnum::USERS_ID, 'show')->whereNumber('id');
         Route::get(ApiRoutesEnum::USERS, 'index');
+        Route::get(ApiRoutesEnum::USERS_ID, 'show')->whereNumber('id');
+        Route::put(ApiRoutesEnum::USERS_ID, 'update')->whereNumber('id');
     });
     
 });
