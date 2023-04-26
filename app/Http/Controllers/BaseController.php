@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Contracts\RedirectEnum;
 use App\Services\BaseService;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response as HttpResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 class BaseController
 {
@@ -37,6 +39,13 @@ class BaseController
     public function update(int $id, Request $request)
     {
         return $this->service->update($id, $request);
+    }
+
+    public function delete(int $id): HttpResponse
+    {
+        $this->service->delete($id);
+
+        return response('', Response::HTTP_NO_CONTENT);
     }
 
     protected function isBladeRequest(): bool

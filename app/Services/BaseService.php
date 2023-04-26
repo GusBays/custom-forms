@@ -49,4 +49,9 @@ class BaseService
 
         return $this->repository->update($id, $request->all());
     }
+
+    public function delete(int $id): void
+    {
+        $this->repository->delete($id);
+    }
 }

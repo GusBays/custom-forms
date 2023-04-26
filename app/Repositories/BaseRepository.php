@@ -60,6 +60,11 @@ class BaseRepository
         return $model;
     }
 
+    public function delete(int $id): ?bool
+    {
+        return $this->query->findOrFail($id)->delete();
+    }
+
     protected function resetModelInstance(): void
     {
         $this->model = $this->model->newInstance();

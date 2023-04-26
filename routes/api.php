@@ -26,6 +26,7 @@ Route::middleware('auth:api')->group(function() {
         Route::get(ApiRoutesEnum::USERS, 'index');
         Route::get(ApiRoutesEnum::USERS_ID, 'show')->whereNumber('id');
         Route::put(ApiRoutesEnum::USERS_ID, 'update')->whereNumber('id');
+        Route::delete(ApiRoutesEnum::USERS_ID, 'delete')->whereNumber('id');
     });
     
 });
