@@ -1,6 +1,7 @@
 <?php
 
 use App\Contracts\ApiRoutesEnum;
+use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -16,13 +17,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 // open routes
+Route::controller(OrganizationController::class)->group(function () {
+    Route::post(ApiRoutesEnum::ORGANIZATIONS, 'create');
+});
+
 Route::controller(UserController::class)->group(function () {
-    Route::post(ApiRoutesEnum::LOGIN, 'login');
-    Route::post(ApiRoutesEnum::USERS, 'create');
+    Route::post(ApiRoutesEnum::USERS_LOGIN, 'login');
 });
 
 Route::middleware('auth:api')->group(function() {
     Route::controller(UserController::class)->group(function () {
+        Route::post(ApiRoutesEnum::USERS, 'create');
         Route::get(ApiRoutesEnum::USERS, 'index');
         Route::get(ApiRoutesEnum::USERS_ID, 'show')->whereNumber('id');
         Route::put(ApiRoutesEnum::USERS_ID, 'update')->whereNumber('id');
