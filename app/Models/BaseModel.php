@@ -51,13 +51,4 @@ class BaseModel extends Model
     {
         return $this->maxPerPage;
     }
-
-    public static function boot()
-    {
-        parent::boot();
-
-        static::creating(function (Model $model) {
-            $model->setAttribute($model->getTable() . '.organization_id', config('organization_id'));
-        });
-    }
 }

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\BaseModel;
 use App\Scopes\OrganizationScope;
+use App\Traits\InsertOrganizationId;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\Access\Authorizable;
@@ -14,6 +15,7 @@ class User extends BaseModel
     use Notifiable;
     use Authenticatable;
     use Authorizable;
+    use InsertOrganizationId;
 
     protected array $rules = [
         'first_name' => 'required|max:255',
@@ -32,8 +34,8 @@ class User extends BaseModel
     ];
 
     protected $hidden = [
+        'users.organization_id',
         'password',
-        'token',
     ];
 
     protected array $filters = [
@@ -71,6 +73,6 @@ class User extends BaseModel
 
     public function organization(): BelongsTo
     {
-        return $this->belongsTo(Organization::class, 'organization_id')->withoutGlobalScope('withOrganizationId');
+        return $this->belongsTo(Organization::class, 'organization_id')->withoutGlobalScope(OrganizationScope::class);
     }
 }

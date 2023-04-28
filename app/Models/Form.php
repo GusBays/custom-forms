@@ -3,11 +3,14 @@
 namespace App\Models;
 
 use App\Scopes\OrganizationScope;
+use App\Traits\InsertOrganizationId;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
 class Form extends BaseModel
 {
+    use InsertOrganizationId;
+
     protected array $rules = [
         'name' => 'required|max:255',
         'available_until' => 'nullable|date|date_format:Y-m-d|after_or_equal:today',
