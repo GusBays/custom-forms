@@ -11,7 +11,9 @@ class BaseModel extends Model
 
     protected array $filters = [];
 
-    protected array $sorts = [];
+    protected array $sorts = [
+        'id'
+    ];
 
     protected array $search = [];
 

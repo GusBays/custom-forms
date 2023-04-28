@@ -1,6 +1,7 @@
 <?php
 
 use App\Contracts\ApiRoutesEnum;
+use App\Http\Controllers\FormController;
 use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -34,4 +35,7 @@ Route::middleware('auth:api')->group(function() {
         Route::delete(ApiRoutesEnum::USERS_ID, 'delete')->whereNumber('id');
     });
     
+    Route::controller(FormController::class)->group(function () {
+        Route::post(ApiRoutesEnum::FORMS, 'create');
+    });
 });

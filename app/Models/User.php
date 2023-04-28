@@ -42,10 +42,6 @@ class User extends BaseModel
         'email'
     ];
 
-    protected array $sorts = [
-        'id'
-    ];
-
     protected array $search = [
         'first_name'
     ];

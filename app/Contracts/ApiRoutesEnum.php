@@ -12,4 +12,5 @@ class ApiRoutesEnum
 
     public const USERS_LOGIN = '/users/login';
 
+    public const FORMS = '/forms';
 }
