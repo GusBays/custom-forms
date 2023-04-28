@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\BaseModel;
 use Illuminate\Auth\Authenticatable;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Notifications\Notifiable;
 
@@ -18,6 +19,7 @@ class User extends BaseModel
         'last_name' => 'nullable|max:255',
         'email' => 'required|unique:users',
         'password' => 'required|min:6|max:255',
+        'type' => 'required|in:employee'
     ];
 
     protected $fillable = [
@@ -25,6 +27,7 @@ class User extends BaseModel
         'last_name',
         'email',
         'password',
+        'type'
     ];
 
     protected $hidden = [
@@ -65,5 +68,10 @@ class User extends BaseModel
         if (blank($value)) return;
 
         $this->attributes['password'] = app('hash')->make($value);
+    }
+
+    public function organization(): BelongsTo
+    {
+        return $this->belongsTo(Organization::class, 'organization_id')->withoutGlobalScope('withOrganizationId');
     }
 }

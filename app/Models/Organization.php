@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\SUpport\Str;
 
 class Organization extends BaseModel
@@ -35,12 +36,25 @@ class Organization extends BaseModel
             unset($model->$key);
 
             $slug = Str::slug($model->name);
+            $originalSlug = $slug;
 
-            $repeatedSlug = $model->newQueryWithoutScopes()->where('slug', $slug)->get();
+            $query = $model->newQueryWithoutScopes()->where('slug', $slug)->get();
+            $toSlug = fn (Organization $organization) => ['slug' => $organization->slug];
 
-            if (filled($repeatedSlug))  $slug = $slug . '-' . ($repeatedSlug->count() + rand(1, 50));
+            $i = 1;
+
+            while (in_array($slug, $query->mapWithKeys($toSlug)->all())) {
+                $slug = $originalSlug . '-' . $i;
+                $i++;
+                $query = $model->newQueryWithoutScopes()->where('slug', $slug)->get();
+            }
 
             $model->slug = $slug;
         });
+    }
+
+    public function users(): HasMany
+    {
+        return $this->hasMany(User::class);
     }
 }
