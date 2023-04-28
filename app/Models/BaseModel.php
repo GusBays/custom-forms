@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class BaseModel extends Model
@@ -48,5 +49,18 @@ class BaseModel extends Model
     public function getMaxPerPage(): int
     {
         return $this->maxPerPage;
+    }
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function (Model $model) {
+            $model->setAttribute($model->getTable() . '.organization_id', config('organization_id'));
+        });
+
+        static::addGlobalScope('withOrganizationId', function (Builder $builder) {
+            if (config('organization_id')) $builder->where($builder->getModel()->getTable() . '.organization_id', config('organization_id'));
+        });
     }
 }
