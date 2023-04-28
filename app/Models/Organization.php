@@ -29,8 +29,6 @@ class Organization extends BaseModel
     {
         parent::boot();
 
-        static::query()->withoutGlobalScope('withOrganizationId');
-
         static::creating(function (Model $model) {
             $key = $model->getTable() . '.organization_id';
             unset($model->$key);

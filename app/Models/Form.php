@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Scopes\OrganizationScope;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 
@@ -40,6 +41,8 @@ class Form extends BaseModel
     public static function boot()
     {
         parent::boot();
+
+        static::addGlobalScope(new OrganizationScope);
 
         static::creating(function (Model $model) {
             $slug = Str::slug($model->name);

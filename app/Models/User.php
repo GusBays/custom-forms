@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\BaseModel;
+use App\Scopes\OrganizationScope;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\Access\Authorizable;
@@ -49,6 +50,8 @@ class User extends BaseModel
     public static function boot()
     {
         parent::boot();
+
+        static::addGlobalScope(new OrganizationScope);
 
         static::saving(function (User $model) {
             $name = $model->first_name;
