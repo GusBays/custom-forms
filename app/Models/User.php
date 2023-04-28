@@ -47,6 +47,19 @@ class User extends BaseModel
         'first_name'
     ];
 
+    public static function boot()
+    {
+        parent::boot();
+
+        static::saving(function (User $model) {
+            $name = $model->first_name;
+
+            if (filled($model->last_name)) $name = $name . ' ' . $model->last_name;
+
+            $model->setAttribute('name', $name);
+        });
+    }
+
     public function setPasswordAttribute($value): void
     {
         if (blank($value)) return;
