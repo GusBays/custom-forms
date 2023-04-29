@@ -29,11 +29,11 @@ Route::controller(UserController::class)->group(function () {
 
 Route::middleware('auth:api')->group(function() {
     Route::controller(UserController::class)->group(function () {
-        Route::post(ApiRoutesEnum::USERS, 'create');
+        Route::post(ApiRoutesEnum::USERS, 'store');
         Route::get(ApiRoutesEnum::USERS, 'index');
         Route::get(ApiRoutesEnum::USERS_ID, 'show')->whereNumber('id');
         Route::put(ApiRoutesEnum::USERS_ID, 'update')->whereNumber('id');
-        Route::delete(ApiRoutesEnum::USERS_ID, 'delete')->whereNumber('id');
+        Route::delete(ApiRoutesEnum::USERS_ID, 'destroy')->whereNumber('id');
     });
     
     Route::controller(FormController::class)->group(function () {
