@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 // open routes
 Route::controller(OrganizationController::class)->group(function () {
-    Route::post(ApiRoutesEnum::ORGANIZATIONS, 'create');
+    Route::post(ApiRoutesEnum::ORGANIZATIONS, 'store');
 });
 
 Route::controller(UserController::class)->group(function () {

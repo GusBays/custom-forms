@@ -2,17 +2,14 @@
 
 namespace App\Services;
 
-use App\Helpers\Validator;
-use App\Models\Organization;
+use App\Datas\Organization\OrganizationData;
+use App\Datas\Organization\OrganizationUpdateData;
 use App\Repositories\OrganizationRepository;
 use App\Repositories\UserRepository;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Request;
 
-class OrganizationService extends BaseService
+class OrganizationService
 {
-    /** @var OrganizationRepository */
-    protected $repository;
+    protected OrganizationRepository $repository;
 
     protected UserRepository $userRepository;
 
@@ -25,19 +22,13 @@ class OrganizationService extends BaseService
         $this->userRepository = $userRepository;
     }
 
-    public function create(Request $request): Organization
+    public function create(OrganizationData $data): OrganizationUpdateData
     {
-        Validator::make($request)
-            ->rules($this->repository->getModelRules())
-            ->validateOrFail();
-
-        $organizationRequest = $request->only(['name']);
+        $organization = $this->repository->create($data);
         
-        $organization = $this->repository->create($organizationRequest);
-        
-        config(['organization_id' => $organization->id]);
+        config(['organization_id' => $organization->getId()]);
 
-        $this->userRepository->createFirstUser($request->all());
+        $this->userRepository->createFirstUser($data->getFirstUser());
 
         return $organization;
     }

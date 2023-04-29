@@ -82,6 +82,7 @@ abstract class UserData implements Arrayable
             'first_name' => $this->getFirstName(),
             'last_name' => $this->getLastName(),
             'email' => $this->getEmail(),
+            'password' => $this->getPassword(),
             'type' => $this->getType(),
             'token' => $this->getToken()
         ];

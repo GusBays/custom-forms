@@ -2,24 +2,28 @@
 
 namespace App\Repositories;
 
+use App\Datas\Organization\OrganizationData;
+use App\Datas\Organization\OrganizationUpdateData;
+use App\Http\Adapters\Organization\OrganizationModelAdapter;
 use App\Models\Organization;
 
-class OrganizationRepository extends BaseRepository
+class OrganizationRepository
 {
-    /** @var Organization */
-    protected $model;
+    protected Organization $model;
 
     public function __construct(
         Organization $model
     )
     {
-        parent::__construct($model);
+        $this->model = $model;
     }
 
-    public function create(array $data): Organization
+    public function create(OrganizationData $data): OrganizationUpdateData
     {
         $query = $this->model->query()->withoutGlobalScopes();
 
-        return $query->forceCreate($data);
+        $organization = $query->create($data->toArray());
+
+        return new OrganizationModelAdapter($organization);
     }
 }

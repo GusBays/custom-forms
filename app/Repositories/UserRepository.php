@@ -95,14 +95,13 @@ class UserRepository
         return new UserModelAdapter($user);
     }
 
-    public function createFirstUser(array $data): User
+    public function createFirstUser(UserData $data): User
     {
         $query = $this->model->newQueryWithoutScopes();
 
         if ($query->where('organization_id', config('organization_id'))->exists()) throw new \Throwable('organization_already_have_user', Response::HTTP_INTERNAL_SERVER_ERROR);
         
-        $this->model->type = 'owner';
-        $this->model->fill($data)->save();
+        $this->model->fill($data->toArray())->save();
 
         return $this->model;
     }

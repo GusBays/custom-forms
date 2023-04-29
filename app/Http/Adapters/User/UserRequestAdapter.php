@@ -21,4 +21,11 @@ class UserRequestAdapter extends UserData
             $request->input('type'),
         );
     }
+
+    public static function fromOrganizationRequest(Request $request): self
+    {
+        $request->merge(['type' => 'owner']);
+
+        return new self($request);
+    }
 }
