@@ -13,5 +13,7 @@ class FormRepository extends BaseRepository
     )
     {
         parent::__construct($model);
+
+        $this->query->with('formUsers');
     }
 }

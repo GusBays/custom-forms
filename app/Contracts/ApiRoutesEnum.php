@@ -13,4 +13,10 @@ class ApiRoutesEnum
     public const USERS_LOGIN = '/users/login';
 
     public const FORMS = '/forms';
+
+    public const FORMS_ID = '/forms/{id}';
+
+    public const FORM_USERS = '/forms/{id}/users';
+
+    public const FORM_USERS_ID = '/forms/{id}/users/{user_id}';
 }

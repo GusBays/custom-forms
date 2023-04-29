@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Scopes\OrganizationScope;
 use App\Traits\CreateSlug;
 use App\Traits\InsertOrganizationId;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Form extends BaseModel
 {
@@ -47,5 +48,10 @@ class Form extends BaseModel
         parent::boot();
 
         static::addGlobalScope(new OrganizationScope);
+    }
+
+    public function formUsers(): HasMany
+    {
+        return $this->hasMany(FormUser::class);
     }
 }
