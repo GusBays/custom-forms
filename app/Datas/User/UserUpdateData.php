@@ -46,13 +46,23 @@ abstract class UserUpdateData extends UserData
         return $this->id;
     }
 
-    public function getCreatedAt(): string
+    public function getCreatedAt(): ?string
     {
         return $this->created_at;
     }
 
-    public function getUpdatedAt(): string
+    public function getUpdatedAt(): ?string
     {
         return $this->updated_at;
+    }
+
+    public function toArray(): array
+    {
+        $array = parent::toArray();
+        $array['id'] = $this->getId();
+        $array['created_at'] = $this->getCreatedAt();
+        $array['updated_at'] = $this->getUpdatedAt();
+
+        return $array;
     }
 }
