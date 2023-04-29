@@ -25,12 +25,14 @@ class UserController
         $this->service = $service;
     }
 
-    public function store(Request $request): UserResource
+    public function store(Request $request): HttpResponse
     {
         $validator = new UserValidator($request);
         $validator->validate();
         
-        return new UserResource($this->service->create(new UserRequestAdapter($request)));
+        $resource = new UserResource($this->service->create(new UserRequestAdapter($request)));
+        
+        return response($resource, Response::HTTP_CREATED);
     }
 
     public function index(Request $request): AnonymousResourceCollection
@@ -59,7 +61,7 @@ class UserController
         return response('', Response::HTTP_NO_CONTENT);
     }
 
-    public function login(Request $request)
+    public function login(Request $request): UserResource
     {
         $validator = new UserLoginValidator($request);
         $validator->validate();
