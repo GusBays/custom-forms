@@ -62,7 +62,8 @@ class Handler extends ExceptionHandler
             $model = Str::kebab(class_basename($th->getModel()));
             $ids = $th->getIds();
             $formattedIds = is_array($ids) ? implode(',', $ids) : $ids;
-            $message =  "$model not found with id: " . $formattedIds;
+            if (blank($formattedIds)) $formattedIds = $request->route('id');
+            $message =  "$model not found with id: $formattedIds";
 
             return response()->json(['error' => $message], Response::HTTP_NOT_FOUND);
         }
