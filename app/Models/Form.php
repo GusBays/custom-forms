@@ -3,13 +3,13 @@
 namespace App\Models;
 
 use App\Scopes\OrganizationScope;
+use App\Traits\CreateSlug;
 use App\Traits\InsertOrganizationId;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
 
 class Form extends BaseModel
 {
     use InsertOrganizationId;
+    use CreateSlug;
 
     protected array $rules = [
         'name' => 'required|max:255',
@@ -34,6 +34,7 @@ class Form extends BaseModel
 
     protected array $search = [
         'name',
+        'slug',
     ];
 
     protected $casts = [
@@ -46,23 +47,5 @@ class Form extends BaseModel
         parent::boot();
 
         static::addGlobalScope(new OrganizationScope);
-
-        static::creating(function (Model $model) {
-            $slug = Str::slug($model->name);
-            $originalSlug = $slug;
-
-            $query = $model->query()->where('slug', $slug)->get();
-            $toSlug = fn (Organization $organization) => ['slug' => $organization->slug];
-
-            $i = 1;
-
-            while (in_array($slug, $query->mapWithKeys($toSlug)->all())) {
-                $slug = $originalSlug . '-' . $i;
-                $i++;
-                $query = $model->query()->where('slug', $slug)->get();
-            }
-
-            $model->slug = $slug;
-        });
     }
 }
