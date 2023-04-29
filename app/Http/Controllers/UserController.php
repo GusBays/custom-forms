@@ -2,17 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Contracts\CookieEnum;
-use App\Contracts\RedirectEnum;
-use App\Http\Controllers\BaseController;
+use App\Filters\User\UserIdFilter;
+use App\Http\Adapters\User\UserRequestAdapter;
+use App\Http\Adapters\User\UserRequestUpdateAdapter;
+use App\Resources\UserResource;
 use App\Services\UserService;
+use App\Validators\UserLoginValidator;
+use App\Validators\UserValidator;
 use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Http\Response as HttpResponse;
+use Symfony\Component\HttpFoundation\Response;
 
-class UserController extends BaseController
+class UserController
 {
-    /** @var UserService */
-    protected $service;
-    protected string $to = RedirectEnum::ADMIN;
+    protected UserService $service;
 
     public function __construct(
         UserService $service
@@ -21,21 +25,45 @@ class UserController extends BaseController
         $this->service = $service;
     }
 
-    public function create(Request $request)
+    public function store(Request $request): UserResource
     {
-        $resource = parent::create($request);
+        $validator = new UserValidator($request);
+        $validator->validate();
+        
+        return new UserResource($this->service->create(new UserRequestAdapter($request)));
+    }
 
-        if ($this->isBladeRequest()) return redirect($this->to);
+    public function index(Request $request): AnonymousResourceCollection
+    {
+        return UserResource::collection($this->service->getPaginate($request)); 
+    }
 
-        return $resource;
+    public function show(Request $request): UserResource
+    {
+        return new UserResource($this->service->getOne(new UserIdFilter($request)));
+    }
+
+    public function update(Request $request): UserResource
+    {
+        $validator = new UserValidator($request);
+        $validator->setId($request->route('id'))
+            ->validate();
+
+        return new UserResource($this->service->update(new UserRequestUpdateAdapter($request)));
+    }
+
+    public function destroy(Request $request): HttpResponse
+    {
+        $this->service->delete(new UserIdFilter($request));
+
+        return response('', Response::HTTP_NO_CONTENT);
     }
 
     public function login(Request $request)
     {
-        $resource = $this->service->login($request);
+        $validator = new UserLoginValidator($request);
+        $validator->validate();
 
-        if ($this->isBladeRequest()) return redirect($this->to);
-
-        return $resource;
+        return new UserResource($this->service->login($request));
     }
 }

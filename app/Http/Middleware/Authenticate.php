@@ -2,12 +2,8 @@
 
 namespace App\Http\Middleware;
 
-use App\Contracts\CookieEnum;
-use App\Contracts\RedirectEnum;
-use App\Helpers\Routes;
-use App\Models\User;
+use App\Datas\User\UserUpdateData;
 use Closure;
-use Exception;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
@@ -15,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class Authenticate extends Middleware
 {
-    private User $user;
+    private UserUpdateData $user;
 
     public function handle($request, Closure $next, ...$guards)
     {
@@ -45,8 +41,8 @@ class Authenticate extends Middleware
 
     private function setGlobalConfigs(): void
     {
-        config(['organization_id' => $this->user->organization_id]);
-        config(['user_id' => $this->user->id]);
-        config(['user_type' => $this->user->type]);
+        config(['organization_id' => $this->user->getOrganizationId()]);
+        config(['user_id' => $this->user->getId()]);
+        config(['user_type' => $this->user->getType()]);
     }
 }

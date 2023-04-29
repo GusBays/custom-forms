@@ -3,19 +3,19 @@
 namespace App\Services;
 
 use App\Contracts\CookieEnum;
-use App\Helpers\Validator;
+use App\Datas\User\UserData;
+use App\Datas\User\UserUpdateData;
+use App\Filters\User\UserEmailFilter;
+use App\Filters\User\UserFilter;
 use App\Repositories\UserRepository;
-use App\Services\BaseService;
 use Exception;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\Response;
 
-class UserService extends BaseService
+class UserService
 {
-    /** @var UserRepository */
-    protected $repository;
+    protected UserRepository $repository;
 
     public function __construct(
         UserRepository $repository
@@ -24,29 +24,41 @@ class UserService extends BaseService
         $this->repository = $repository;
     }
 
-    public function create(Request $request): Model
+    public function create(UserData $data): UserUpdateData
     {
-        $resource = parent::create($request);
-    
-        addCookie(CookieEnum::ADM_TOKEN, $resource->token);
-
-        return $resource;
+        return $this->repository->create($data);
     }
 
-    public function login(Request $request): Model
+    /**
+     * @return UserUpdateData[]
+     */
+    public function getPaginate(Request $request): ?array
     {
-        Validator::make($request)
-            ->rules([
-                'email' => 'required',
-                'password' => 'required',
-            ])
-            ->validateOrFail();
+        return $this->repository->getPaginate($request);
+    }
 
-        $user = $this->repository->getByEmail($request->email);
+    public function getOne(UserFilter $filter): UserUpdateData
+    {
+        return $this->repository->getOne($filter);
+    }
 
-        if (!$this->check($request->password, $user->password)) throw new Exception('invalid_password', Response::HTTP_UNAUTHORIZED);
+    public function update(UserUpdateData $data): UserUpdateData
+    {
+        return $this->repository->update($data);
+    }
+
+    public function delete(UserFilter $filter): void
+    {
+        $this->repository->delete($filter);
+    }
+
+    public function login(Request $request): UserUpdateData
+    {
+        $user = $this->repository->getByEmail(new UserEmailFilter($request));
+
+        if (!$this->check($request->password, $user->getPassword())) throw new Exception('invalid_password', Response::HTTP_UNAUTHORIZED);
         
-        addCookie(CookieEnum::ADM_TOKEN, $user->token);
+        addCookie(CookieEnum::ADM_TOKEN, $user->getToken());
 
         return $user;
     }

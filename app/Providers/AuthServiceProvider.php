@@ -2,12 +2,11 @@
 
 namespace App\Providers;
 
-use App\Contracts\CookieEnum;
+use App\Filters\User\UserTokenFilter;
 use App\Repositories\UserRepository;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {
@@ -31,15 +30,15 @@ class AuthServiceProvider extends ServiceProvider
 
         Auth::viaRequest('jwt-token', function (Request $request) {
             try {
-                return app(UserRepository::class)->getByToken($request->bearerToken());
+                return app(UserRepository::class)->getByToken(new UserTokenFilter($request));
             } catch (\Throwable $th) {
                 return null;
             }
         });
 
-        Auth::viaRequest('cookie-token', function () {
+        Auth::viaRequest('cookie-token', function (Request $request) {
             try {
-                return app(UserRepository::class)->getByToken(getCookie(CookieEnum::ADM_TOKEN));
+                return app(UserRepository::class)->getByToken(new UserTokenFilter($request));
             } catch (\Throwable $th) {
                 return null;
             }
