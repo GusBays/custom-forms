@@ -20,12 +20,6 @@ class FormUserRequestAdapter extends FormUserData
 
     public static function createFromFormRequest(Request $request): array
     {
-        $toMergeFields = fn (Request $request) => $request->merge([
-            'form_id' => $request->route('id'),
-            'user_id' => config('user_id'),
-            'type' => 'creator',
-        ]);
-
-        return collect($request->input('form_users'))->map($toMergeFields)->mapInto(self::class)->all();
+        return collect($request->input('form_users'))->mapInto(self::class)->all();
     }
 }

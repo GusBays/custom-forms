@@ -3,6 +3,8 @@
 namespace App\Http\Adapters\Form;
 
 use App\Datas\Form\FormData;
+use App\Http\Adapters\FormField\FormFieldRequestAdapter;
+use App\Http\Adapters\FormUser\FormUserRequestAdapter;
 use Illuminate\Http\Request;
 
 class FormRequestAdapter extends FormData
@@ -16,7 +18,9 @@ class FormRequestAdapter extends FormData
             $request->input('available_until'),
             $request->input('fill_limit'),
             $request->input('should_notify_each_fill'),
-            $request->input('active')
+            $request->input('active'),
+            FormUserRequestAdapter::createFromFormRequest($request),
+            FormFieldRequestAdapter::createFromFormRequest($request)
         );
     }
 }

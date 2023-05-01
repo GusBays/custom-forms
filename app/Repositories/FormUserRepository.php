@@ -75,9 +75,9 @@ class FormUserRepository
         $formUser->delete();
     }
 
-    public function createFirstFormUser(Form $form): FormUser
+    public function createFirstFormUser(int $form_id): FormUser
     {
-        $this->model->form_id = $form->id;
+        $this->model->form_id = $form_id;
         $this->model->user_id = config('user_id');
         $this->model->type = 'creator';
 

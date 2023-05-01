@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Datas\Form\FormData;
 use App\Datas\Form\FormUpdateData;
+use App\Datas\FormField\FormFieldData;
 use App\Filters\Form\FormFilter;
 use App\Http\Adapters\Form\FormModelAdapter;
 use App\Interpreters\Form\FormIdInterpreter;
@@ -24,13 +25,15 @@ class FormRepository
 
     protected Form $model;
     protected Builder $query;
-    private const RELATIONS = ['formUsers'];
+    private const RELATIONS = ['formUsers', 'formFields'];
 
     protected FormUserRepository $formUserRepository;
+    protected FormFieldRepository $formFieldRepository;
 
     public function __construct(
         Form $model,
-        FormUserRepository $formUserRepository
+        FormUserRepository $formUserRepository,
+        FormFieldRepository $formFieldRepository
     )
     {
         $this->model = $model;
@@ -40,13 +43,16 @@ class FormRepository
         $this->query->with(self::RELATIONS);
 
         $this->formUserRepository = $formUserRepository;
+        $this->formFieldRepository = $formFieldRepository;
     }
 
     public function create(FormData $data): FormUpdateData
     {
         $this->model->fill($data->toArray())->save();
 
-        $this->formUserRepository->createFirstFormUser($this->model);
+        $this->formUserRepository->createFirstFormUser($this->model->id);
+
+        $this->formFieldRepository->createFromArray($this->model->id, $data->getFormFields());
 
         $this->model->loadMissing(self::RELATIONS);
 

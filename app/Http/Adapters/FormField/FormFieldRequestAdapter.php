@@ -17,12 +17,13 @@ class FormFieldRequestAdapter extends FormFieldData
             $request->input('description'),
             $request->input('required', true),
             $request->input('type'),
-            $request->input('content')
+            $request->input('content', [])
         );
     }
 
     public static function createFromFormRequest(Request $request): array
     {
-        return collect($request->input('content'))->mapInto(self::class)->all();
+        $toRequest = fn (array $form_field) => new Request($form_field);
+        return collect($request->input('form_fields'))->map($toRequest)->mapInto(self::class)->all();
     }
 }

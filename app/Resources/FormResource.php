@@ -19,6 +19,7 @@ class FormResource extends JsonResource
             'should_notify_each_fill' => $this->getShouldNotifyEachFill(),
             'active' => $this->getActive(),
             'form_users' => FormUserResource::collection($this->getFormUsers()),
+            'form_fields' => FormFIeldResource::collection($this->getFormFields()),
             'created_at' => $this->getCreatedAt(),
             'updated_at' => $this->getUpdatedAt(),
         ];

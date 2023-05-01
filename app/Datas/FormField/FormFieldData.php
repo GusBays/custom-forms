@@ -60,6 +60,13 @@ class FormFieldData implements Arrayable
         return $this->content;
     }
 
+    public function setFormId(int $form_id): self
+    {
+        $this->form_id = $form_id;
+
+        return $this;
+    }
+
     public function toArray(): array
     {
         return [

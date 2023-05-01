@@ -15,8 +15,6 @@ class FormUpdateData extends FormData
     private int $id;
     private int $organization_id;
     private ?string $slug = null;
-    /** @var FormUserData[] */
-    private ?array $formUsers = null;
     private ?string $created_at = null;
     private ?string $updated_at = null;
 
@@ -29,7 +27,8 @@ class FormUpdateData extends FormData
         bool $should_notify_each_fill = true,
         bool $active = true,
         string $slug = null,
-        array $formUsers = [],
+        array $form_users = [],
+        array $form_fields = [],
         string $created_at = null,
         string $updated_at = null
     )
@@ -37,7 +36,6 @@ class FormUpdateData extends FormData
         $this->id = $id;
         $this->organization_id = $organization_id;
         $this->slug = $slug;
-        $this->formUsers = $formUsers;
         $this->created_at = $created_at;
         $this->updated_at = $updated_at;
         parent::__construct(
@@ -46,7 +44,8 @@ class FormUpdateData extends FormData
             $fill_limit,
             $should_notify_each_fill,
             $active,
-            $formUsers
+            $form_users,
+            $form_fields
         );
     }
 
@@ -58,14 +57,6 @@ class FormUpdateData extends FormData
     public function getSlug(): ?string
     {
         return $this->slug;
-    }
-
-    /**
-     * @return FormUserData[]
-     */
-    public function getFormUsers(): ?array
-    {
-        return $this->formUsers;
     }
 
     public function toArray(): array

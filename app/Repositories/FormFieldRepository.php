@@ -10,6 +10,7 @@ use App\Interpreters\FormField\FormFieldIdInterpreter;
 use App\Models\FormField;
 use App\Traits\Filterable;
 use App\Traits\PerPage;
+use App\Traits\ResetModel;
 use App\Traits\Searchable;
 use App\Traits\Sortable;
 use Illuminate\Database\Eloquent\Builder;
@@ -21,6 +22,7 @@ class FormFieldRepository
     use Searchable;
     use Sortable;
     use PerPage;
+    use ResetModel;
 
     protected FormField $model;
     protected Builder $query;
@@ -77,6 +79,20 @@ class FormFieldRepository
         $formField = $this->getFormFieldQuery($filter)->firstOrFail();
 
         $formField->delete();
+    }
+
+    public function createFromArray(int $form_id, array $form_fields): array
+    {
+        $rows = collect();
+
+        /** @var FormFieldData */
+        foreach ($form_fields as $form_field) {
+            $form_field->setFormId($form_id);
+            $rows->push($this->create($form_field));
+            $this->resetModelInstance();
+        }
+
+        return $rows->all();
     }
 
     private function getFormFieldQuery(FormFieldFilter $filter): Builder

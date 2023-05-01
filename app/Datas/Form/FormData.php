@@ -2,6 +2,7 @@
 
 namespace App\Datas\Form;
 
+use App\Datas\FormField\FormFieldData;
 use Illuminate\Contracts\Support\Arrayable;
 
 class FormData implements Arrayable
@@ -10,14 +11,20 @@ class FormData implements Arrayable
     private ?string $available_until = null;
     private ?int $fill_limit = null;
     private bool $should_notify_each_fill = true;
-    private bool $active = true; 
+    private bool $active = true;
+    /** @var FormUserData[] */
+    private ?array $form_users = null;
+    /** @var FormFieldData[] */
+    private ?array $form_fields = [];
 
     public function __construct(
         string $name,
         string $available_until = null,
         int $fill_limit = null,
         bool $should_notify_each_fill = true,
-        bool $active = true
+        bool $active = true,
+        array $form_users = [],
+        array $form_fields = []
     )
     {
         $this->name = $name;
@@ -25,6 +32,8 @@ class FormData implements Arrayable
         $this->fill_limit = $fill_limit;
         $this->should_notify_each_fill = $should_notify_each_fill;
         $this->active = $active;
+        $this->form_users = $form_users;
+        $this->form_fields = $form_fields;
     }
 
     public function getName(): string
@@ -50,6 +59,22 @@ class FormData implements Arrayable
     public function getActive(): bool
     {
         return $this->active;
+    }
+
+    /**
+     * @return FormUserData[]
+     */
+    public function getFormUsers(): ?array
+    {
+        return $this->form_users;
+    }
+
+    /**
+     * @return FormFieldData[]
+     */
+    public function getFormFields(): ?array
+    {
+        return $this->form_fields;
     }
 
     public function toArray(): array

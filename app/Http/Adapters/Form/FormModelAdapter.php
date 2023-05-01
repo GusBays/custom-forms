@@ -3,6 +3,7 @@
 namespace App\Http\Adapters\Form;
 
 use App\Datas\Form\FormUpdateData;
+use App\Http\Adapters\FormField\FormFieldModelAdapter;
 use App\Http\Adapters\FormUser\FormUserModelAdapter;
 use App\Models\Form;
 
@@ -22,6 +23,7 @@ class FormModelAdapter extends FormUpdateData
             $form->active,
             $form->slug,
             FormUserModelAdapter::createFromFormModel($form->formUsers),
+            FormFieldModelAdapter::createFromFormModel($form->formFields),
             $form->created_at,
             $form->updated_at
         );
