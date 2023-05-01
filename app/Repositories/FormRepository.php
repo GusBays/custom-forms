@@ -7,6 +7,7 @@ use App\Datas\Form\FormUpdateData;
 use App\Datas\FormField\FormFieldData;
 use App\Filters\Form\FormFilter;
 use App\Http\Adapters\Form\FormModelAdapter;
+use App\Http\Adapters\FormUser\FormUserCreatorAdapter;
 use App\Interpreters\Form\FormIdInterpreter;
 use App\Models\Form;
 use App\Traits\Filterable;
@@ -50,7 +51,7 @@ class FormRepository
     {
         $this->model->fill($data->toArray())->save();
 
-        $this->formUserRepository->createFirstFormUser($this->model->id);
+        $this->formUserRepository->create(new FormUserCreatorAdapter($this->model->id));
 
         $this->formFieldRepository->createFromArray($this->model->id, $data->getFormFields());
 
