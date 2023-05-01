@@ -12,14 +12,6 @@ class Form extends BaseModel
     use InsertOrganizationId;
     use CreateSlug;
 
-    protected array $rules = [
-        'name' => 'required|max:255',
-        'available_until' => 'nullable|date|date_format:Y-m-d|after_or_equal:today',
-        'fill_limt' => 'nullable|integer',
-        'should_notify_each_fill' => 'boolean',
-        'active' => 'boolean',
-    ];
-
     protected $fillable = [
         'name',
         'available_until',

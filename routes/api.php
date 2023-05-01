@@ -37,11 +37,11 @@ Route::middleware('auth:api')->group(function() {
     });
     
     Route::controller(FormController::class)->group(function () {
-        Route::post(ApiRoutesEnum::FORMS, 'create');
+        Route::post(ApiRoutesEnum::FORMS, 'store');
         Route::get(ApiRoutesEnum::FORMS, 'index');
         Route::get(ApiRoutesEnum::FORMS_ID, 'show')->whereNumber('id');
         Route::put(ApiRoutesEnum::FORMS_ID, 'update')->whereNumber('id');
-        Route::delete(ApiRoutesEnum::FORMS_ID, 'delete')->whereNumber('id');
+        Route::delete(ApiRoutesEnum::FORMS_ID, 'destroy')->whereNumber('id');
     });
 
     Route::controller(FormUserController::class)->group(function () {

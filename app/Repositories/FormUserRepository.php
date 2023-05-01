@@ -2,9 +2,8 @@
 
 namespace App\Repositories;
 
-use App\Models\Form;
+use App\Datas\Form\FormUpdateData;
 use App\Models\FormUser;
-use App\Models\User;
 
 class FormUserRepository extends BaseRepository
 {
@@ -18,10 +17,10 @@ class FormUserRepository extends BaseRepository
         parent::__construct($model);
     }
 
-    public function createFirstFormUser(Form $form, User $user): FormUser
+    public function createFirstFormUser(FormUpdateData $form): FormUser
     {
-        $this->model->form_id = $form->id;
-        $this->model->user_id = $user->id;
+        $this->model->form_id = $form->getId();
+        $this->model->user_id = config('user_id');
         $this->model->type = 'creator';
 
         $this->model->save();

@@ -2,44 +2,60 @@
 
 namespace App\Services;
 
+use App\Datas\Form\FormData;
+use App\Datas\Form\FormUpdateData;
+use App\Filters\Form\FormFilter;
 use App\Helpers\Validator;
+use App\Http\Adapters\Form\FormModelAdapter;
 use App\Repositories\FormRepository;
 use App\Repositories\FormUserRepository;
 use App\Repositories\UserRepository;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
-class FormService extends BaseService
+class FormService
 {
-    /** @var FormRepository */
-    protected $repository;
-
-    protected UserRepository $userRepository;
+    protected FormRepository $repository;
     protected FormUserRepository $formUserRepository;
 
     public function __construct(
         FormRepository $repository,
-        UserRepository $userRepository,
         FormUserRepository $formUserRepository
     )
     {
         $this->repository = $repository;
-        $this->userRepository = $userRepository;
         $this->formUserRepository = $formUserRepository;
     }
 
-    public function create(Request $request): Model
-    {
-        Validator::make($request)
-            ->rules($this->repository->getModelRules())
-            ->validateOrFail();
+    public function create(FormData $data): FormUpdateData
+    {   
+        $form = $this->repository->create($data);
 
-        $user = $this->userRepository->getOne(config('user_id'));
-        
-        $form = $this->repository->create($request->all());
-
-        $this->formUserRepository->createFirstFormUser($form, $user);
+        $this->formUserRepository->createFirstFormUser($form);
         
         return $form;
+    }
+
+    /**
+     * @var FormUpdateData[]
+     */
+    public function getPaginate(Request $request): ?array
+    {
+        return $this->repository->getPaginate($request);
+    }
+
+    public function getOne(FormFilter $filter): FormUpdateData
+    {
+        return $this->repository->getOne($filter);
+    }
+
+    public function update(FormUpdateData $data): FormUpdateData
+    {
+        return $this->repository->update($data);
+    }
+
+    public function delete(FormFilter $filter): void
+    {
+        $this->repository->delete($filter);
     }
 }

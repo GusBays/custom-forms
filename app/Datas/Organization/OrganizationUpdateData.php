@@ -2,8 +2,12 @@
 
 namespace App\Datas\Organization;
 
+use App\Traits\GetTimestamps;
+
 class OrganizationUpdateData extends OrganizationData
 {
+    use GetTimestamps;
+
     private int $id;
     private ?string $slug = null;
     private ?string $created_at = null;
@@ -39,16 +43,6 @@ class OrganizationUpdateData extends OrganizationData
     public function getSlug(): ?string
     {
         return $this->slug;
-    }
-
-    public function getCreatedAt(): ?string
-    {
-        return $this->created_at;
-    }
-
-    public function getUpdatedAt(): ?string
-    {
-        return $this->updated_at;
     }
 
     public function toArray(): array
