@@ -3,10 +3,13 @@
 namespace App\Models;
 
 use App\Scopes\OrganizationScope;
+use App\Traits\InsertOrganizationId;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class FormField extends BaseModel
 {
+    use InsertOrganizationId;
+
     protected $fillable = [
         'form_id',
         'name',

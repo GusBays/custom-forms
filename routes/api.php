@@ -2,6 +2,7 @@
 
 use App\Contracts\ApiRoutesEnum;
 use App\Http\Controllers\FormController;
+use App\Http\Controllers\FormFieldController;
 use App\Http\Controllers\FormUserController;
 use App\Http\Controllers\OrganizationController;
 use App\Http\Controllers\UserController;
@@ -49,5 +50,13 @@ Route::middleware('auth:api')->group(function() {
         Route::get(ApiRoutesEnum::FORM_USERS, 'index');
         Route::put(ApiRoutesEnum::FORM_USERS_ID, 'update')->whereNumber('id');
         Route::delete(ApiRoutesEnum::FORM_USERS_ID, 'destroy')->whereNumber('id');
+    });
+
+    Route::controller(FormFieldController::class)->group(function () {
+        Route::post(ApiRoutesEnum::FORM_FIELDS, 'store');
+        Route::get(ApiRoutesEnum::FORM_FIELDS, 'index');
+        Route::get(ApiRoutesEnum::FORM_FIELDS_ID, 'show')->whereNumber('id');
+        Route::put(ApiRoutesEnum::FORM_FIELDS_ID, 'update')->whereNumber('id');
+        Route::delete(ApiRoutesEnum::FORM_FIELDS_ID, 'destroy')->whereNumber('id');
     });
 });
