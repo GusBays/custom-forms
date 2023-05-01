@@ -46,4 +46,9 @@ class Form extends BaseModel
     {
         return $this->hasMany(FormUser::class);
     }
+
+    public function formFields(): HasMany
+    {
+        return $this->hasMany(FormField::class);
+    }
 }
