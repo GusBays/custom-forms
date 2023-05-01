@@ -26,19 +26,29 @@ class FormRepository
     protected Builder $query;
     private const RELATIONS = ['formUsers'];
 
+    protected FormUserRepository $formUserRepository;
+
     public function __construct(
-        Form $model
+        Form $model,
+        FormUserRepository $formUserRepository
     )
     {
         $this->model = $model;
-        $this->query = $model->query();
+        $this->model->with(self::RELATIONS);
 
+        $this->query = $model->query();
         $this->query->with(self::RELATIONS);
+
+        $this->formUserRepository = $formUserRepository;
     }
 
     public function create(FormData $data): FormUpdateData
     {
         $this->model->fill($data->toArray())->save();
+
+        $this->formUserRepository->createFirstFormUser($this->model);
+
+        $this->model->loadMissing(self::RELATIONS);
 
         return new FormModelAdapter($this->model);
     }

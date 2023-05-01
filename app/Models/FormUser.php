@@ -10,12 +10,6 @@ class FormUser extends BaseModel
 {
     use InsertOrganizationId;
 
-    protected array $rules = [
-        'form_id' => 'required|integer|exists:forms',
-        'user_id' => 'required|integer|exists:users',
-        'type' => 'required|in:creator,editor,viewer',
-    ];
-
     protected $fillable = [
         'form_id',
         'user_id',

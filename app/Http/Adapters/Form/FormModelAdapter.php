@@ -3,6 +3,7 @@
 namespace App\Http\Adapters\Form;
 
 use App\Datas\Form\FormUpdateData;
+use App\Http\Adapters\FormUser\FormUserModelAdapter;
 use App\Models\Form;
 
 class FormModelAdapter extends FormUpdateData
@@ -20,6 +21,7 @@ class FormModelAdapter extends FormUpdateData
             $form->should_notify_each_fill,
             $form->active,
             $form->slug,
+            FormUserModelAdapter::createFromFormModel($form->formUsers),
             $form->created_at,
             $form->updated_at
         );

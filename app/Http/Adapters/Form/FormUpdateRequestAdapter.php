@@ -3,6 +3,7 @@
 namespace App\Http\Adapters\Form;
 
 use App\Datas\Form\FormUpdateData;
+use App\Http\Adapters\FormUser\FormUserRequestAdapter;
 use Illuminate\Http\Request;
 
 class FormUpdateRequestAdapter extends FormUpdateData
@@ -20,6 +21,7 @@ class FormUpdateRequestAdapter extends FormUpdateData
             $request->input('should_notify_each_fill', true),
             $request->input('active', true),
             $request->input('slug'),
+            FormUserRequestAdapter::createFromFormRequest($request),
             $request->input('created_at'),
             $request->input('updated_at')
         );

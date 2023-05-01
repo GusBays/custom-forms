@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Datas\Form;
+namespace App\Datas\FormUser;
 
 use App\Traits\GetOrganizationId;
 use App\Traits\GetTimestamps;
 use App\Traits\SetModifiedFields;
 
-class FormUpdateData extends FormData
+class FormUserUpdateData extends FormUserData
 {
     use GetOrganizationId;
     use GetTimestamps;
@@ -14,39 +14,27 @@ class FormUpdateData extends FormData
 
     private int $id;
     private int $organization_id;
-    private ?string $slug = null;
-    /** @var FormUserData[] */
-    private ?array $formUsers = null;
     private ?string $created_at = null;
     private ?string $updated_at = null;
 
     public function __construct(
         int $id,
         int $organization_id,
-        string $name,
-        string $available_until = null,
-        int $fill_limit = null,
-        bool $should_notify_each_fill = true,
-        bool $active = true,
-        string $slug = null,
-        array $formUsers = [],
+        int $form_id = null,
+        int $user_id = null,
+        string $type = null,
         string $created_at = null,
         string $updated_at = null
     )
     {
         $this->id = $id;
         $this->organization_id = $organization_id;
-        $this->slug = $slug;
-        $this->formUsers = $formUsers;
         $this->created_at = $created_at;
         $this->updated_at = $updated_at;
         parent::__construct(
-            $name,
-            $available_until,
-            $fill_limit,
-            $should_notify_each_fill,
-            $active,
-            $formUsers
+            $form_id,
+            $user_id,
+            $type
         );
     }
 
@@ -55,25 +43,10 @@ class FormUpdateData extends FormData
         return $this->id;
     }
 
-    public function getSlug(): ?string
-    {
-        return $this->slug;
-    }
-
-    /**
-     * @return FormUserData[]
-     */
-    public function getFormUsers(): ?array
-    {
-        return $this->formUsers;
-    }
-
     public function toArray(): array
     {
         $array = parent::toArray();
         $array['id'] = $this->getId();
-        $array['organization_id'] = $this->getOrganizationId();
-        $array['slug'] = $this->getSlug();
         $array['created_at'] = $this->getCreatedAt();
         $array['updated_at'] = $this->getUpdatedAt();
 

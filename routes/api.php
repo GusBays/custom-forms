@@ -45,8 +45,9 @@ Route::middleware('auth:api')->group(function() {
     });
 
     Route::controller(FormUserController::class)->group(function () {
-        Route::post(ApiRoutesEnum::FORM_USERS, 'create');
-        Route::get(ApiRoutesEnum::FORM_USERS, 'getByFormId')->whereNumber('id');
-        Route::delete(ApiRoutesEnum::FORM_USERS_ID, 'delete')->where(['id', 'user_id']);
+        Route::post(ApiRoutesEnum::FORM_USERS, 'store');
+        Route::get(ApiRoutesEnum::FORM_USERS, 'index');
+        Route::put(ApiRoutesEnum::FORM_USERS_ID, 'update')->whereNumber('id');
+        Route::delete(ApiRoutesEnum::FORM_USERS_ID, 'destroy')->whereNumber('id');
     });
 });
