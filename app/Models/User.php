@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\BaseModel;
 use App\Scopes\OrganizationScope;
 use App\Traits\InsertOrganizationId;
+use App\Traits\MountName;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Foundation\Auth\Access\Authorizable;
@@ -16,6 +17,7 @@ class User extends BaseModel
     use Authenticatable;
     use Authorizable;
     use InsertOrganizationId;
+    use MountName;
 
     protected array $rules = [
         'first_name' => 'required|max:255',
@@ -54,14 +56,6 @@ class User extends BaseModel
         parent::boot();
 
         static::addGlobalScope(new OrganizationScope);
-
-        static::saving(function (User $model) {
-            $name = $model->first_name;
-
-            if (filled($model->last_name)) $name = $name . ' ' . $model->last_name;
-
-            $model->setAttribute('name', $name);
-        });
     }
 
     public function setPasswordAttribute($value): void

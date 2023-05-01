@@ -1,6 +1,7 @@
 <?php
 
 use App\Contracts\ApiRoutesEnum;
+use App\Http\Controllers\FillerController;
 use App\Http\Controllers\FormController;
 use App\Http\Controllers\FormFieldController;
 use App\Http\Controllers\FormUserController;
@@ -58,5 +59,13 @@ Route::middleware('auth:api')->group(function() {
         Route::get(ApiRoutesEnum::FORM_FIELDS_ID, 'show')->whereNumber('id');
         Route::put(ApiRoutesEnum::FORM_FIELDS_ID, 'update')->whereNumber('id');
         Route::delete(ApiRoutesEnum::FORM_FIELDS_ID, 'destroy')->whereNumber('id');
+    });
+
+    Route::controller(FillerController::class)->group(function () {
+        Route::post(ApiRoutesEnum::FILLERS, 'store');
+        Route::get(ApiRoutesEnum::FILLERS, 'index');
+        Route::get(ApiRoutesEnum::FILLERS_ID, 'show')->whereNumber('id');
+        Route::put(ApiRoutesEnum::FILLERS_ID, 'update')->whereNumber('id');
+        Route::delete(ApiRoutesEnum::FILLERS_ID, 'destroy')->whereNumber('id');
     });
 });
