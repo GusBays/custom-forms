@@ -5,26 +5,25 @@
 @endsection
 
 @section('content')
-    <div class="container">
-        <form class="row justify-content-center align-items-center form form-login mt-4" method="POST" action="/api/users/login">
-            <div class="col-12 text-center">
-                <p class="form-text">Insira seu e-mail</p>
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-10 mx-auto col-lg-5">
+                <form method="POST" action="/login">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Endereço de e-mail</span>
+                        <input id="email" name="email" type="text" class="form-control" placeholder="Email"/>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">Senha</span>
+                        <input id="password" name="password" type="password" class="form-control" placeholder="Senha"/>
+                    </div>
+                    <button type="submit" class="btn btn-success">Entrar</button>
+                    @csrf
+                </form>
+                <form method="GET" action="/admin/cadastro">
+                    <button type="submit" class="btn btn-secondary btn-block btn-lg">Cadastrar-se</button>
+                </form>
             </div>
-            <div class="form-group">
-                <input id="email" type="text" class="form-control form-control-lg text-center"></input>
-            </div>
-            <div class="col-12 text-center">
-                <p class="form-text">Insira sua senha</p>
-            </div>
-            <div class="form-group">
-                <input id="password" type="password" class="form-control form-control-lg text-center"></input>
-            </div>
-            <div class="col-6">
-                <button type="submit" class="btn btn-secondary btn-block btn-lg">Entrar</button>
-            </div>
-        </form>
-        <form class="row justify-content-center align-items-center form form-login mt-4" method="GET" action="/admin/cadastro">
-            <button type="submit" class="btn btn-secondary btn-block btn-lg">Cadastrar-se</button>
-        </form>
+        </div>
     </div>
 @endsection
