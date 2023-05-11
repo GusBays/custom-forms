@@ -57,8 +57,8 @@ class UserService
         $user = $this->repository->getByEmail(new UserEmailFilter($request));
 
         if (!$this->check($request->password, $user->getPassword())) throw new Exception('invalid_password', Response::HTTP_UNAUTHORIZED);
-        
-        addCookie(CookieEnum::ADM_TOKEN, $user->getToken());
+
+        config(['organization_id' => $user->getOrganizationId()]);
 
         return $user;
     }
