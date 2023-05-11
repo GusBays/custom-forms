@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Contracts\CookieEnum;
 use App\Datas\User\UserUpdateData;
 use Closure;
 use Illuminate\Auth\Access\AuthorizationException;
@@ -15,7 +16,7 @@ class Authenticate extends Middleware
 
     public function handle($request, Closure $next, ...$guards)
     {
-        if (!$request->bearerToken()) throw new AuthenticationException();
+        if (blank($request->bearerToken()) && blank(getCookie(CookieEnum::ADM_TOKEN))) throw new AuthenticationException();
 
         $auth = $this->auth->guard(...$guards);
 
