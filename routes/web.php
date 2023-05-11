@@ -1,7 +1,11 @@
 <?php
 
+use App\Contracts\ApiRoutesEnum;
 use App\Contracts\RedirectEnum;
+use App\Http\Controllers\ApiRequestsController;
 use App\Http\Controllers\ViewsController;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,9 +26,14 @@ Route::controller(ViewsController::class)->group(function () {
     Route::get(RedirectEnum::CADASTRO, 'cadastro');
 });
 
+Route::controller(ApiRequestsController::class)->group(function () {
+    Route::post(RedirectEnum::LOGIN, 'login');
+    Route::post(RedirectEnum::CREATE_ORGANIZATION, 'createOrganization');
+});
+
 Route::middleware('auth:web')->group(function () {
 
-    Route::controller(ViewsController::class)->group(function () {
+    Route::controller(ApiRequestsController::class)->group(function () {
         Route::get(RedirectEnum::ADMIN, 'admin');
     });
 
