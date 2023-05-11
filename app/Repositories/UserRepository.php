@@ -100,7 +100,7 @@ class UserRepository
         $query = $this->model->newQueryWithoutScopes();
 
         if ($query->where('organization_id', config('organization_id'))->exists()) throw new \Throwable('organization_already_have_user', Response::HTTP_INTERNAL_SERVER_ERROR);
-        
+
         $this->model->fill($data->toArray())->save();
 
         return $this->model;
@@ -112,7 +112,7 @@ class UserRepository
             'first_name' => $user->first_name,
             'last_name' => $user->last_name,
             'email' => $user->email,
-            'organization_id' => $user->organization_id
+            'organization_id' => config('organization_id')
         ], 
         env('APP_KEY'),
         'HS256');

@@ -77,7 +77,6 @@ abstract class UserData implements Arrayable
     public function toArray(): array
     {
         return [
-            'organization_id' => $this->getOrganizationId(),
             'name' => $this->getName(),
             'first_name' => $this->getFirstName(),
             'last_name' => $this->getLastName(),
