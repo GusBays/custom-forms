@@ -19,8 +19,13 @@ class ViewsController
         return view('register');
     }
 
-    public function admin()
+    public function admin(array $organization)
     {
-        return view('admin');
+        return view('admin', $organization);
+    }
+
+    public function error(\Throwable $th)
+    {
+        return view('error', $th);
     }
 }
