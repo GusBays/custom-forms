@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Filters\Organization\OrganizationIdFilter;
 use App\Http\Adapters\Organization\OrganizationRequestAdapter;
 use App\Resources\OrganizationResource;
 use App\Services\OrganizationService;
@@ -29,5 +30,10 @@ class OrganizationController
         $resource = new OrganizationResource($this->service->create(new OrganizationRequestAdapter($request)));
 
         return response($resource, Response::HTTP_CREATED);
+    }
+
+    public function show(Request $request): OrganizationResource
+    {
+        return new OrganizationResource($this->service->getOne(new OrganizationIdFilter($request)));
     }
 }
