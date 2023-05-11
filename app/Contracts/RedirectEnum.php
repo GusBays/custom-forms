@@ -11,4 +11,8 @@ class RedirectEnum
     public const CADASTRO = '/admin/cadastro';
 
     public const ADMIN = '/admin';
+
+    public const LOGIN = '/login';
+
+    public const CREATE_ORGANIZATION = '/create/organization';
 }
