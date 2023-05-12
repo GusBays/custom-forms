@@ -4,7 +4,7 @@ namespace App\Datas\FormField;
 
 use Illuminate\Contracts\Support\Arrayable;
 
-class FormFieldData implements Arrayable
+abstract class FormFieldData implements Arrayable
 {
     private ?int $form_id = null;
     private ?string $name = null;

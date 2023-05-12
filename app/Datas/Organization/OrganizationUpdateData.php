@@ -4,7 +4,7 @@ namespace App\Datas\Organization;
 
 use App\Traits\GetTimestamps;
 
-class OrganizationUpdateData extends OrganizationData
+abstract class OrganizationUpdateData extends OrganizationData
 {
     use GetTimestamps;
 

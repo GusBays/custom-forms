@@ -4,7 +4,7 @@ namespace App\Datas\FormUser;
 
 use Illuminate\Contracts\Support\Arrayable;
 
-class FormUserData implements Arrayable
+abstract class FormUserData implements Arrayable
 {
     private ?int $form_id = null;
     private ?int $user_id = null;

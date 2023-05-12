@@ -6,7 +6,7 @@ use App\Traits\GetOrganizationId;
 use App\Traits\GetTimestamps;
 use App\Traits\SetModifiedFields;
 
-class FormUpdateData extends FormData
+abstract class FormUpdateData extends FormData
 {
     use GetOrganizationId;
     use GetTimestamps;

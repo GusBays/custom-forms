@@ -6,7 +6,7 @@ use App\Traits\GetOrganizationId;
 use App\Traits\GetTimestamps;
 use App\Traits\SetModifiedFields;
 
-class FillerUpdateData extends FillerData
+abstract class FillerUpdateData extends FillerData
 {
     use GetOrganizationId;
     use GetTimestamps;

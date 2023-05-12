@@ -5,7 +5,7 @@ namespace App\Datas\Form;
 use App\Datas\FormField\FormFieldData;
 use Illuminate\Contracts\Support\Arrayable;
 
-class FormData implements Arrayable
+abstract class FormData implements Arrayable
 {
     private string $name;
     private ?string $available_until = null;

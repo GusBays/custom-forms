@@ -4,7 +4,7 @@ namespace App\Datas\Filler;
 
 use Illuminate\Contracts\Support\Arrayable;
 
-class FillerData implements Arrayable
+abstract class FillerData implements Arrayable
 {
     private ?string $first_name = null;
     private ?string $last_name = null;

@@ -5,7 +5,7 @@ namespace App\Datas\Organization;
 use App\Datas\User\UserData;
 use Illuminate\Contracts\Support\Arrayable;
 
-class OrganizationData implements Arrayable
+abstract class OrganizationData implements Arrayable
 {
     private string $name;
     private ?int $forms_count = null;
