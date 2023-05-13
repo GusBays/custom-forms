@@ -95,6 +95,11 @@ class UserRepository
         return new UserModelAdapter($user);
     }
 
+    public function getNotifiableInstance(UserFilter $filter): User
+    {
+        return $this->getUserQuery($filter)->firstOrFail();
+    }
+
     public function createFirstUser(UserData $data): User
     {
         $query = $this->model->newQueryWithoutScopes();
