@@ -2,18 +2,12 @@
 
 namespace App\Filters\User;
 
-use Illuminate\Http\Request;
-
 class UserIdFilter extends UserFilter
 {
     public function __construct(
-        Request $request
+        int $id
     )
     {
-        parent::__construct(
-            $request->route('id'),
-            null,
-            null
-        );
+        parent::__construct($id);
     }
 }
