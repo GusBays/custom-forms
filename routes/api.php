@@ -3,6 +3,7 @@
 use App\Contracts\ApiRoutesEnum;
 use App\Http\Controllers\FillerController;
 use App\Http\Controllers\FormController;
+use App\Http\Controllers\FormFieldAnswerController;
 use App\Http\Controllers\FormFieldController;
 use App\Http\Controllers\FormUserController;
 use App\Http\Controllers\OrganizationController;
@@ -67,5 +68,9 @@ Route::middleware('auth:api')->group(function() {
         Route::get(ApiRoutesEnum::FILLERS_ID, 'show')->whereNumber('id');
         Route::put(ApiRoutesEnum::FILLERS_ID, 'update')->whereNumber('id');
         Route::delete(ApiRoutesEnum::FILLERS_ID, 'destroy')->whereNumber('id');
+    });
+
+    Route::controller(FormFieldAnswerController::class)->group(function () {
+        Route::post(ApiRoutesEnum::FORM_FIELDS_ANSWERS, 'store');
     });
 });
