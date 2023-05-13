@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Filters\User\UserIdFilter;
+use App\Filters\User\UserIdRequestFilter;
 use App\Http\Adapters\User\UserRequestAdapter;
 use App\Http\Adapters\User\UserRequestUpdateAdapter;
 use App\Resources\UserResource;
@@ -42,7 +42,7 @@ class UserController
 
     public function show(Request $request): UserResource
     {
-        return new UserResource($this->service->getOne(new UserIdFilter($request)));
+        return new UserResource($this->service->getOne(new UserIdRequestFilter($request)));
     }
 
     public function update(Request $request): UserResource
@@ -56,7 +56,7 @@ class UserController
 
     public function destroy(Request $request): HttpResponse
     {
-        $this->service->delete(new UserIdFilter($request));
+        $this->service->delete(new UserIdRequestFilter($request));
 
         return response('', Response::HTTP_NO_CONTENT);
     }

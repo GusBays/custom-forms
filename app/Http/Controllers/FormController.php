@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Filters\Form\FormIdFilter;
+use App\Filters\Form\FormIdRequestFilter;
 use App\Http\Adapters\Form\FormRequestAdapter;
 use App\Http\Adapters\Form\FormUpdateRequestAdapter;
 use App\Resources\FormResource;
@@ -41,7 +41,7 @@ class FormController
 
     public function show(Request $request): FormResource
     {
-        return new FormResource($this->service->getOne(new FormIdFilter($request)));
+        return new FormResource($this->service->getOne(new FormIdRequestFilter($request)));
     }
 
     public function update(Request $request): FormResource
@@ -55,7 +55,7 @@ class FormController
 
     public function destroy(Request $request): HttpResponse
     {
-        $this->service->delete(new FormIdFilter($request));
+        $this->service->delete(new FormIdRequestFilter($request));
 
         return response('', Response::HTTP_NO_CONTENT);
     }
