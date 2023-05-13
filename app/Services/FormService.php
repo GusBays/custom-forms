@@ -5,23 +5,39 @@ namespace App\Services;
 use App\Datas\Form\FormData;
 use App\Datas\Form\FormUpdateData;
 use App\Filters\Form\FormFilter;
+use App\Filters\Form\FormIdFilter;
+use App\Http\Adapters\FormUser\FormUserCreatorAdapter;
+use App\Repositories\FormFieldRepository;
 use App\Repositories\FormRepository;
+use App\Repositories\FormUserRepository;
 use Illuminate\Http\Request;
 
 class FormService
 {
     protected FormRepository $repository;
+    protected FormUserRepository $formUserRepository;
+    protected FormFieldRepository $formFieldRepository;
 
     public function __construct(
-        FormRepository $repository
+        FormRepository $repository,
+        FormUserRepository $formUserRepository,
+        FormFieldRepository $formFieldRepository
     )
     {
         $this->repository = $repository;
+        $this->formUserRepository = $formUserRepository;
+        $this->formFieldRepository = $formFieldRepository;
     }
 
     public function create(FormData $data): FormUpdateData
-    {   
-        return $this->repository->create($data);
+    {
+        $form = $this->repository->create($data);
+
+        $this->formUserRepository->create(new FormUserCreatorAdapter($form->getId()));
+
+        $this->formFieldRepository->createFromArray($form->getId(), $data->getFormFields());
+
+        return $this->repository->getOne(new FormIdFilter($form->getId()));
     }
 
     /**

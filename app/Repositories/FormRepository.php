@@ -4,10 +4,8 @@ namespace App\Repositories;
 
 use App\Datas\Form\FormData;
 use App\Datas\Form\FormUpdateData;
-use App\Datas\FormField\FormFieldData;
 use App\Filters\Form\FormFilter;
 use App\Http\Adapters\Form\FormModelAdapter;
-use App\Http\Adapters\FormUser\FormUserCreatorAdapter;
 use App\Interpreters\Form\FormIdInterpreter;
 use App\Models\Form;
 use App\Traits\Filterable;
@@ -28,13 +26,10 @@ class FormRepository
     protected Builder $query;
     private const RELATIONS = ['formUsers', 'formFields'];
 
-    protected FormUserRepository $formUserRepository;
     protected FormFieldRepository $formFieldRepository;
 
     public function __construct(
-        Form $model,
-        FormUserRepository $formUserRepository,
-        FormFieldRepository $formFieldRepository
+        Form $model
     )
     {
         $this->model = $model;
@@ -42,20 +37,11 @@ class FormRepository
 
         $this->query = $model->query();
         $this->query->with(self::RELATIONS);
-
-        $this->formUserRepository = $formUserRepository;
-        $this->formFieldRepository = $formFieldRepository;
     }
 
     public function create(FormData $data): FormUpdateData
     {
         $this->model->fill($data->toArray())->save();
-
-        $this->formUserRepository->create(new FormUserCreatorAdapter($this->model->id));
-
-        $this->formFieldRepository->createFromArray($this->model->id, $data->getFormFields());
-
-        $this->model->loadMissing(self::RELATIONS);
 
         return new FormModelAdapter($this->model);
     }
@@ -78,6 +64,8 @@ class FormRepository
     public function getOne(FormFilter $filter): FormUpdateData
     {
         $form = $this->getFormQuery($filter)->firstOrFail();
+
+        $form->loadMissing(self::RELATIONS);
 
         return new FormModelAdapter($form);
     }

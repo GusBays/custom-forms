@@ -38,9 +38,11 @@ class FormFieldRepository
 
     public function create(FormFieldData $data): FormFieldUpdateData
     {
-        $this->model->fill($data->toArray())->save();
+        $formField = $this->query->create($data->toArray());
 
-        return new FormFieldModelAdapter($this->model);
+        $this->query = $this->model->newQuery();
+
+        return new FormFieldModelAdapter($formField);
     }
 
     /**
@@ -83,16 +85,12 @@ class FormFieldRepository
 
     public function createFromArray(int $form_id, array $form_fields): array
     {
-        $rows = collect();
-
-        /** @var FormFieldData */
-        foreach ($form_fields as $form_field) {
-            $form_field->setFormId($form_id);
-            $rows->push($this->create($form_field));
-            $this->resetModelInstance();
-        }
-
-        return $rows->all();
+        $toSetFormId = fn (FormFieldData $form_field) => $form_field->setFormId($form_id);
+        $create = fn (FormFieldData $form_field) => $this->create($form_field);
+        return collect($form_fields)
+            ->map($toSetFormId)
+            ->each($create)
+            ->all();
     }
 
     private function getFormFieldQuery(FormFieldFilter $filter): Builder
