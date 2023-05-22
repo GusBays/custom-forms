@@ -18,8 +18,12 @@ class FormUserRequestAdapter extends FormUserData
         );
     }
 
-    public static function createFromFormRequest(Request $request): array
+    public static function createFromFormRequest(array $formUsers): array
     {
-        return collect($request->input('form_users'))->mapInto(self::class)->all();
+        $toRequest = fn (array $formUser) => new Request($formUser);
+        return collect($formUsers)
+            ->map($toRequest)
+            ->mapInto(self::class)
+            ->all();
     }
 }
