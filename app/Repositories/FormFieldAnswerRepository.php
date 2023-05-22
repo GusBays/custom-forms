@@ -2,6 +2,7 @@
 
 namespace App\Repositories;
 
+use App\Datas\Form\FormUpdateData;
 use App\Datas\FormFieldAnswer\FormFieldAnswerData;
 use App\Datas\FormFieldAnswer\FormFieldAnswerUpdateData;
 use App\Http\Adapters\FormFieldAnswer\FormFieldAnswerModelAdapter;
@@ -25,8 +26,6 @@ class FormFieldAnswerRepository
 
     public function create(FormFieldAnswerData $data): FormFieldAnswerUpdateData
     {
-        $this->checkIfAnswerIsAlreadyRegistered($data);
-
         $formFieldAnswer = $this->query->create($data->toArray());
 
         $this->query = $this->model->newQuery();
@@ -34,7 +33,7 @@ class FormFieldAnswerRepository
         return new FormFieldAnswerModelAdapter($formFieldAnswer);
     }
 
-    private function checkIfAnswerIsAlreadyRegistered(FormFieldAnswerData $data): void
+    public function checkIfAnswerIsAlreadyRegistered(FormFieldAnswerData $data): void
     {
         $answer = $this->query
             ->where('form_id', $data->getFormId())
@@ -45,5 +44,22 @@ class FormFieldAnswerRepository
         $this->query = $this->model->newQuery();
         
         if (filled($answer)) throw new Exception('answer_already_registered', Response::HTTP_INTERNAL_SERVER_ERROR);
+    }
+
+    public function hasExceededFillLimitOn(FormUpdateData $form): bool
+    {
+        if (blank($form->getFillLimit())) return false;
+
+        $formAnswersCount = $this->query
+            ->where('form_id', $form->getId())
+            ->get()
+            ->unique('filler_id')
+            ->count();
+
+        $this->query = $this->model->newQuery();
+
+        if ($formAnswersCount >= $form->getFillLimit()) return true;
+
+        return false;
     }
 }

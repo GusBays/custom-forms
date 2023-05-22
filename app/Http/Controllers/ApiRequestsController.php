@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Contracts\CookieEnum;
 use App\Contracts\RedirectEnum;
+use App\Datas\User\UserUpdateData;
 use Illuminate\Http\Request;
 
 class ApiRequestsController
@@ -31,6 +32,7 @@ class ApiRequestsController
             return $this->viewsController->error($th);
         }
 
+        /** @var UserUpdateData */
         $firstUser = $this->userController->index($request)->first();
 
         addCookie(CookieEnum::ADM_TOKEN, $firstUser->getToken());

@@ -36,6 +36,27 @@ abstract class FormUserData implements Arrayable
         return $this->type;
     }
 
+    public function setFormId(int $formId): self
+    {
+        $this->form_id = $formId;
+
+        return $this;
+    }
+
+    public function setUserId(int $userId): self
+    {
+        $this->user_id = $userId;
+
+        return $this;
+    }
+
+    public function setType(string $type): self
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
     public function toArray(): array
     {
         return [

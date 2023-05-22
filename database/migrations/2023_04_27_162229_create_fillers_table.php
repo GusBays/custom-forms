@@ -16,8 +16,8 @@ class CreateFillersTable extends Migration
         Schema::create('fillers', function (Blueprint $table) {
             $table->id();
             $table->foreignId('organization_id');
-            $table->string('name', 255);
-            $table->string('first_name', 255);
+            $table->string('name', 255)->nullable();
+            $table->string('first_name', 255)->nullable();
             $table->string('last_name', 255)->nullable();
             $table->string('email', 255);
             $table->timestamps();

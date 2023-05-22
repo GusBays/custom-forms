@@ -2,6 +2,7 @@
 
 namespace App\Datas\FormFieldAnswer;
 
+use App\Datas\Filler\FillerUpdateData;
 use App\Datas\Form\FormUpdateData;
 use App\Traits\GetOrganizationId;
 use App\Traits\GetTimestamps;
@@ -24,7 +25,8 @@ abstract class FormFieldAnswerUpdateData extends FormFieldAnswerData
         int $filler_id,
         array $answer = null,
         string $created_at = null,
-        string $updated_at = null
+        string $updated_at = null,
+        FillerUpdateData $filler = null
     )
     {
         $this->id = $id;
@@ -35,7 +37,8 @@ abstract class FormFieldAnswerUpdateData extends FormFieldAnswerData
             $form_id,
             $field_id,
             $filler_id,
-            $answer
+            $answer,
+            $filler
         );
     }
 

@@ -3,6 +3,7 @@
 namespace App\Datas\Form;
 
 use App\Datas\FormField\FormFieldData;
+use App\Datas\FormUser\FormUserData;
 use Illuminate\Contracts\Support\Arrayable;
 
 abstract class FormData implements Arrayable

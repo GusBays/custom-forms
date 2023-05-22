@@ -9,7 +9,7 @@ class FormFieldAnswerValidator extends RequestValidator
         return [
             'form_id' => 'required|integer|exists:forms,id',
             'field_id' => 'required|integer|exists:form_fields,id',
-            'filler_id' => 'required|integer|exists:fillers,id',
+            'filler_id' => 'nullable|integer|exists:fillers,id',
             'answer' => 'nullable|array',
         ];
     }

@@ -6,6 +6,7 @@ use App\Datas\Filler\FillerData;
 use App\Datas\Filler\FillerUpdateData;
 use App\Filters\Filler\FillerFilter;
 use App\Http\Adapters\Filler\FillerModelAdapter;
+use App\Interpreters\Filler\FillerEmailInterpreter;
 use App\Interpreters\Filler\FillerIdInterpreter;
 use App\Models\Filler;
 use App\Traits\Filterable;
@@ -81,7 +82,8 @@ class FillerRepository
     protected function getFillerQuery(FillerFilter $filter): Builder
     {
         $interpreters = [
-            new FillerIdInterpreter($filter)
+            new FillerIdInterpreter($filter),
+            new FillerEmailInterpreter($filter)
         ];
 
         foreach ($interpreters as $interpreter) {

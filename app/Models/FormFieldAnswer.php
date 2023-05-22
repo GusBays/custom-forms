@@ -40,16 +40,16 @@ class FormFieldAnswer extends BaseModel
 
     public function form(): HasOne
     {
-        return $this->hasOne(Form::class);
+        return $this->hasOne(Form::class, 'id', 'form_id');
     }
 
     public function formField(): HasOne
     {
-        return $this->hasOne(FormField::class);
+        return $this->hasOne(FormField::class, 'id', 'field_id');
     }
 
-    public function filled(): HasOne
+    public function filler(): HasOne
     {
-        return $this->hasOne(Filler::class);
+        return $this->hasOne(Filler::class, 'id', 'filler_id');
     }
 }

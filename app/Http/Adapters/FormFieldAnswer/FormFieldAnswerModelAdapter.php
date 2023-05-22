@@ -3,6 +3,7 @@
 namespace App\Http\Adapters\FormFieldAnswer;
 
 use App\Datas\FormFieldAnswer\FormFieldAnswerUpdateData;
+use App\Http\Adapters\Filler\FillerModelAdapter;
 use App\Models\FormFieldAnswer;
 
 class FormFieldAnswerModelAdapter extends FormFieldAnswerUpdateData
@@ -19,7 +20,8 @@ class FormFieldAnswerModelAdapter extends FormFieldAnswerUpdateData
             $formFieldAnswer->filler_id,
             $formFieldAnswer->answer,
             $formFieldAnswer->created_at,
-            $formFieldAnswer->updated_at
+            $formFieldAnswer->updated_at,
+            new FillerModelAdapter($formFieldAnswer->filler)
         );
     }
 }

@@ -4,6 +4,8 @@ namespace App\Services;
 
 use App\Datas\Form\FormData;
 use App\Datas\Form\FormUpdateData;
+use App\Datas\FormField\FormFieldData;
+use App\Datas\FormUser\FormUserData;
 use App\Filters\Form\FormFilter;
 use App\Filters\Form\FormIdFilter;
 use App\Http\Adapters\FormUser\FormUserCreatorAdapter;
@@ -33,9 +35,20 @@ class FormService
     {
         $form = $this->repository->create($data);
 
-        $this->formUserRepository->create(new FormUserCreatorAdapter($form->getId()));
+        /** @var FormUserData */
+        $firstUser = collect($data->getFormUsers())->first();
+        $firstUser->setFormId($form->getId())
+            ->setUserId(config('user_id'))
+            ->setType('creator');
 
-        $this->formFieldRepository->createFromArray($form->getId(), $data->getFormFields());
+        $this->formUserRepository->create($firstUser);
+
+        $toSetFormId = fn (FormFieldData $formField) => $formField->setFormId($form->getId());
+        $toCreate = fn (FormFieldData $formField) => $this->formFieldRepository->create($formField);
+        collect($data->getFormFields())
+            ->map($toSetFormId)
+            ->map($toCreate)
+            ->all();
 
         return $this->repository->getOne(new FormIdFilter($form->getId()));
     }
