@@ -6,6 +6,7 @@ use App\Datas\Form\FormData;
 use App\Datas\Form\FormUpdateData;
 use App\Datas\FormField\FormFieldData;
 use App\Datas\FormUser\FormUserData;
+use App\Datas\FormUser\FormUserUpdateData;
 use App\Filters\Form\FormFilter;
 use App\Filters\Form\FormIdFilter;
 use App\Http\Adapters\FormUser\FormUserCreatorAdapter;
@@ -35,13 +36,15 @@ class FormService
     {
         $form = $this->repository->create($data);
 
-        /** @var FormUserData */
-        $firstUser = collect($data->getFormUsers())->first();
-        $firstUser->setFormId($form->getId())
-            ->setUserId(config('user_id'))
-            ->setType('creator');
+        $firstUser = $this->formUserRepository->create(new FormUserCreatorAdapter($form->getId()));
 
-        $this->formUserRepository->create($firstUser);
+        $creator = fn (FormUserData $formUser) => $firstUser->getUserId() === $formUser->getUserId();
+        $toSetFormId = fn (FormUserData $formUser) => $formUser->setFormId($form->getId());
+        $toCreate = fn (FormUserData $formUser) => $this->formUserRepository->create($formUser);
+        collect($data->getFormUsers())
+            ->reject($creator)
+            ->map($toSetFormId)
+            ->map($toCreate);
 
         $toSetFormId = fn (FormFieldData $formField) => $formField->setFormId($form->getId());
         $toCreate = fn (FormFieldData $formField) => $this->formFieldRepository->create($formField);
@@ -54,7 +57,7 @@ class FormService
     }
 
     /**
-     * @var FormUpdateData[]
+     * @return FormUpdateData[]
      */
     public function getPaginate(Request $request): ?array
     {

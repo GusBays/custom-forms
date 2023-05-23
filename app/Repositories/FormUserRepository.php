@@ -37,9 +37,11 @@ class FormUserRepository
 
     public function create(FormUserData $data): FormUserUpdateData
     {
-        $this->model->fill($data->toArray())->save();
+        $user = $this->query->create($data->toArray());
 
-        return new FormUserModelAdapter($this->model);
+        $this->query = $this->model->newQuery();
+
+        return new FormUserModelAdapter($user);
     }
 
     /**
