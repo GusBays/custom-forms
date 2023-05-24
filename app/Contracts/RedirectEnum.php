@@ -14,5 +14,7 @@ class RedirectEnum
 
     public const LOGIN = '/login';
 
+    public const FORMS = '/formularios';
+
     public const CREATE_ORGANIZATION = '/create/organization';
 }

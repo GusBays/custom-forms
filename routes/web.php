@@ -35,6 +35,7 @@ Route::middleware('auth:web')->group(function () {
 
     Route::controller(ApiRequestsController::class)->group(function () {
         Route::get(RedirectEnum::ADMIN, 'admin');
+        Route::get(RedirectEnum::FORMS, 'forms');
     });
 
 });
