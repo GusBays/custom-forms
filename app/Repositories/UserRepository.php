@@ -100,15 +100,15 @@ class UserRepository
         return $this->getUserQuery($filter)->firstOrFail();
     }
 
-    public function createFirstUser(UserData $data): User
+    public function createFirstUser(UserData $data): UserModelAdapter
     {
         $query = $this->model->newQueryWithoutScopes();
 
         if ($query->where('organization_id', config('organization_id'))->exists()) throw new \Throwable('organization_already_have_user', Response::HTTP_INTERNAL_SERVER_ERROR);
 
-        $this->model->fill($data->toArray())->save();
+        $user = $query->create($data->toArray());
 
-        return $this->model;
+        return new UserModelAdapter($user);
     }
 
     public function createJwtToken(User $user): string
