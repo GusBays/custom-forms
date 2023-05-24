@@ -12,6 +12,7 @@
 */
 
 use App\Contracts\RedirectEnum;
+use Carbon\Carbon;
 
 $app = new Illuminate\Foundation\Application(
     $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__)
@@ -63,6 +64,12 @@ if (!function_exists('addCookie')) {
 if (!function_exists('getCookie')) {
     function getCookie(string $cookie) {
         return $_COOKIE[$cookie] ?? null;
+    }
+}
+
+if (!function_exists('formatDate')) {
+    function formatDate(string $date) {
+        return Carbon::parse($date)->format('d/m/Y');
     }
 }
 
