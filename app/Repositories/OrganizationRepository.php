@@ -14,13 +14,17 @@ class OrganizationRepository
 {
     protected Organization $model;
     protected Builder $query;
+    private const RELATIONS = ['users'];
 
     public function __construct(
         Organization $model
     )
     {
         $this->model = $model;
+        $this->model->with(self::RELATIONS);
+
         $this->query = $model->query();
+        $this->query->with(self::RELATIONS);
     }
 
     public function create(OrganizationData $data): OrganizationUpdateData
