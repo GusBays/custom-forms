@@ -29,7 +29,7 @@ class OrganizationService
         
         config(['organization_id' => $organization->getId()]);
 
-        $this->userRepository->createFirstUser($data->getFirstUser());
+        $this->userRepository->createFirstUser(collect($data->getUsers())->first());
 
         return $organization;
     }

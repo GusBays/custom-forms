@@ -20,7 +20,8 @@ abstract class OrganizationUpdateData extends OrganizationData
         int $forms_count = null,
         int $users_count = null,
         string $created_at = null,
-        string $updated_at = null
+        string $updated_at = null,
+        array $users = []
     )
     {
         $this->id = $id;
@@ -31,7 +32,7 @@ abstract class OrganizationUpdateData extends OrganizationData
             $name,
             $forms_count,
             $users_count,
-            null
+            $users
         );
     }
 

@@ -22,10 +22,10 @@ class UserRequestAdapter extends UserData
         );
     }
 
-    public static function fromOrganizationRequest(Request $request): self
+    public static function fromOrganizationRequest(Request $request): array
     {
         $request->merge(['type' => 'owner']);
 
-        return new self($request);
+        return [new self($request)];
     }
 }

@@ -10,19 +10,20 @@ abstract class OrganizationData implements Arrayable
     private string $name;
     private ?int $forms_count = null;
     private ?int $users_count = null;
-    private ?UserData $firstUser = null;
+    /** @var UserData[] */
+    private ?array $users = null;
 
     public function __construct(
         string $name,
         int $forms_count = null,
         int $users_count = null,
-        UserData $firstUser = null
+        array $users = []
     )
     {
         $this->name = $name;
         $this->forms_count = $forms_count;
         $this->users_count = $users_count;
-        $this->firstUser = $firstUser;
+        $this->users = $users;
     }
 
     public function getName(): string
@@ -40,9 +41,12 @@ abstract class OrganizationData implements Arrayable
         return $this->users_count;
     }
 
-    public function getFirstUser(): ?UserData
+    /** 
+     * @return UserData[]
+     */
+    public function getUsers(): ?array
     {
-        return $this->firstUser;
+        return $this->users;
     }
 
     public function toArray(): array

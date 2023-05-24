@@ -4,6 +4,7 @@ namespace App\Http\Adapters\User;
 
 use App\Datas\User\UserUpdateData;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Collection;
 
 class UserModelAdapter extends UserUpdateData
 {
@@ -29,5 +30,10 @@ class UserModelAdapter extends UserUpdateData
     public static function collection(array $users): array
     {
         return collect($users)->mapInto(self::class)->all();
+    }
+
+    public static function fromOrganizationModel(Collection $users): array
+    {
+        return $users->mapInto(self::class)->all();
     }
 }
