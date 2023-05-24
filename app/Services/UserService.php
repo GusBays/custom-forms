@@ -2,7 +2,6 @@
 
 namespace App\Services;
 
-use App\Contracts\CookieEnum;
 use App\Datas\User\UserData;
 use App\Datas\User\UserUpdateData;
 use App\Filters\User\UserEmailFilter;
@@ -56,15 +55,10 @@ class UserService
     {
         $user = $this->repository->getByEmail(new UserEmailFilter($request));
 
-        if (!$this->check($request->password, $user->getPassword())) throw new Exception('invalid_password', Response::HTTP_UNAUTHORIZED);
+        if (!Hash::check($request->password, $user->getPassword())) throw new Exception('invalid_password', Response::HTTP_UNAUTHORIZED);
 
         config(['organization_id' => $user->getOrganizationId()]);
 
         return $user;
-    }
-
-    private function check(string $requestPassword, string $userPassword): bool
-    {
-        return Hash::check($requestPassword, $userPassword);
     }
 }

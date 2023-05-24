@@ -6,7 +6,6 @@ use App\Datas\Form\FormData;
 use App\Datas\Form\FormUpdateData;
 use App\Datas\FormField\FormFieldData;
 use App\Datas\FormUser\FormUserData;
-use App\Datas\FormUser\FormUserUpdateData;
 use App\Filters\Form\FormFilter;
 use App\Filters\Form\FormIdFilter;
 use App\Http\Adapters\FormUser\FormUserCreatorAdapter;
@@ -40,18 +39,17 @@ class FormService
 
         $creator = fn (FormUserData $formUser) => $firstUser->getUserId() === $formUser->getUserId();
         $toSetFormId = fn (FormUserData $formUser) => $formUser->setFormId($form->getId());
-        $toCreate = fn (FormUserData $formUser) => $this->formUserRepository->create($formUser);
+        $create = fn (FormUserData $formUser) => $this->formUserRepository->create($formUser);
         collect($data->getFormUsers())
             ->reject($creator)
             ->map($toSetFormId)
-            ->map($toCreate);
+            ->each($create);
 
         $toSetFormId = fn (FormFieldData $formField) => $formField->setFormId($form->getId());
-        $toCreate = fn (FormFieldData $formField) => $this->formFieldRepository->create($formField);
+        $create = fn (FormFieldData $formField) => $this->formFieldRepository->create($formField);
         collect($data->getFormFields())
             ->map($toSetFormId)
-            ->map($toCreate)
-            ->all();
+            ->each($create);
 
         return $this->repository->getOne(new FormIdFilter($form->getId()));
     }
