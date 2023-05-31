@@ -5,7 +5,9 @@ namespace App\Services;
 use App\Datas\Form\FormData;
 use App\Datas\Form\FormUpdateData;
 use App\Datas\FormField\FormFieldData;
+use App\Datas\FormField\FormFieldUpdateData;
 use App\Datas\FormUser\FormUserData;
+use App\Datas\FormUser\FormUserUpdateData;
 use App\Filters\Form\FormFilter;
 use App\Filters\Form\FormIdFilter;
 use App\Http\Adapters\FormUser\FormUserCreatorAdapter;
@@ -69,7 +71,15 @@ class FormService
 
     public function update(FormUpdateData $data): FormUpdateData
     {
-        return $this->repository->update($data);
+        $form = $this->repository->update($data);
+
+        $update = fn (FormUserUpdateData $formUser) => $this->formUserRepository->update($formUser);
+        if (filled($form->getFormUsers())) collect($data->getFormUsers())->each($update);
+
+        $update = fn (FormFieldUpdateData $formField) => $this->formFieldRepository->update($formField);
+        if (filled($form->getFormFields())) collect($data->getFormFields())->each($update);
+
+        return $form;
     }
 
     public function delete(FormFilter $filter): void

@@ -28,4 +28,13 @@ class FormFieldUpdateRequestAdapter extends FormFieldUpdateData
             $this->setField($key, $value);
         }
     }
+
+    public static function createFromFormUpdateRequest(array $fields): array
+    {
+        $toRequest = fn (array $field) => new Request($field);
+        return collect($fields)
+            ->map($toRequest)
+            ->mapInto(self::class)
+            ->all();
+    }
 }

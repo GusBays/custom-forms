@@ -25,4 +25,13 @@ class FormUserUpdateRequestAdapter extends FormUserUpdateData
             $this->setField($key, $value);
         }
     }
+
+    public static function createFromFormUpdateRequest(array $users): array
+    {
+        $toRequest = fn (array $user) => new Request($user);
+        return collect($users)
+            ->map($toRequest)
+            ->mapInto(self::class)
+            ->all();
+    }
 }
