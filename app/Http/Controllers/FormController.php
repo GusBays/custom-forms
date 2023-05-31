@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Filters\Form\FormIdRequestFilter;
+use App\Filters\Form\FormSlugRequestFilter;
 use App\Http\Adapters\Form\FormRequestAdapter;
 use App\Http\Adapters\Form\FormUpdateRequestAdapter;
 use App\Resources\FormResource;
@@ -58,5 +59,10 @@ class FormController
         $this->service->delete(new FormIdRequestFilter($request));
 
         return response('', Response::HTTP_NO_CONTENT);
+    }
+
+    public function getOneBySlug(Request $request): FormResource
+    {
+        return new FormResource($this->service->getOneBySlug(new FormSlugRequestFilter($request)));
     }
 }

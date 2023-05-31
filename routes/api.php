@@ -30,6 +30,10 @@ Route::controller(UserController::class)->group(function () {
     Route::post(ApiRoutesEnum::USERS_LOGIN, 'login');
 });
 
+Route::controller(FormController::class)->group(function () {
+    Route::get(ApiRoutesEnum::FORMS_SLUG, 'getOneBySlug');
+});
+
 Route::middleware('auth:api')->group(function() {
     Route::controller(UserController::class)->group(function () {
         Route::post(ApiRoutesEnum::USERS, 'store');

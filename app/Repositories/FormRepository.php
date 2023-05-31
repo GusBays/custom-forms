@@ -7,6 +7,7 @@ use App\Datas\Form\FormUpdateData;
 use App\Filters\Form\FormFilter;
 use App\Http\Adapters\Form\FormModelAdapter;
 use App\Interpreters\Form\FormIdInterpreter;
+use App\Interpreters\Form\FormSlugInterpreter;
 use App\Models\Form;
 use App\Traits\Filterable;
 use App\Traits\PerPage;
@@ -86,10 +87,26 @@ class FormRepository
         $form->delete();
     }
 
+    public function getOneBySlug(FormFilter $filter): FormUpdateData
+    {
+        $form = $this->getFormQuery($filter)->firstOrFail();
+
+        $form->loadMissing(self::RELATIONS);
+
+        $data = new FormModelAdapter($form);
+
+        config(['organization_id' => $data->getOrganizationId()]);
+
+        $this->query = $this->model->newQuery();
+
+        return $data;
+    }
+
     private function getFormQuery(FormFilter $filter): Builder
     {
         $interpreters = [
             new FormIdInterpreter($filter),
+            new FormSlugInterpreter($filter)
         ];
 
         foreach ($interpreters as $interpreter) {

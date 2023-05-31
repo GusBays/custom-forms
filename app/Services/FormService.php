@@ -76,4 +76,9 @@ class FormService
     {
         $this->repository->delete($filter);
     }
+
+    public function getOneBySlug(FormFilter $filter): FormUpdateData
+    {
+        return $this->repository->getOneBySlug($filter);
+    }
 }
