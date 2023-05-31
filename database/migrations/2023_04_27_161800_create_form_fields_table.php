@@ -20,7 +20,7 @@ class CreateFormFieldsTable extends Migration
             $table->string('name', 255);
             $table->text('description')->nullable();
             $table->tinyInteger('required');
-            $table->enum('type', ['text', 'checkbox', 'select', 'table']);
+            $table->enum('type', ['text', 'checkbox', 'select', 'table', 'blocked']);
             $table->json('content')->nullable();
             $table->timestamps();
 

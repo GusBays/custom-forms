@@ -11,7 +11,7 @@ class FormFieldValidator extends RequestValidator
             'name' => 'required|string|max:255',
             'description' => 'nullable|string|max:512',
             'required' => 'required|boolean',
-            'type' => 'required|in:text,checkbox,select,table',
+            'type' => 'required|in:text,checkbox,select,table,blocked',
             'content' => 'array'
         ];
     }
