@@ -40,6 +40,8 @@ class OrganizationRepository
     {
         $organization = $this->getOrganizationQuery($filter)->firstOrFail();
 
+        $organization->loadMissing(self::RELATIONS);
+
         return new OrganizationModelAdapter($organization);
     }
 
