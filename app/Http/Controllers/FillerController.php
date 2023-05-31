@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Filters\Filler\FillerIdFilter;
+use App\Filters\Filler\FillerIdRequestFilter;
 use App\Http\Adapters\Filler\FillerRequestAdapter;
 use App\Http\Adapters\Filler\FillerUpdateRequestAdapter;
 use App\Resources\FillerResource;
@@ -41,7 +41,7 @@ class FillerController
 
     public function show(Request $request): FillerResource
     {
-        return new FillerResource($this->service->getOne(new FillerIdFilter($request)));
+        return new FillerResource($this->service->getOne(new FillerIdRequestFilter($request)));
     }
 
     public function update(Request $request): FillerResource
@@ -55,7 +55,7 @@ class FillerController
 
     public function destroy(Request $request): HttpResponse
     {
-        $this->service->delete(new FillerIdFilter($request));
+        $this->service->delete(new FillerIdRequestFilter($request));
 
         return response('', Response::HTTP_NO_CONTENT);
     }

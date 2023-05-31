@@ -7,6 +7,7 @@ use App\Datas\FormFieldAnswer\FormFieldAnswerData;
 use App\Datas\FormFieldAnswer\FormFieldAnswerUpdateData;
 use App\Filters\Filler\FillerEmailFilter;
 use App\Filters\Form\FormIdFilter;
+use App\Jobs\AnswerNotificationJob;
 use App\Jobs\FillNotificationJob;
 use App\Repositories\FillerRepository;
 use App\Repositories\FormFieldAnswerRepository;
@@ -51,14 +52,13 @@ class FormFieldAnswerService
             $filler = null;
         }
 
-        if (blank($filler)) $fillerId = $this->fillerRepository->create($firstAnswer->getFiller())->getId();
-        else $fillerId = $filler->getId();
+        if (blank($filler)) $filler = $this->fillerRepository->create($firstAnswer->getFiller())->getId();
 
         $form = $this->formRepository->getOne(new FormIdFilter($firstAnswer->getFormId()));
 
         $this->checkIfCanAnswer($form);
 
-        $toSetFillerId = fn (FormFieldAnswerData $formFieldAnswerData) => $formFieldAnswerData->setFillerId($fillerId);
+        $toSetFillerId = fn (FormFieldAnswerData $formFieldAnswerData) => $formFieldAnswerData->setFillerId($filler->getId());
         $checkIfExists = fn (FormFieldAnswerData $formFieldAnswerData) => $this->repository->checkIfAnswerIsAlreadyRegistered($formFieldAnswerData);
         $toCreate = fn (FormFieldAnswerData $formFieldAnswerData) => $this->create($formFieldAnswerData);
         $formFieldAnswersUpdateDataArray = collect($answers)
@@ -68,6 +68,8 @@ class FormFieldAnswerService
             ->all();
 
         //if ($form->getShouldNotifyEachFill()) dispatch(new FillNotificationJob($form));
+
+        //dispatch(new AnswerNotificationJob($form, $filler));
 
         return $formFieldAnswersUpdateDataArray;
     }

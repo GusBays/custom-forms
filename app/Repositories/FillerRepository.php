@@ -79,6 +79,11 @@ class FillerRepository
         $filler->delete();
     }
 
+    public function getNotifiableInstance(FillerFilter $filter): Filler
+    {
+        return $this->getFillerQuery($filter)->firstOrFail();
+    }
+
     protected function getFillerQuery(FillerFilter $filter): Builder
     {
         $interpreters = [

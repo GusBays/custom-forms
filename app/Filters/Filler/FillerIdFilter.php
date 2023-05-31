@@ -2,16 +2,15 @@
 
 namespace App\Filters\Filler;
 
-use Illuminate\Http\Request;
-
 class FillerIdFilter extends FillerFilter
 {
     public function __construct(
-        Request $request
+        int $id
     )
     {
         parent::__construct(
-            $request->route('id')
+            $id,
+            null
         );
     }
 }
