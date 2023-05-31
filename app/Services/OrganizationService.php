@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Datas\Organization\OrganizationData;
 use App\Datas\Organization\OrganizationUpdateData;
 use App\Filters\Organization\OrganizationFilter;
+use App\Filters\Organization\OrganizationIdFilter;
 use App\Repositories\OrganizationRepository;
 use App\Repositories\UserRepository;
 
@@ -31,7 +32,7 @@ class OrganizationService
 
         $this->userRepository->createFirstUser(collect($data->getUsers())->first());
 
-        return $organization;
+        return $this->repository->getOne(new OrganizationIdFilter());
     }
 
     public function getOne(OrganizationFilter $filter): OrganizationUpdateData

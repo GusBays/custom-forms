@@ -9,7 +9,7 @@ class OrganizationIdFilter extends OrganizationFilter
     public function __construct()
     {
         parent::__construct(
-            Utils::getOrganizationIdFromAuth()
+            Utils::getOrganizationIdFromAuth() ?? config('organization_id')
         );
     }
 }
