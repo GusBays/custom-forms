@@ -6,7 +6,7 @@ use App\Datas\Form\FormUpdateData;
 use App\Datas\FormUser\FormUserUpdateData;
 use App\Filters\User\UserIdFilter;
 use App\Models\User;
-use App\Notifications\Admin\AdminNotification;
+use App\Notifications\Admin\FillNotification;
 use App\Repositories\UserRepository;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -21,27 +21,20 @@ class FillNotificationJob implements ShouldQueue
     private FormUpdateData $form;
     private UserRepository $userRepository;
 
-    /**
-     * Create a new job instance.
-     *
-     * @return void
-     */
     public function __construct(
         FormUpdateData $form
     )
     {
         $this->form = $form;
+        $this->userRepository = app(UserRepository::class);
     }
 
-    /**
-     * Execute the job.
-     *
-     * @return void
-     */
-    public function handle()
+    public function handle(): void
     {
-        $toGetNotifiable = fn (FormUserUpdateData $user) => $this->userRepository->getNotifiableInstance(new UserIdFilter($user->getId()));
-        $notify = fn (User $user) => $user->notify('mail');
+        config(['organization_id' => $this->form->getOrganizationId()]);
+
+        $toGetNotifiable = fn (FormUserUpdateData $user) => $this->userRepository->getNotifiableInstance(new UserIdFilter($user->getUserId()));
+        $notify = fn (User $user) => $user->notify(new FillNotification($this->form));
         collect($this->form->getFormUsers())
             ->map($toGetNotifiable)
             ->each($notify);
