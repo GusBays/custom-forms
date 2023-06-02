@@ -33,4 +33,14 @@ class ViewsController
     {
         return view('forms');
     }
+
+    public function form(array $data)
+    {
+        return view('form', $data);
+    }
+
+    public function formFieldsAnswer(array $data)
+    {
+        return view('formFieldAnswer', $data);
+    }
 }
