@@ -7,6 +7,8 @@ use App\Datas\FormFieldAnswer\FormFieldAnswerData;
 use App\Datas\FormFieldAnswer\FormFieldAnswerUpdateData;
 use App\Filters\Filler\FillerEmailFilter;
 use App\Filters\Form\FormIdFilter;
+use App\Filters\FormFieldAnswer\FormFieldAnswerFormIdFillerIdFieldIdFilter;
+use App\Filters\FormFieldAnswer\FormFieldAnswerFormIdFilter;
 use App\Jobs\AnswerNotificationJob;
 use App\Jobs\FillNotificationJob;
 use App\Repositories\FillerRepository;
@@ -56,10 +58,20 @@ class FormFieldAnswerService
 
         $form = $this->formRepository->getOne(new FormIdFilter($firstAnswer->getFormId()));
 
+        $teste = new FillNotificationJob($form);
+        $teste->handle();
+        dd('acabou');
+
         $this->checkIfCanAnswer($form);
 
         $toSetFillerId = fn (FormFieldAnswerData $formFieldAnswerData) => $formFieldAnswerData->setFillerId($filler->getId());
-        $checkIfExists = fn (FormFieldAnswerData $formFieldAnswerData) => $this->repository->checkIfAnswerIsAlreadyRegistered($formFieldAnswerData);
+        $checkIfExists = fn (FormFieldAnswerData $formFieldAnswerData) => $this->repository->checkIfAnswerIsAlreadyRegistered(
+            new FormFieldAnswerFormIdFillerIdFieldIdFilter(
+                $formFieldAnswerData->getFormId(),
+                $formFieldAnswerData->getFillerId(),
+                $formFieldAnswerData->getFieldId()
+            )
+        );
         $toCreate = fn (FormFieldAnswerData $formFieldAnswerData) => $this->create($formFieldAnswerData);
         $formFieldAnswersUpdateDataArray = collect($answers)
             ->map($toSetFillerId)
@@ -76,10 +88,19 @@ class FormFieldAnswerService
 
     private function checkIfCanAnswer(FormUpdateData $form): void
     {
-        if ($this->repository->hasExceededFillLimitOn($form)) throw new \Exception('fill_limit_exceeded', Response::HTTP_INTERNAL_SERVER_ERROR);
+        if ($this->hasExceededFillLimitOn($form)) throw new \Exception('fill_limit_exceeded', Response::HTTP_INTERNAL_SERVER_ERROR);
 
         if (filled($form->getAvailableUntil()) && Carbon::now()->isAfter($form->getAvailableUntil())) throw new \Exception('form_is_no_longer_available', Response::HTTP_INTERNAL_SERVER_ERROR);
 
         if (false === $form->getActive()) throw new \Exception('cannot_answer_inactive_form');
+    }
+
+    private function hasExceededFillLimitOn(FormUpdateData $form): bool
+    {
+        if (blank($form->getFillLimit())) return false;
+
+        $answersCount = $this->repository->getFormAnswersCount(new FormFieldAnswerFormIdFilter($form->getId()));
+
+        if ($answersCount >= $form->getFillLimit()) return true;
     }
 }

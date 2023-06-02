@@ -125,6 +125,8 @@ class UserRepository
 
     private function getUserQuery(UserFilter $filter): Builder
     {
+        $query = $this->model->newQuery();
+
         $interpreters = [
             new UserTokenInterpreter($filter),
             new UserEmailInterpreter($filter),
@@ -132,9 +134,9 @@ class UserRepository
         ];
         
         foreach ($interpreters as $interpreter) {
-            $interpreter->setQuery($this->query)->interpret();
+            $interpreter->setQuery($query)->interpret();
         }
 
-        return $this->query;
+        return $query;
     }
 }

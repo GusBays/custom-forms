@@ -2,10 +2,13 @@
 
 namespace App\Repositories;
 
-use App\Datas\Form\FormUpdateData;
 use App\Datas\FormFieldAnswer\FormFieldAnswerData;
 use App\Datas\FormFieldAnswer\FormFieldAnswerUpdateData;
+use App\Filters\FormFieldAnswer\FormFieldAnswerFilter;
 use App\Http\Adapters\FormFieldAnswer\FormFieldAnswerModelAdapter;
+use App\Interpreters\FormFieldAnswer\FormFieldAnswerFieldIdInterpreter;
+use App\Interpreters\FormFieldAnswer\FormFieldAnswerFillerIdInterpreter;
+use App\Interpreters\FormFieldAnswer\FormFieldAnswerFormIdInterpreter;
 use App\Models\FormFieldAnswer;
 use Exception;
 use Illuminate\Database\Eloquent\Builder;
@@ -14,52 +17,67 @@ use Symfony\Component\HttpFoundation\Response;
 class FormFieldAnswerRepository
 {
     private FormFieldAnswer $model;
-    private Builder $query;
 
     public function __construct(
         FormFieldAnswer $model
     )
     {
         $this->model = $model;
-        $this->query = $model->query();
     }
 
     public function create(FormFieldAnswerData $data): FormFieldAnswerUpdateData
     {
-        $formFieldAnswer = $this->query->create($data->toArray());
+        $this->model->fill($data->toArray())->save();
 
-        $this->query = $this->model->newQuery();
+        $data = new FormFieldAnswerModelAdapter($this->model);
 
-        return new FormFieldAnswerModelAdapter($formFieldAnswer);
-    }
-
-    public function checkIfAnswerIsAlreadyRegistered(FormFieldAnswerData $data): void
-    {
-        $answer = $this->query
-            ->where('form_id', $data->getFormId())
-            ->where('field_id', $data->getFieldId())
-            ->where('filler_id', $data->getFillerId())
-            ->get();
-
-        $this->query = $this->model->newQuery();
+        $this->model->newInstance();
         
-        if (filled($answer)) throw new Exception('answer_already_registered', Response::HTTP_INTERNAL_SERVER_ERROR);
+        return $data;
     }
 
-    public function hasExceededFillLimitOn(FormUpdateData $form): bool
+    /**
+     * @return FormFieldAnswerUpdateData[]
+     */
+    public function getAnswersBy(FormFieldAnswerFilter $filter): array
     {
-        if (blank($form->getFillLimit())) return false;
+        return $this->getFormFieldAnswerQuery($filter)
+            ->get()
+            ->mapInto(FormFieldAnswerModelAdapter::class)
+            ->all();
+    }
 
-        $formAnswersCount = $this->query
-            ->where('form_id', $form->getId())
+    public function checkIfAnswerIsAlreadyRegistered(FormFieldAnswerFilter $filter): void
+    {
+        $answer = $this->getFormFieldAnswerQuery($filter)->first();
+
+        if (blank($answer)) return;
+
+        throw new Exception('answer_already_registered', Response::HTTP_INTERNAL_SERVER_ERROR);
+    }
+
+    public function getFormAnswersCount(FormFieldAnswerFilter $filter): int
+    {
+        return $this->getFormFieldAnswerQuery($filter)
             ->get()
             ->unique('filler_id')
             ->count();
+    }
 
-        $this->query = $this->model->newQuery();
+    private function getFormFieldAnswerQuery(FormFieldAnswerFilter $filter): Builder
+    {
+        $query = $this->model->newQuery();
 
-        if ($formAnswersCount >= $form->getFillLimit()) return true;
+        $interpreters = [
+            new FormFieldAnswerFormIdInterpreter($filter),
+            new FormFieldAnswerFillerIdInterpreter($filter),
+            new FormFieldAnswerFieldIdInterpreter($filter)
+        ];
 
-        return false;
+        foreach ($interpreters as $interpreter) {
+            $interpreter->setQuery($query)->interpret();
+        }
+
+        return $query;
     }
 }
