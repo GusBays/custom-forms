@@ -58,10 +58,6 @@ class FormFieldAnswerService
 
         $form = $this->formRepository->getOne(new FormIdFilter($firstAnswer->getFormId()));
 
-        $teste = new FillNotificationJob($form);
-        $teste->handle();
-        dd('acabou');
-
         $this->checkIfCanAnswer($form);
 
         $toSetFillerId = fn (FormFieldAnswerData $formFieldAnswerData) => $formFieldAnswerData->setFillerId($filler->getId());
