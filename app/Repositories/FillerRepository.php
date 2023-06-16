@@ -5,33 +5,30 @@ namespace App\Repositories;
 use App\Datas\Filler\FillerData;
 use App\Datas\Filler\FillerUpdateData;
 use App\Filters\Filler\FillerFilter;
+use App\Filters\Filler\FillerGetAllFilter;
+use App\Filters\Filler\FillerIdFilter;
 use App\Http\Adapters\Filler\FillerModelAdapter;
 use App\Interpreters\Filler\FillerEmailInterpreter;
 use App\Interpreters\Filler\FillerIdInterpreter;
+use App\Interpreters\FilterInterpreter;
+use App\Interpreters\SearchInterpreter;
+use App\Interpreters\SortInterpreter;
 use App\Models\Filler;
-use App\Traits\Filterable;
 use App\Traits\PerPage;
-use App\Traits\Searchable;
-use App\Traits\Sortable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
 class FillerRepository
 {
-    use Filterable;
-    use Searchable;
-    use Sortable;
     use PerPage;
 
     protected Filler $model;
-    protected Builder $query;
 
     public function __construct(
         Filler $model
     )
     {
         $this->model = $model;
-        $this->query = $model->query();
     }
 
     public function create(FillerData $data): FillerUpdateData
@@ -46,10 +43,7 @@ class FillerRepository
      */
     public function getPaginate(Request $request): array
     {
-        $fillers = $this->filter()
-            ->search()
-            ->sort()
-            ->query
+        $fillers = $this->getFillerQuery(new FillerGetAllFilter())
             ->paginate($this->perPage())
             ->items();
 
@@ -65,7 +59,7 @@ class FillerRepository
 
     public function update(FillerUpdateData $data): FillerUpdateData
     {
-        $filler = $this->query->findOrFail($data->getId());
+        $filler = $this->getFillerQuery(new FillerIdFilter($data->getId()))->firstOrFail();
         
         $filler->fill($data->onlyModifiedData())->save();
 
@@ -86,15 +80,20 @@ class FillerRepository
 
     protected function getFillerQuery(FillerFilter $filter): Builder
     {
+        $query = $this->model->newQuery();
+
         $interpreters = [
             new FillerIdInterpreter($filter),
-            new FillerEmailInterpreter($filter)
+            new FillerEmailInterpreter($filter),
+            new FilterInterpreter(),
+            new SearchInterpreter(),
+            new SortInterpreter()
         ];
 
         foreach ($interpreters as $interpreter) {
-            $interpreter->setQuery($this->query)->interpret();
+            $interpreter->setQuery($query)->interpret();
         }
 
-        return $this->query;
+        return $query;
     }
 }
