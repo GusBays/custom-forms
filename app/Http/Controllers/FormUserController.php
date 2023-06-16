@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Filters\FormUser\FormUserIdFilter;
+use App\Filters\FormUser\FormUserIdRequestFilter;
 use App\Http\Adapters\FormUser\FormUserRequestAdapter;
 use App\Http\Adapters\FormUser\FormUserUpdateRequestAdapter;
 use App\Resources\FormUserResource;
@@ -50,7 +50,7 @@ class FormUserController
 
     public function destroy(Request $request): HttpResponse
     {
-        $this->service->delete(new FormUserIdFilter($request));
+        $this->service->delete(new FormUserIdRequestFilter($request));
 
         return response('', Response::HTTP_NO_CONTENT);
     }

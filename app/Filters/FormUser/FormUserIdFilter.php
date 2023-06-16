@@ -2,16 +2,14 @@
 
 namespace App\Filters\FormUser;
 
-use Illuminate\Http\Request;
-
 class FormUserIdFilter extends FormUserFilter
 {
     public function __construct(
-        Request $request
+        int $id
     )
     {
         parent::__construct(
-            $request->route('id')
+            $id
         );
     }
 }

@@ -5,41 +5,35 @@ namespace App\Repositories;
 use App\Datas\FormUser\FormUserData;
 use App\Datas\FormUser\FormUserUpdateData;
 use App\Filters\FormUser\FormUserFilter;
+use App\Filters\FormUser\FormUserGetAllFilter;
+use App\Filters\FormUser\FormUserIdFilter;
 use App\Http\Adapters\FormUser\FormUserModelAdapter;
+use App\Interpreters\FilterInterpreter;
 use App\Interpreters\FormUser\FormUserIdInterpreter;
-use App\Models\Form;
+use App\Interpreters\SearchInterpreter;
+use App\Interpreters\SortInterpreter;
 use App\Models\FormUser;
-use App\Traits\Filterable;
 use App\Traits\PerPage;
-use App\Traits\Searchable;
-use App\Traits\Sortable;
 use Exception;
 use Illuminate\Database\Eloquent\Builder;
 
 class FormUserRepository
 {
-    use Filterable;
-    use Searchable;
-    use Sortable;
     use PerPage;
 
     protected FormUser $model;
-    protected Builder $query;
 
     public function __construct(
         FormUser $model
     )
     {
         $this->model = $model;
-
-        $this->query = $model->query();
     }
 
     public function create(FormUserData $data): FormUserUpdateData
     {
-        $user = $this->query->create($data->toArray());
-
-        $this->query = $this->model->newQuery();
+        $user = $this->getFormUserQuery(new FormUserGetAllFilter())
+            ->create($data->toArray());
 
         return new FormUserModelAdapter($user);
     }
@@ -49,10 +43,7 @@ class FormUserRepository
      */
     public function getPaginate(): array
     {
-        $formUsers = $this->filter()
-            ->search()
-            ->sort()
-            ->query
+        $formUsers = $this->getFormUserQuery(new FormUserGetAllFilter())
             ->paginate($this->perPage())
             ->items();
 
@@ -61,7 +52,7 @@ class FormUserRepository
 
     public function update(FormUserUpdateData $data): FormUserUpdateData
     {
-        $formUser = $this->query->findOrFail($data->getId());
+        $formUser = $this->getFormUserQuery(new FormUserIdFilter($data->getId()))->firstOrFail();
 
         $formUser->fill($data->onlyModifiedData())->save();
 
@@ -79,14 +70,19 @@ class FormUserRepository
 
     private function getFormUserQuery(FormUserFilter $filter): Builder
     {
+        $query = $this->model->newQuery();
+
         $interpreters = [
-            new FormUserIdInterpreter($filter)
+            new FormUserIdInterpreter($filter),
+            new FilterInterpreter(),
+            new SearchInterpreter(),
+            new SortInterpreter()
         ];
 
         foreach ($interpreters as $interpreters) {
-            $interpreters->setQuery($this->query)->interpret();
+            $interpreters->setQuery($query)->interpret();
         }
 
-        return $this->query;
+        return $query;
     }
 }
