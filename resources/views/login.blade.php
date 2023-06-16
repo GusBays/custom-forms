@@ -6,14 +6,16 @@
 
 @section('content')
     <div class="container">
-        <div class="row justify-content-end align-items-center vh-100">
+        <div class="row align-items-center vh-100">
 
-            <div class="col-6">
+            <div class="col">
                 <div class="d-none d-md-block">
-                    <img src="{{ env('APP_URL') }}/assets/login-notebook.svg" class="img-fluid" alt="caderno-aberto">
+                    <h2 class="text-left ms-5">
+                        Formulando
+                    </h2>
+                    <img src="{{ env('APP_URL') }}/assets/login-notebook.svg" class="img-fluid w-50" alt="caderno-aberto">
                 </div>
             </div>
-
             <div class="col-12 col-md-6 col-lg-4 col-xl-3">
                 <form method="POST" action="/login" class="shadow p-3 mb-5 bg-body-tertiary rounded">
 
@@ -58,7 +60,9 @@
                             <button type="submit" class="btn btn-success w-100" style="background-color:#7800D2;border:none;">Entrar</button>
                         </div>
                         <div class="col-12 col-md-6">
-                            <a type="button" href="/admin/cadastro" class="btn btn-secondary w-100" style="background-color:##4a4a4a;border:none">Cadastrar</a>
+                            <div class="mt-1 mt-md-0">
+                                <a type="button" href="/admin/cadastro" class="btn btn-secondary w-100" style="background-color:#4a4a4a;border:none">Cadastrar</a>
+                            </div>
                         </div>
                     </div>
 
