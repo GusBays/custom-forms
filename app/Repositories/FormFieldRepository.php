@@ -5,42 +5,35 @@ namespace App\Repositories;
 use App\Datas\FormField\FormFieldData;
 use App\Datas\FormField\FormFieldUpdateData;
 use App\Filters\FormField\FormFieldFilter;
+use App\Filters\FormField\FormFieldGetAllFilter;
+use App\Filters\FormField\FormFieldIdFilter;
 use App\Http\Adapters\FormField\FormFieldModelAdapter;
+use App\Interpreters\FilterInterpreter;
 use App\Interpreters\FormField\FormFieldIdInterpreter;
+use App\Interpreters\SearchInterpreter;
+use App\Interpreters\SortInterpreter;
 use App\Models\FormField;
-use App\Traits\Filterable;
 use App\Traits\PerPage;
-use App\Traits\ResetModel;
-use App\Traits\Searchable;
-use App\Traits\Sortable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
 class FormFieldRepository
 {
-    use Filterable;
-    use Searchable;
-    use Sortable;
     use PerPage;
-    use ResetModel;
 
     protected FormField $model;
-    protected Builder $query;
 
     public function __construct(
         FormField $model
     )
     {
         $this->model = $model;
-
-        $this->query = $model->query();
     }
 
     public function create(FormFieldData $data): FormFieldUpdateData
     {
-        $formField = $this->query->create($data->toArray());
-
-        $this->query = $this->model->newQuery();
+        $formField = $this->getFormFieldQuery(new FormFieldGetAllFilter())
+            ->create($data->toArray());
 
         return new FormFieldModelAdapter($formField);
     }
@@ -50,10 +43,7 @@ class FormFieldRepository
      */
     public function getPaginate(Request $request): array
     {
-        $formFields = $this->filter()
-            ->search()
-            ->sort()
-            ->query
+        $formFields = $this->getFormFieldQuery(new FormFieldGetAllFilter())
             ->paginate($this->perPage())
             ->items();
 
@@ -69,7 +59,7 @@ class FormFieldRepository
 
     public function update(FormFieldUpdateData $data): FormFieldUpdateData
     {
-        $formField = $this->query->findOrFail($data->getId());
+        $formField = $this->getFormFieldQuery(new FormFieldIdFilter($data->getId()))->firstOrFail();
 
         $formField->fill($data->onlyModifiedData())->save();
 
@@ -85,14 +75,19 @@ class FormFieldRepository
 
     private function getFormFieldQuery(FormFieldFilter $filter): Builder
     {
+        $query = $this->model->newQuery();
+
         $interpreters = [
-            new FormFieldIdInterpreter($filter)
+            new FormFieldIdInterpreter($filter),
+            new FilterInterpreter(),
+            new SearchInterpreter(),
+            new SortInterpreter()
         ];
 
         foreach ($interpreters as $interpreter) {
-            $interpreter->setQuery($this->query)->interpret();
+            $interpreter->setQuery($query)->interpret();
         }
 
-        return $this->query;
+        return $query;
     }
 }

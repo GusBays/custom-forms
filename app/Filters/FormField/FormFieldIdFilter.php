@@ -2,16 +2,14 @@
 
 namespace App\Filters\FormField;
 
-use Illuminate\Http\Request;
-
 class FormFieldIdFilter extends FormFieldFilter
 {
     public function __construct(
-        Request $request
+        int $id
     )
     {
         parent::__construct(
-            $request->route('id')
+            $id
         );
     }
 }
