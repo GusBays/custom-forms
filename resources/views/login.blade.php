@@ -54,11 +54,11 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-12 mb-1 col-md-6">
-                            <button type="submit" class="btn btn-success w-100 main-color">Entrar</button>
+                        <div class="col-12 col-md-6">
+                            <button type="submit" class="btn btn-success w-100" style="background-color:#7800D2;border:none;">Entrar</button>
                         </div>
                         <div class="col-12 col-md-6">
-                            <a type="button" href="/admin/cadastro" class="btn btn-secondary  w-100">Cadastrar</a>
+                            <a type="button" href="/admin/cadastro" class="btn btn-secondary w-100" style="background-color:##4a4a4a;border:none">Cadastrar</a>
                         </div>
                     </div>
 
