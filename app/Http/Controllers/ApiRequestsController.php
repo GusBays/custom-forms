@@ -35,6 +35,7 @@ class ApiRequestsController
 
     public function createOrganization(Request $request): RedirectResponse
     {
+        dd($request);
         try {
             $this->organizationController->store($request);
         } catch (\Throwable $th) {

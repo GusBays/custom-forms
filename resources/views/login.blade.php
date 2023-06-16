@@ -17,7 +17,7 @@
                 </div>
             </div>
             <div class="col-12 col-md-6 col-lg-4 col-xl-3">
-                <form method="POST" action="/login" class="shadow p-3 mb-5 bg-body-tertiary rounded">
+                <form method="POST" action="/action/login" class="shadow p-3 mb-5 bg-body-tertiary rounded">
 
                     <div class="row">
                         <div class="col">

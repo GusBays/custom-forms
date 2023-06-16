@@ -6,7 +6,7 @@
 
 @section('content')
     <div class="container">
-        <form class="row justify-content-center align-items-center form form-login mt-4" method="POST" action="/create/organization">
+        <form class="row justify-content-center align-items-center form form-login mt-4" method="POST" action="/action/create-organization">
             @csrf
                 <div class="col-12 text-center">
                     <p class="form-text">Nome da organização</p>

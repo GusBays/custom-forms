@@ -1,5 +1,6 @@
 <?php
 
+use App\Contracts\ActionEnum;
 use App\Contracts\ApiRoutesEnum;
 use App\Contracts\RedirectEnum;
 use App\Http\Controllers\ApiRequestsController;
@@ -28,8 +29,8 @@ Route::controller(ViewsController::class)->group(function () {
 });
 
 Route::controller(ApiRequestsController::class)->group(function () {
-    Route::post(RedirectEnum::LOGIN, 'login');
-    Route::post(RedirectEnum::CREATE_ORGANIZATION, 'createOrganization');
+    Route::post(ActionEnum::LOGIN, 'login');
+    Route::post(ActionEnum::CREATE_ORGANIZATION, 'createOrganization');
 });
 
 Route::middleware('auth:web')->group(function () {
