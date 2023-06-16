@@ -5,24 +5,23 @@ namespace App\Repositories;
 use App\Datas\User\UserData;
 use App\Datas\User\UserUpdateData;
 use App\Filters\User\UserFilter;
+use App\Filters\User\UserGetAllFilter;
+use App\Filters\User\UserIdFilter;
 use App\Http\Adapters\User\UserModelAdapter;
+use App\Interpreters\FilterInterpreter;
+use App\Interpreters\SearchInterpreter;
+use App\Interpreters\SortInterpreter;
 use App\Interpreters\User\UserEmailInterpreter;
 use App\Interpreters\User\UserIdInterpreter;
 use App\Interpreters\User\UserTokenInterpreter;
 use App\Models\User;
-use App\Traits\Filterable;
 use App\Traits\PerPage;
-use App\Traits\Searchable;
-use App\Traits\Sortable;
 use Firebase\JWT\JWT;
 use Illuminate\Database\Eloquent\Builder;
 use Symfony\Component\HttpFoundation\Response;
 
 class UserRepository
 {
-    use Filterable;
-    use Searchable;
-    use Sortable;
     use PerPage;
 
     protected User $model;
@@ -33,7 +32,6 @@ class UserRepository
     )
     {
         $this->model = $model;
-        $this->query = $model->query();
     }
 
     public function create(UserData $data): UserUpdateData
@@ -48,10 +46,7 @@ class UserRepository
      */
     public function getPaginate(): ?array
     {
-        $users = $this->filter()
-            ->search()
-            ->sort()
-            ->query
+        $users = $this->getUserQuery(new UserGetAllFilter())
             ->paginate($this->perPage())
             ->items();
 
@@ -67,7 +62,7 @@ class UserRepository
 
     public function update(UserUpdateData $data): UserUpdateData
     {
-        $user = $this->query->findOrFail($data->getId());
+        $user = $this->getUserQuery(new UserIdFilter($data->getId()))->firstOrFail();
 
         $user->fill($data->onlyModifiedData())->save();
 
@@ -130,7 +125,10 @@ class UserRepository
         $interpreters = [
             new UserTokenInterpreter($filter),
             new UserEmailInterpreter($filter),
-            new UserIdInterpreter($filter)
+            new UserIdInterpreter($filter),
+            new FilterInterpreter($filter),
+            new SearchInterpreter($filter),
+            new SortInterpreter($filter),
         ];
         
         foreach ($interpreters as $interpreter) {

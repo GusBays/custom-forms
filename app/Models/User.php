@@ -48,7 +48,7 @@ class User extends BaseModel
     ];
 
     protected array $search = [
-        'first_name'
+        'name'
     ];
 
     public static function boot()
