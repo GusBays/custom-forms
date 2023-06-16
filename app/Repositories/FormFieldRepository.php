@@ -32,10 +32,13 @@ class FormFieldRepository
 
     public function create(FormFieldData $data): FormFieldUpdateData
     {
-        $formField = $this->getFormFieldQuery(new FormFieldGetAllFilter())
-            ->create($data->toArray());
+        $this->model->fill($data->toArray())->save();
 
-        return new FormFieldModelAdapter($formField);
+        $data = new FormFieldModelAdapter($this->model);
+
+        $this->model->newInstance();
+
+        return $data;
     }
 
     /**
