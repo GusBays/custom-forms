@@ -19,6 +19,11 @@ class ViewsController
         return view('register');
     }
 
+    public function recuperar()
+    {
+        return view('recover');
+    }
+
     public function admin(array $data)
     {
         return view('admin', $data);

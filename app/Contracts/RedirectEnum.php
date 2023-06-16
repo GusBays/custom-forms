@@ -10,6 +10,8 @@ class RedirectEnum
 
     public const CADASTRO = '/admin/cadastro';
 
+    public const RECUPERAR = '/recuperar-senha';
+
     public const ADMIN = '/admin';
 
     public const LOGIN = '/login';

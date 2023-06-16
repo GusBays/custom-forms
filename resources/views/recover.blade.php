@@ -1,0 +1,44 @@
+@extends('default')
+
+@section('title')
+    Recuperação de senha
+@endsection
+
+@section('content')
+    <div class="container">
+        <div class="row align-items-center justify-content-center vh-100">
+            <div class="col-9 col-md-6 col-lg-4">
+                <form method="POST" action="#" class="shadow p-3 mb-5 bg-body-tertiary rounded">
+
+                    <div class="row">
+                        <div class="col">
+                            <h3>Que bom te ver novamente!</h3>
+                        </div>
+                        <div class="col-12">
+                            <small class="text-body-secondary text-center">Para recuperar sua senha, insira seu email abaixo e clique em confirmar.</small>
+                        </div>
+                    </div>
+
+                    <div class="row my-3">
+                        <div class="col">
+                            <input id="email" name="email" type="email" class="form-control" placeholder="Email"/>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 col-md-6">
+                            <button type="submit" class="btn btn-success w-100" style="background-color:#7800D2;border:none;">Confirmar</button>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <div class="mt-1 mt-md-0">
+                                <a type="button" href="/admin/entrar" class="btn btn-secondary w-100" style="background-color:#4a4a4a;border:none">Voltar</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    @csrf
+                </form>
+            </div>
+        </div>
+    </div>
+@endsection

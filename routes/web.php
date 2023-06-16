@@ -24,6 +24,7 @@ Route::controller(ViewsController::class)->group(function () {
     Route::get(RedirectEnum::HOME, 'home');
     Route::get(RedirectEnum::ENTRAR, 'entrar');
     Route::get(RedirectEnum::CADASTRO, 'cadastro');
+    Route::get(RedirectEnum::RECUPERAR, 'recuperar');
 });
 
 Route::controller(ApiRequestsController::class)->group(function () {
