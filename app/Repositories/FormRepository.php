@@ -14,22 +14,15 @@ use App\Interpreters\Form\FormSlugInterpreter;
 use App\Interpreters\SearchInterpreter;
 use App\Interpreters\SortInterpreter;
 use App\Models\Form;
-use App\Traits\Filterable;
 use App\Traits\PerPage;
-use App\Traits\Searchable;
-use App\Traits\Sortable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
 class FormRepository
 {
-    use Filterable;
-    use Searchable;
-    use Sortable;
     use PerPage;
 
     protected Form $model;
-    protected Builder $query;
     private const RELATIONS = ['formUsers', 'formFields'];
 
     protected FormFieldRepository $formFieldRepository;

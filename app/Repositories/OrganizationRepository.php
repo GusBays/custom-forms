@@ -13,7 +13,6 @@ use Illuminate\Database\Eloquent\Builder;
 class OrganizationRepository
 {
     protected Organization $model;
-    protected Builder $query;
     private const RELATIONS = ['users'];
 
     public function __construct(
@@ -22,9 +21,6 @@ class OrganizationRepository
     {
         $this->model = $model;
         $this->model->with(self::RELATIONS);
-
-        $this->query = $model->query();
-        $this->query->with(self::RELATIONS);
     }
 
     public function create(OrganizationData $data): OrganizationUpdateData
@@ -47,14 +43,16 @@ class OrganizationRepository
 
     private function getOrganizationQuery(OrganizationFilter $filter): Builder
     {
+        $query = $this->model->newQuery();
+
         $interpreters = [
             new OrganizationIdInterpreter($filter)
         ];
 
         foreach ($interpreters as $interpreter) {
-            $interpreter->setQuery($this->query)->interpret();
+            $interpreter->setQuery($query)->interpret();
         }
 
-        return $this->query;
+        return $query;
     }
 }

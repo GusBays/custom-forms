@@ -25,7 +25,6 @@ class UserRepository
     use PerPage;
 
     protected User $model;
-    protected Builder $query;
 
     public function __construct(
         User $model
