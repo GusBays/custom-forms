@@ -1,12 +1,9 @@
 <?php
 
 use App\Contracts\ActionEnum;
-use App\Contracts\ApiRoutesEnum;
 use App\Contracts\RedirectEnum;
-use App\Http\Controllers\ApiRequestsController;
+use App\Http\Controllers\ActionController;
 use App\Http\Controllers\ViewsController;
-use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,14 +25,14 @@ Route::controller(ViewsController::class)->group(function () {
     Route::get(RedirectEnum::RECUPERAR, 'recuperar');
 });
 
-Route::controller(ApiRequestsController::class)->group(function () {
+Route::controller(ActionController::class)->group(function () {
     Route::post(ActionEnum::LOGIN, 'login');
     Route::post(ActionEnum::CREATE_ORGANIZATION, 'createOrganization');
 });
 
 Route::middleware('auth:web')->group(function () {
 
-    Route::controller(ApiRequestsController::class)->group(function () {
+    Route::controller(ViewsController::class)->group(function () {
         Route::get(RedirectEnum::ADMIN, 'admin');
         Route::get(RedirectEnum::FORMS, 'forms');
     });
