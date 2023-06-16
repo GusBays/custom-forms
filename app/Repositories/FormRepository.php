@@ -5,9 +5,14 @@ namespace App\Repositories;
 use App\Datas\Form\FormData;
 use App\Datas\Form\FormUpdateData;
 use App\Filters\Form\FormFilter;
+use App\Filters\Form\FormGetAllFilter;
+use App\Filters\Form\FormIdFilter;
 use App\Http\Adapters\Form\FormModelAdapter;
+use App\Interpreters\FilterInterpreter;
 use App\Interpreters\Form\FormIdInterpreter;
 use App\Interpreters\Form\FormSlugInterpreter;
+use App\Interpreters\SearchInterpreter;
+use App\Interpreters\SortInterpreter;
 use App\Models\Form;
 use App\Traits\Filterable;
 use App\Traits\PerPage;
@@ -35,9 +40,6 @@ class FormRepository
     {
         $this->model = $model;
         $this->model->with(self::RELATIONS);
-
-        $this->query = $model->query();
-        $this->query->with(self::RELATIONS);
     }
 
     public function create(FormData $data): FormUpdateData
@@ -52,10 +54,7 @@ class FormRepository
      */
     public function getPaginate(Request $request): ?array
     {
-        $forms = $this->filter()
-            ->search()
-            ->sort()
-            ->query
+        $forms = $this->getFormQuery(new FormGetAllFilter())
             ->paginate($this->perPage())
             ->items();
 
@@ -73,7 +72,7 @@ class FormRepository
 
     public function update(FormUpdateData $data): FormUpdateData
     {
-        $form = $this->query->findOrFail($data->getId());
+        $form = $this->getFormQuery(new FormIdFilter($data->getId()))->firstOrFail();
 
         $form->fill($data->onlyModifiedData())->save();
 
@@ -97,22 +96,25 @@ class FormRepository
 
         config(['organization_id' => $data->getOrganizationId()]);
 
-        $this->query = $this->model->newQuery();
-
         return $data;
     }
 
     private function getFormQuery(FormFilter $filter): Builder
     {
+        $query = $this->model->newQuery();
+
         $interpreters = [
             new FormIdInterpreter($filter),
-            new FormSlugInterpreter($filter)
+            new FormSlugInterpreter($filter),
+            new FilterInterpreter(),
+            new SearchInterpreter(),
+            new SortInterpreter()
         ];
 
         foreach ($interpreters as $interpreter) {
-            $interpreter->setQuery($this->query)->interpret();
+            $interpreter->setQuery($query)->interpret();
         }
 
-        return $this->query;
+        return $query;
     }
 }

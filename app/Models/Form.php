@@ -20,7 +20,7 @@ class Form extends BaseModel
         'active',
     ];
 
-    protected array $filter = [
+    protected array $filters = [
         'available_until',
         'active',
     ];

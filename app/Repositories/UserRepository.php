@@ -126,9 +126,9 @@ class UserRepository
             new UserTokenInterpreter($filter),
             new UserEmailInterpreter($filter),
             new UserIdInterpreter($filter),
-            new FilterInterpreter($filter),
-            new SearchInterpreter($filter),
-            new SortInterpreter($filter),
+            new FilterInterpreter(),
+            new SearchInterpreter(),
+            new SortInterpreter(),
         ];
         
         foreach ($interpreters as $interpreter) {

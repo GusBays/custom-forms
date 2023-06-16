@@ -3,6 +3,7 @@
 namespace App\Interpreters;
 
 use App\Models\BaseModel;
+use App\Models\Form;
 use Illuminate\Database\Eloquent\Builder;
 
 class FilterInterpreter extends DbInterpreter

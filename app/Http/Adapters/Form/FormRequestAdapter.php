@@ -19,8 +19,8 @@ class FormRequestAdapter extends FormData
             $request->input('fill_limit'),
             $request->input('should_notify_each_fill'),
             $request->input('active'),
-            FormUserRequestAdapter::createFromFormRequest($request->form_users),
-            FormFieldRequestAdapter::createFromFormRequest($request->form_fields)
+            filled($request->form_users) ? FormUserRequestAdapter::createFromFormRequest($request->form_users) : [],
+            filled($request->form_fields) ? FormFieldRequestAdapter::createFromFormRequest($request->form_fields) : []
         );
     }
 }
