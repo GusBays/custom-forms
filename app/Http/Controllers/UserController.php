@@ -8,6 +8,7 @@ use App\Http\Adapters\User\UserRequestUpdateAdapter;
 use App\Resources\UserResource;
 use App\Services\UserService;
 use App\Validators\UserLoginValidator;
+use App\Validators\UserPasswordRecoverValidator;
 use App\Validators\UserValidator;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
@@ -66,6 +67,16 @@ class UserController
         $validator = new UserLoginValidator($request);
         $validator->validate();
 
-        return new UserResource($this->service->login($request));
+        return new UserResource($this->service->login(new UserRequestAdapter($request)));
+    }
+
+    public function recoverPassword(Request $request): HttpResponse
+    {
+        $validator = new UserPasswordRecoverValidator($request);
+        $validator->validate();
+
+        $this->service->recoverPassword(new UserRequestAdapter($request));
+
+        return response('', Response::HTTP_OK);
     }
 }

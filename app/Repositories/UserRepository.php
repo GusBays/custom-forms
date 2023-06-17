@@ -75,13 +75,6 @@ class UserRepository
         $user->delete();
     }
 
-    public function getByEmail(UserFilter $filter): UserUpdateData
-    {
-        $user = $this->getUserQuery($filter)->firstOrFail();
-
-        return new UserModelAdapter($user);
-    }
-
     public function getByToken(UserFilter $filter): UserUpdateData
     {
         $user = $this->getUserQuery($filter)->firstOrFail();

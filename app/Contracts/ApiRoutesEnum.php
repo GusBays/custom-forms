@@ -12,6 +12,8 @@ class ApiRoutesEnum
 
     public const USERS_LOGIN = '/users/login';
 
+    public const USERS_RECOVER_PASSWORD = '/users/recover-password';
+
     public const FORMS = '/forms';
 
     public const FORMS_ID = '/forms/{id}';

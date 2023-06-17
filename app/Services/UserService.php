@@ -6,6 +6,9 @@ use App\Datas\User\UserData;
 use App\Datas\User\UserUpdateData;
 use App\Filters\User\UserEmailFilter;
 use App\Filters\User\UserFilter;
+use App\Http\Adapters\User\UserPasswordUpdateAdapter;
+use App\Http\Adapters\User\UserRequestUpdateAdapter;
+use App\Jobs\RecoverPasswordJob;
 use App\Repositories\UserRepository;
 use Exception;
 use Illuminate\Http\Request;
@@ -51,14 +54,25 @@ class UserService
         $this->repository->delete($filter);
     }
 
-    public function login(Request $request): UserUpdateData
+    public function login(UserData $data): UserUpdateData
     {
-        $user = $this->repository->getByEmail(new UserEmailFilter($request));
+        $user = $this->repository->getOne(new UserEmailFilter($data->getEmail()));
 
-        if (!Hash::check($request->password, $user->getPassword())) throw new Exception('invalid_password', Response::HTTP_UNAUTHORIZED);
+        if (!Hash::check($data->getPassword(), $user->getPassword())) throw new Exception('invalid_password', Response::HTTP_UNAUTHORIZED);
 
         config(['organization_id' => $user->getOrganizationId()]);
 
         return $user;
+    }
+
+    public function recoverPassword(UserData $data): void
+    {
+        $newPassword = bin2hex(random_bytes(6));
+
+        $user = $this->repository->getOne(new UserEmailFilter($data->getEmail()));
+
+        $user = $this->repository->update(new UserPasswordUpdateAdapter($user->getId(), $newPassword));
+
+        dispatch(new RecoverPasswordJob($user, $newPassword));
     }
 }

@@ -7,12 +7,12 @@ use Illuminate\Http\Request;
 class UserEmailFilter extends UserFilter
 {
     public function __construct(
-        Request $request
+        string $email
     )
     {
         parent::__construct(
             null,
-            $request->input('email'),
+            $email,
             null
         );
     }

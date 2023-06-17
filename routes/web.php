@@ -28,6 +28,7 @@ Route::controller(ViewsController::class)->group(function () {
 Route::controller(ActionController::class)->group(function () {
     Route::post(ActionEnum::LOGIN, 'login');
     Route::post(ActionEnum::CREATE_ORGANIZATION, 'createOrganization');
+    Route::post(ActionEnum::RECOVER_PASSWORD, 'recoverPassword');
 });
 
 Route::middleware('auth:web')->group(function () {

@@ -28,6 +28,7 @@ Route::controller(OrganizationController::class)->group(function () {
 
 Route::controller(UserController::class)->group(function () {
     Route::post(ApiRoutesEnum::USERS_LOGIN, 'login');
+    Route::post(ApiRoutesEnum::USERS_RECOVER_PASSWORD, 'recoverPassword');
 });
 
 Route::controller(FormController::class)->group(function () {
