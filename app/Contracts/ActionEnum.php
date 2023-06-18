@@ -8,5 +8,7 @@ class ActionEnum
     
     public const LOGIN = '/action/login';
 
+    public const LOGOFF = '/action/logoff';
+
     public const RECOVER_PASSWORD = '/action/recover-password';
 }

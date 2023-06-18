@@ -68,4 +68,9 @@ class ActionController
 
         return redirect(RedirectEnum::ENTRAR);
     }
+
+    public function logoff(Request $request): RedirectResponse
+    {
+        return redirect(RedirectEnum::ENTRAR)->withoutCookie(CookieEnum::ADM_TOKEN);
+    }
 }

@@ -27,6 +27,7 @@ class Utils
     public static function addCookieAndReturnInstance(string $name, string $value, int $daysToExpire = 0): Cookie
     {
         if ($daysToExpire > 0) $expiresAt = Carbon::now()->addDays($daysToExpire)->getTimestamp();
+        else $expiresAt = 0;
 
         return Cookie::create($name, $value, $expiresAt);
     }
