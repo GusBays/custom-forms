@@ -18,23 +18,41 @@
                 </div>
                 <div class="modal-body">
                     <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="navbar-brand" href="/admin">Início</a>
+                        <li class="nav-item list-group list-group-item-action mb-1">
+                            <a class="navbar-brand" href="/admin">
+                                <img src="{{ env('APP_URL') }}/assets/home-icon.svg" alt="home icon" width="30" height="24">
+                                Início
+                            </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="navbar-brand" href="/formularios">Formulários</a>
+                        <li class="nav-item list-group list-group-item-action mb-1">
+                            <a class="navbar-brand" href="/formularios">
+                                <img src="{{ env('APP_URL') }}/assets/form-icon.svg" alt="form icon" width="30" height="30">
+                                Formulários
+                            </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="navbar-brand" href="/formulários/respostas">Respostas</a>
+                        <li class="nav-item list-group list-group-item-action mb-1">
+                            <a class="navbar-brand" href="/formulários/respostas">
+                                <img src="{{ env('APP_URL') }}/assets/pencil-icon.svg" alt="pencil icon" width="30" height="30">
+                                Respostas
+                            </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="navbar-brand" href="/preenchedores">Preenchedores</a>
+                        <li class="nav-item list-group list-group-item-action mb-1">
+                            <a class="navbar-brand" href="/preenchedores">
+                                <img src="{{ env('APP_URL') }}/assets/filler-icon.svg" alt="filler icon" width="30" height="28">
+                                Preenchedores
+                            </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="navbar-brand" href="/relatorios">Relatórios</a>
+                        <li class="nav-item list-group list-group-item-action mb-1">
+                            <a class="navbar-brand" href="/relatorios">
+                                <img src="{{ env('APP_URL') }}/assets/report-icon.svg" alt="report icon" width="28" height="32">
+                                Relatórios
+                            </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="navbar-brand" href="/usuarios">Usuários</a>
+                        <li class="nav-item list-group list-group-item-action mb-1">
+                            <a class="navbar-brand" href="/usuarios">
+                                <img src="{{ env('APP_URL') }}/assets/user-icon.svg" alt="user icon" width="30" height="30">
+                                Usuários
+                            </a>
                         </li>
                     </ul>
                 </div>
