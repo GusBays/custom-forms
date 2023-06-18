@@ -39,6 +39,7 @@
                     </ul>
                 </div>
                 <div class="modal-footer">
+                    <a type="button" href="/action/logoff" class="btn btn-danger">Sair</a>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" style="background-color:#7800D2;border:none;">Fechar</button>
                 </div>
             </div>

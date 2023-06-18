@@ -64,6 +64,7 @@ class ViewsController
             ->collection
             ->map($toResource)
             ->sort($byDate)
+            ->slice(0, 6)
             ->all();
 
         $data = collect()
