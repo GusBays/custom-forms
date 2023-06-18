@@ -4,8 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Contracts\CookieEnum;
 use App\Contracts\RedirectEnum;
+use App\Datas\User\UserUpdateData;
+use App\Helpers\Utils;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Symfony\Component\HttpFoundation\Cookie;
 
 class ActionController
 {
@@ -46,9 +50,12 @@ class ActionController
             return view('error', ['error' => $th->getMessage()]);
         }
 
-        addCookie(CookieEnum::ADM_TOKEN, $user->getToken());
+        if ($request->has('keep_connected')) $daysToExpire = 7;
+        else $daysToExpire = 0;
 
-        return redirect(RedirectEnum::ADMIN);
+        $cookie = Utils::addCookieAndReturnInstance(CookieEnum::ADM_TOKEN, $user->getToken(), $daysToExpire);
+
+        return redirect(RedirectEnum::ADMIN)->withCookie($cookie);
     }
 
     public function recoverPassword(Request $request): RedirectResponse

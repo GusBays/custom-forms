@@ -5,6 +5,8 @@ namespace App\Helpers;
 use App\Contracts\CookieEnum;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
+use Illuminate\Support\Carbon;
+use Symfony\Component\HttpFoundation\Cookie;
 
 class Utils
 {
@@ -20,5 +22,12 @@ class Utils
         );
 
         return $decodedAuth->organization_id;
+    }
+
+    public static function addCookieAndReturnInstance(string $name, string $value, int $daysToExpire = 0): Cookie
+    {
+        if ($daysToExpire > 0) $expiresAt = Carbon::now()->addDays($daysToExpire)->getTimestamp();
+
+        return Cookie::create($name, $value, $expiresAt);
     }
 }
