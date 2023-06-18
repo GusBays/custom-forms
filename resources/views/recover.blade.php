@@ -7,12 +7,14 @@
 @section('content')
     <div class="container">
         <div class="row align-items-center justify-content-center vh-100">
-            <div class="col-9 col-md-6 col-lg-4">
+            <div class="col-10 col-md-8 col-lg-6">
                 <form method="POST" action="/action/recover-password" class="shadow p-3 mb-5 bg-body-tertiary rounded">
 
                     <div class="row">
-                        <div class="col">
-                            <h3 class="text-center">Recuperação de senha</h3>
+                        <div class="col-12">
+                            <div class="form-title mb-3">
+                                <h3 class="text-center">Recuperação de senha</h3>
+                            </div>
                         </div>
                         <div class="col-12">
                             <small class="text-body-secondary text-center">
