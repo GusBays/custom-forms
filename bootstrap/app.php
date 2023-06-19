@@ -74,38 +74,4 @@ if (!function_exists('formatDate')) {
     }
 }
 
-if (!function_exists('isDescSortDirection')) {
-    function isDescSortDirection() {
-        $request = request();
-
-        $sort = $request->query('sort');
-
-        if (blank($sort)) return false;
-
-        $isDesc = 0 === strpos($sort, '-');
-
-        if (!$isDesc) return false;
-
-        return true;
-    }
-}
-
-if (!function_exists('getSelfRequestWithOppositeSortDirection')) {
-    function getSelfRequestWithOppositeSortDirection(string $sortField = 'id') {
-        $request = request();
-
-        $sort = request()->query('sort');
-
-        if (blank($sort)) return $request->getUri() . "?sort=-$sortField";
-
-        $isDesc = 0 === strpos($sort, '-');
-
-        if (!$isDesc) return Str::replace($sort, '-' . $sortField, $request->getUri());
-
-        $newSort = Str::replace('-', '', $sortField);
-
-        return Str::replace($sort, $newSort, $request->getUri());
-    }
-}
-
 return $app;

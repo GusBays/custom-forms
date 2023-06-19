@@ -13,3 +13,11 @@
 </div>
 
 @endsection
+
+<div class="container">
+    <div class="row align-items-center">
+
+        @yield('footer')
+
+    </div>
+</div>

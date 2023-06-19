@@ -49,7 +49,7 @@
                             </a>
                         </li>
                         <li class="nav-item list-group list-group-item-action mb-1">
-                            <a class="navbar-brand" href="/admin/usuarios">
+                            <a class="navbar-brand" href="/admin/usuarios?sort=id&limit=100&page=1">
                                 <img src="{{ env('APP_URL') }}/assets/user-icon.svg" alt="user icon" width="30" height="30">
                                 Usuários
                             </a>
@@ -85,7 +85,4 @@
       </div>
     </div>
   </div>
-
-
-    </div>
 </nav>

@@ -15,6 +15,8 @@
             @include('snippets/form-card')
         @endforeach
     </div>
+@endsection
 
+@section('footer')
     @include('snippets/footer')
 @endsection
