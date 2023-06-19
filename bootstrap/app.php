@@ -13,6 +13,7 @@
 
 use App\Contracts\RedirectEnum;
 use Carbon\Carbon;
+use Illuminate\Support\Str;
 
 $app = new Illuminate\Foundation\Application(
     $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__)
@@ -70,6 +71,40 @@ if (!function_exists('getCookie')) {
 if (!function_exists('formatDate')) {
     function formatDate(string $date) {
         return Carbon::parse($date)->format('d/m/Y');
+    }
+}
+
+if (!function_exists('isDescSortDirection')) {
+    function isDescSortDirection() {
+        $request = request();
+
+        $sort = $request->query('sort');
+
+        if (blank($sort)) return false;
+
+        $isDesc = 0 === strpos($sort, '-');
+
+        if (!$isDesc) return false;
+
+        return true;
+    }
+}
+
+if (!function_exists('getSelfRequestWithOppositeSortDirection')) {
+    function getSelfRequestWithOppositeSortDirection(string $sortField = 'id') {
+        $request = request();
+
+        $sort = request()->query('sort');
+
+        if (blank($sort)) return $request->getUri() . "?sort=-$sortField";
+
+        $isDesc = 0 === strpos($sort, '-');
+
+        if (!$isDesc) return Str::replace($sort, '-' . $sortField, $request->getUri());
+
+        $newSort = Str::replace('-', '', $sortField);
+
+        return Str::replace($sort, $newSort, $request->getUri());
     }
 }
 

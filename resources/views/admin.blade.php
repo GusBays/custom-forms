@@ -10,5 +10,6 @@
         @yield('admin-content')
 
     </div>
+</div>
 
 @endsection
