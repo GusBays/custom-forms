@@ -6,6 +6,7 @@ use App\Datas\Form\FormUpdateData;
 use App\Datas\Organization\OrganizationUpdateData;
 use App\Datas\User\UserUpdateData;
 use App\Resources\FormResource;
+use App\Resources\UserResource;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -14,14 +15,17 @@ class ViewsController
 {
     private OrganizationController $organizationController;
     private FormController $formController;
+    private UserController $userController;
 
     public function __construct(
         OrganizationController $organizationController,
-        FormController $formController
+        FormController $formController,
+        UserController $userController
     )
     {
         $this->organizationController = $organizationController;
         $this->formController = $formController;
+        $this->userController = $userController;
     }
 
     public function home(): View
@@ -73,7 +77,7 @@ class ViewsController
             ->merge(['forms' => $forms])
             ->all();
 
-        return view('admin', $data);
+        return view('admin-home', $data);
     }
 
     public function forms(Request $request): View
@@ -114,5 +118,21 @@ class ViewsController
         }
 
         return view('formFieldsAnswer', ['form' => $form]);
+    }
+
+    public function users(Request $request): View
+    {
+        try {
+            $users = $this->userController->index($request);
+        } catch (\Throwable $th) {
+            return view('error', ['error' => $th->getMessage()]);
+        }
+
+        $toResource = fn (UserResource $user) => $user->resource;
+        $users = $users->collection
+            ->map($toResource)
+            ->all();
+
+        return view('users', ['users' => $users]);
     }
 }

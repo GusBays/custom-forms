@@ -14,5 +14,7 @@ class RedirectEnum
 
     public const ADMIN = '/admin';
 
-    public const FORMS = '/formularios';
+    public const FORMS = '/admin/formularios';
+
+    public const USERS = '/admin/usuarios';
 }

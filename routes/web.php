@@ -37,6 +37,7 @@ Route::middleware('auth:web')->group(function () {
     Route::controller(ViewsController::class)->group(function () {
         Route::get(RedirectEnum::ADMIN, 'admin');
         Route::get(RedirectEnum::FORMS, 'forms');
+        Route::get(RedirectEnum::USERS, 'users');
     });
 
 });
