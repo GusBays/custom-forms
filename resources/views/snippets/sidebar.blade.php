@@ -25,31 +25,31 @@
                             </a>
                         </li>
                         <li class="nav-item list-group list-group-item-action mb-1">
-                            <a class="navbar-brand" href="/formularios">
+                            <a class="navbar-brand" href="/admin/formularios">
                                 <img src="{{ env('APP_URL') }}/assets/form-icon.svg" alt="form icon" width="30" height="30">
                                 Formulários
                             </a>
                         </li>
                         <li class="nav-item list-group list-group-item-action mb-1">
-                            <a class="navbar-brand" href="/formulários/respostas">
+                            <a class="navbar-brand" href="/admin/formulários/respostas">
                                 <img src="{{ env('APP_URL') }}/assets/pencil-icon.svg" alt="pencil icon" width="30" height="30">
                                 Respostas
                             </a>
                         </li>
                         <li class="nav-item list-group list-group-item-action mb-1">
-                            <a class="navbar-brand" href="/preenchedores">
+                            <a class="navbar-brand" href="/admin/preenchedores">
                                 <img src="{{ env('APP_URL') }}/assets/filler-icon.svg" alt="filler icon" width="30" height="28">
                                 Preenchedores
                             </a>
                         </li>
                         <li class="nav-item list-group list-group-item-action mb-1">
-                            <a class="navbar-brand" href="/relatorios">
+                            <a class="navbar-brand" href="/admin/relatorios">
                                 <img src="{{ env('APP_URL') }}/assets/report-icon.svg" alt="report icon" width="28" height="32">
                                 Relatórios
                             </a>
                         </li>
                         <li class="nav-item list-group list-group-item-action mb-1">
-                            <a class="navbar-brand" href="/usuarios">
+                            <a class="navbar-brand" href="/admin/usuarios">
                                 <img src="{{ env('APP_URL') }}/assets/user-icon.svg" alt="user icon" width="30" height="30">
                                 Usuários
                             </a>
