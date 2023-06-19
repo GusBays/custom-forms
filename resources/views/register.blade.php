@@ -68,7 +68,7 @@
                         </div>
                         <div class="col-12 col-md-6">
                             <div class="mt-1 mt-md-0">
-                                <a href="/admin/entrar" type="button" class="btn btn-secondary w-100" style="background-color:#4a4a4a;border:none">Voltar</a>
+                                <a href="/admin/entrar" type="button" class="btn btn-secondary border-0 w-100">Voltar</a>
                             </div>
                             
                         </div>
