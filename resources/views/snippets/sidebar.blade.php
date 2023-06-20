@@ -2,7 +2,7 @@
     <div class="container">
 
     <a href="/admin" class="navbar-brand">
-        <img src="{{ env('APP_URL') }}/assets/notebook-icon.svg" alt="notebook icon" width="30" height="24" class="d-inline-block align-text-top">
+        <img src="{{ env('APP_URL') }}/assets/img/notebook-icon.svg" alt="notebook icon" width="30" height="24" class="d-inline-block align-text-top">
     </a>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="modal" data-bs-target="#sidebar">
@@ -13,44 +13,44 @@
         <div class="modal-dialog modal-fullscreen">
             <div class="modal-content" style="width:300px">
                 <div class="modal-header">
-                    <img src="{{ env('APP_URL') }}/assets/notebook-icon.svg" alt="notebook icon" width="30" height="24" class="d-inline-block align-text-top">
+                    <img src="{{ env('APP_URL') }}/assets/img/notebook-icon.svg" alt="notebook icon" width="30" height="24" class="d-inline-block align-text-top">
                 <button type="button" class="btn-close text-start" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <ul class="navbar-nav">
                         <li class="nav-item list-group list-group-item-action mb-1">
                             <a class="navbar-brand" href="/admin">
-                                <img src="{{ env('APP_URL') }}/assets/home-icon.svg" alt="home icon" width="30" height="24">
+                                <img src="{{ env('APP_URL') }}/assets/img/home-icon.svg" alt="home icon" width="30" height="24">
                                 Início
                             </a>
                         </li>
                         <li class="nav-item list-group list-group-item-action mb-1">
                             <a class="navbar-brand" href="/admin/formularios">
-                                <img src="{{ env('APP_URL') }}/assets/form-icon.svg" alt="form icon" width="30" height="30">
+                                <img src="{{ env('APP_URL') }}/assets/img/form-icon.svg" alt="form icon" width="30" height="30">
                                 Formulários
                             </a>
                         </li>
                         <li class="nav-item list-group list-group-item-action mb-1">
                             <a class="navbar-brand" href="/admin/formulários/respostas">
-                                <img src="{{ env('APP_URL') }}/assets/pencil-icon.svg" alt="pencil icon" width="30" height="30">
+                                <img src="{{ env('APP_URL') }}/assets/img/pencil-icon.svg" alt="pencil icon" width="30" height="30">
                                 Respostas
                             </a>
                         </li>
                         <li class="nav-item list-group list-group-item-action mb-1">
                             <a class="navbar-brand" href="/admin/preenchedores">
-                                <img src="{{ env('APP_URL') }}/assets/filler-icon.svg" alt="filler icon" width="29" height="28">
+                                <img src="{{ env('APP_URL') }}/assets/img/filler-icon.svg" alt="filler icon" width="29" height="28">
                                 Preenchedores
                             </a>
                         </li>
                         <li class="nav-item list-group list-group-item-action mb-1">
                             <a class="navbar-brand" href="/admin/relatorios">
-                                <img src="{{ env('APP_URL') }}/assets/report-icon.svg" alt="report icon" width="28" height="32">
+                                <img src="{{ env('APP_URL') }}/assets/img/report-icon.svg" alt="report icon" width="28" height="32">
                                 Relatórios
                             </a>
                         </li>
                         <li class="nav-item list-group list-group-item-action mb-1">
                             <a class="navbar-brand" href="/admin/usuarios?sort=id&limit=100&page=1">
-                                <img src="{{ env('APP_URL') }}/assets/user-icon.svg" alt="user icon" width="30" height="30">
+                                <img src="{{ env('APP_URL') }}/assets/img/user-icon.svg" alt="user icon" width="30" height="30">
                                 Usuários
                             </a>
                         </li>

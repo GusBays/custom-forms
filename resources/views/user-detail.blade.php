@@ -1,7 +1,7 @@
 @extends('admin')
 
 @section('scripts')
-    <script type="text/javascript" src="{{ env('APP_URL') }}/js/validations/recaptcha.js"></script>
+    <script type="text/javascript" src="{{ env('APP_URL') }}/assets/js/validations/recaptcha.js"></script>
     <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
 @endsection
 
@@ -32,7 +32,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Senha: </label>
-                        <button type="button" class="btn btn-danger border-0" style="background-color:#7800D2" data-bs-toggle="modal" data-bs-target="#exampleModal">Editar senha</button>
+                        <button type="button" class="btn btn-danger border-0 theme-color" data-bs-toggle="modal" data-bs-target="#exampleModal">Editar senha</button>
                     </div>
                     <div class="mb-3">
                         <label for="type" class="form-label">Tipo de cadastro</label>
@@ -41,7 +41,7 @@
                 </div>
                 <div class="row">
                     <div class="col-12 col-md-6">
-                        <button type="submit" class="border-0 btn btn-success w-100" style="background-color:#7800D2;">Salvar alterações</button>
+                        <button type="submit" class="btn btn-success border-0 w-100 theme-color">Salvar alterações</button>
                     </div>
                     <div class="col-12 col-md-6">
                         <div class="mt-1 mt-md-0">

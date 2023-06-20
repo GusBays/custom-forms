@@ -3,7 +3,7 @@
         <a class="list-group-item list-group-item-action" href="/admin/usuarios/{{ $user->getId() }}">
             <h5 class="text-center"> {{ $user->getName() }} 
                 @if ('owner' === $user->getType())
-                    <span class="badge ms-1 rounded-pill" style="background-color:#7800D2">Proprietário</span>
+                    <span class="badge ms-1 rounded-pill theme-color">Proprietário</span>
                 @else
                     <span class="badge ms-1 bg-secondary rounded-pill">Integrante</span>
                 @endif

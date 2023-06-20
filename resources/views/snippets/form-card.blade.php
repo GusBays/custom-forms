@@ -20,7 +20,7 @@
 
         <a href="/admin/formularios/{{ $form->getId() }}/respostas" type="button" class="list-group-item mt-3 list-group-item-action">
             <h6 class="text-center">Respostas</h6>
-            <span class="position-absolute top-0 start-100 translate-middle p-2 border border-light rounded-circle" style="background-color:#7800D2;">
+            <span class="position-absolute top-0 start-100 translate-middle p-2 border border-light rounded-circle theme-color">
                 <span class="visually-hidden">unread messages</span>
             </span>
         </a>

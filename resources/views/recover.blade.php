@@ -32,7 +32,7 @@
 
                     <div class="row">
                         <div class="col-12 col-md-6">
-                            <button type="submit" class="btn btn-success w-100" style="background-color:#7800D2;border:none;">Confirmar</button>
+                            <button type="submit" class="btn btn-success border-0 w-100 theme-color">Confirmar</button>
                         </div>
                         <div class="col-12 col-md-6">
                             <div class="mt-1 mt-md-0">

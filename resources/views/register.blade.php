@@ -1,7 +1,7 @@
 @extends('default')
 
 @section('scripts')
-    <script type="text/javascript" src="{{ env('APP_URL') }}/js/validations/recaptcha.js"></script>
+    <script type="text/javascript" src="{{ env('APP_URL') }}/assets/js/validations/recaptcha.js"></script>
     <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
 @endsection
 

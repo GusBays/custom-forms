@@ -13,7 +13,7 @@
                     <h2 class="text-left ms-5">
                         Formulando
                     </h2>
-                    <img src="{{ env('APP_URL') }}/assets/login-notebook.svg" class="img-fluid w-50" alt="caderno-aberto">
+                    <img src="{{ env('APP_URL') }}/assets/img/login-notebook.svg" class="img-fluid w-50" alt="caderno-aberto">
                 </div>
             </div>
             <div class="col-12 col-md-6 col-lg-4 col-xl-3">
@@ -30,13 +30,13 @@
 
                     <div class="row mt-3">
                         <div class="col">
-                            <input id="email" name="email" type="email" class="form-control" placeholder="Email"/>
+                            <input id="email" name="email" type="email" class="form-control" placeholder="Email" required/>
                         </div>
                     </div>
 
                     <div class="row mt-3">
                         <div class="col">
-                            <input id="password" name="password" type="password" class="form-control" placeholder="Senha"/>
+                            <input id="password" name="password" type="password" class="form-control" placeholder="Senha" required/>
                         </div>
                     </div>
 
@@ -57,7 +57,7 @@
 
                     <div class="row">
                         <div class="col-12 col-md-6">
-                            <button type="submit" class="btn btn-success w-100" style="background-color:#7800D2;border:none;">Entrar</button>
+                            <button type="submit" class="btn btn-success border-0 w-100 theme-color">Entrar</button>
                         </div>
                         <div class="col-12 col-md-6">
                             <div class="mt-1 mt-md-0">
