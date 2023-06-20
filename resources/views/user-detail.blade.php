@@ -20,15 +20,15 @@
                     </div>
                     <div class="mb-3">
                         <label for="first_name" class="form-label">Primeiro nome</label>
-                        <input type="text" class="form-control" value="{{ $user->getFirstName() }}" id="first_name">
+                        <input type="text" class="form-control" value="{{ $user->getFirstName() }}" id="first_name" placeholder="Ex.: Ana">
                     </div>
                     <div class="mb-3">
                         <label for="last_name" class="form-label">Sobrenome</label>
-                        <input type="text" class="form-control" value="{{ $user->getLastName() }}" id="last_name">
+                        <input type="text" class="form-control" value="{{ $user->getLastName() }}" id="last_name" placeholder="Ex.: Flores">
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">E-mail</label>
-                        <input type="text" class="form-control" value="{{ $user->getEmail() }}" id="email">
+                        <input type="text" class="form-control" value="{{ $user->getEmail() }}" id="email" placeholder="Ex.: email@exemplo.com.br">
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Senha: </label>
@@ -64,11 +64,11 @@
             <form>
             <div class="mb-3">
                 <label for="new-password" class="col-form-label">Nova senha: </label>
-                <input type="password" class="form-control" id="new-password">
+                <input type="password" class="form-control" id="new-password" placeholder="Ex.: 123@Abc">
             </div>
             <div class="mb-3">
                 <label for="new-password-repeat" class="col-form-label">Repita a nova senha: </label>
-                <input type="password" class="form-control" id="new-password-repeat"></textarea>
+                <input type="password" class="form-control" id="new-password-repeat" placeholder="Ex.: 123@Abc"></textarea>
             </div>
             </form>
         </div>

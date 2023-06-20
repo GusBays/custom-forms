@@ -1,5 +1,10 @@
 @extends('default')
 
+@section('scripts')
+    <script type="text/javascript" src="{{ env('APP_URL') }}/js/validations/recaptcha.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
+@endsection
+
 @section('title')
     Cadastro
 @endsection
@@ -48,11 +53,11 @@
                             <h6 class="form-text">E-mail</h6>
                         </div>
                         <div class="col-12">
-                            <input id="email" name="email" type="text" required="required" class="form-control" placeholder="Ex.: mail@sample.com.br"/>
+                            <input id="email" name="email" type="text" required="required" class="form-control" placeholder="Ex.: email@exemplo.com.br"/>
                         </div>
                     </div>
 
-                    <div class="row mb-3">
+                    <div class="row mb-1">
                         <div class="col-12 text-left">
                             <h6 class="form-text">Senha</h6>
                         </div>
@@ -61,16 +66,27 @@
                         </div>
                     </div>
 
+                    <div class="row mb-3">
+                        <div class="col-12 text-left">
+                            <h6 class="form-text">Repita sua senha</h6>
+                        </div>
+                        <div class="col-12">
+                            <input id="new-password" name="new-password" type="password" class="form-control" placeholder="Ex.: 123@Abc"/>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div id="recaptcha"></div>
+                    </div>
                 
                     <div class="row">
                         <div class="col-12 col-md-6">
-                            <button type="submit"  class="btn btn-success w-100" style="background-color:#7800D2;border:none;">Cadastrar-se</button>
+                            <button type="submit" id="confirm-button" class="btn btn-success w-100" style="background-color:#7800D2;border:none;" disabled>Cadastrar-se</button>
                         </div>
                         <div class="col-12 col-md-6">
                             <div class="mt-1 mt-md-0">
                                 <a href="/admin/entrar" type="button" class="btn btn-secondary border-0 w-100">Voltar</a>
                             </div>
-                            
                         </div>
                     </div>
 
