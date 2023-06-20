@@ -71,7 +71,7 @@
                             <h6 class="form-text">Repita sua senha</h6>
                         </div>
                         <div class="col-12">
-                            <input id="new-password" name="new-password" type="password" class="form-control" placeholder="Ex.: 123@Abc"/>
+                            <input id="password-repeat" name="password-repeat" type="password" class="form-control" placeholder="Ex.: 123@Abc"/>
                         </div>
                     </div>
 

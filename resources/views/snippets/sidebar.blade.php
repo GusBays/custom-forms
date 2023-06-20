@@ -38,7 +38,7 @@
                         </li>
                         <li class="nav-item list-group list-group-item-action mb-1">
                             <a class="navbar-brand" href="/admin/preenchedores">
-                                <img src="{{ env('APP_URL') }}/assets/filler-icon.svg" alt="filler icon" width="30" height="28">
+                                <img src="{{ env('APP_URL') }}/assets/filler-icon.svg" alt="filler icon" width="29" height="28">
                                 Preenchedores
                             </a>
                         </li>

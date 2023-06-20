@@ -45,10 +45,12 @@
                     </div>
                     <div class="col-12 col-md-6">
                         <div class="mt-1 mt-md-0">
-                            <a class="btn btn-secondary w-100" href="/admin/usuarios" type="button">Voltar</a>
+                            <a class="btn btn-secondary w-100" href="/admin/usuarios?sort=id&limit=100&page=1" type="button">Voltar</a>
                         </div>
                     </div>
                 </div>
+
+                @csrf
             </form>
         </div>
     </div>
@@ -62,14 +64,16 @@
         </div>
         <div class="modal-body">
             <form>
-            <div class="mb-3">
-                <label for="new-password" class="col-form-label">Nova senha: </label>
-                <input type="password" class="form-control" id="new-password" placeholder="Ex.: 123@Abc">
-            </div>
-            <div class="mb-3">
-                <label for="new-password-repeat" class="col-form-label">Repita a nova senha: </label>
-                <input type="password" class="form-control" id="new-password-repeat" placeholder="Ex.: 123@Abc"></textarea>
-            </div>
+                <div class="mb-3">
+                    <label for="password" class="col-form-label">Nova senha: </label>
+                    <input type="password" class="form-control" id="password" placeholder="Ex.: 123@Abc">
+                </div>
+                <div class="mb-3">
+                    <label for="password-repeat" class="col-form-label">Repita a nova senha: </label>
+                    <input type="password" class="form-control" id="password-repeat" placeholder="Ex.: 123@Abc"></textarea>
+                </div>
+
+                @csrf
             </form>
         </div>
         <div class="modal-footer">
