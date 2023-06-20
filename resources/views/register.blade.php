@@ -12,8 +12,8 @@
 @section('content')
     <div class="container">
         <div class="row align-items-center justify-content-center vh-100">
-            <div class="col-12 col-md-10 col-lg-8">
-                <form method="POST" action="/action/create-organization" class="shadow p-3 mb-5 bg-body-tertiary rounded">
+            <div class="col-12 col-md-8 col-lg-6">
+                <form method="POST" action="/action/create-organization" class="shadow my-3 p-3 bg-body-tertiary rounded">
 
                     <div class="row">
                         <div class="col-12">
