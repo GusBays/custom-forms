@@ -11,6 +11,7 @@
             <div class="col">
                 <div class="d-none d-md-block">
                     <h2 class="text-left ms-5">
+                        <img src="{{ env('APP_URL') }}/assets/img/notebook-icon.svg" alt="notebook icon" class="me-2" width="30" height="30">
                         Formulando
                     </h2>
                     <img src="{{ env('APP_URL') }}/assets/img/login-notebook.svg" class="img-fluid w-50" alt="caderno-aberto">
