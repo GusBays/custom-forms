@@ -1,5 +1,10 @@
 @extends('default')
 
+@section('scripts')
+    <script type="text/javascript" src="{{ env('APP_URL') }}/assets/js/validations/recaptcha.js"></script>
+    <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
+@endsection
+
 @section('title')
     Recuperação de senha
 @endsection
@@ -31,10 +36,11 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-12 col-md-6">
-                            <button type="submit" class="btn btn-success border-0 w-100 theme-color">Confirmar</button>
+                        <div id="recaptcha"></div>
+                        <div class="col-12 mt-2 col-md-6">
+                            <button type="submit" id="confirm-button" class="btn btn-success border-0 w-100" style="background-color:#7800D2" disabled>Confirmar</button>
                         </div>
-                        <div class="col-12 col-md-6">
+                        <div class="col-12 mt-2 col-md-6">
                             <div class="mt-1 mt-md-0">
                                 <a type="button" href="/admin/entrar" class="btn btn-secondary border-0 w-100">Voltar</a>
                             </div>
