@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
+
+body {
+    font-family: 'Comfortaa', cursive;
+}
+
 .theme-color {
     background-color: #7800D2;
 }
