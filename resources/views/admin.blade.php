@@ -5,19 +5,15 @@
 @include('snippets/sidebar')
 
 <div class="container">
-    <div class="row align-items-center">
 
-        @yield('admin-content')
+    @yield('admin-content')
 
-    </div>
 </div>
 
 @endsection
 
 <div class="container">
-    <div class="row align-items-center">
 
-        @yield('footer')
+    @yield('footer')
 
-    </div>
 </div>

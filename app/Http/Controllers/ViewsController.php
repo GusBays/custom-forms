@@ -135,4 +135,15 @@ class ViewsController
 
         return view('users', ['users' => $users]);
     }
+
+    public function user(Request $request): View
+    {
+        try {
+            $user = $this->userController->show($request);
+        } catch (ModelNotFoundException $th) {
+            return view('error', ['error' => $th->getMessage()]);
+        }
+
+        return view('user-detail', ['user' => $user->resource]);
+    }
 }
