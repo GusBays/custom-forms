@@ -8,14 +8,11 @@
 
     <div class="row justify-content-between align-items-center">
 
-        <div class="col-12 col-lg-5">
-            <div class="mb-2 mb-lg-0">
-                <h3 class="text-center align-text-top">
-                    <img src="{{ env('APP_URL') }}/assets/img/user-icon.svg" alt="" width="30" height="30">
-                    Lista de usuários
-                </h3>
-            </div>
-        </div>
+        <x-grid-side 
+            title="Lista de usuários"
+            iconUrl="{{ env('APP_URL') }}/assets/img/user-icon.svg"
+        >
+        </x-grid-side>
 
         <div class="col-12 col-lg-7">
             @foreach($users as $user) 

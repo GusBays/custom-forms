@@ -8,17 +8,12 @@
     <div class="container">
         <div class="row justify-content-between align-items-center vh-100">
 
-            <div class="col-12 col-md-7 col-lg-8">
-                <div class="mb-2 mb-lg-0">
-                    <h2 class="text-center">
-                        <img src="{{ env('APP_URL') }}/assets/img/notebook-icon.svg" alt="notebook icon" class="me-1" width="30" height="30">
-                        Formulando
-                    </h2>
-                    <div class="d-none d-md-block">
-                        <img src="{{ env('APP_URL') }}/assets/img/login-notebook.svg" class="img-fluid w-50" alt="caderno-aberto">
-                    </div>
-                </div>
-            </div>
+            <x-grid-side 
+                title="Formulando"
+                iconUrl="{{ env('APP_URL') }}/assets/img/notebook-icon.svg"
+                extraImageUrl="{{ env('APP_URL') }}/assets/img/login-notebook.svg"
+            >
+            </x-grid-side>
 
             <div class="col-12 col-md-5 col-lg-4">
                 <form method="POST" action="/action/login" class="shadow p-3 mb-5 bg-body-tertiary rounded">
