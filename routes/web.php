@@ -39,8 +39,10 @@ Route::middleware('auth:web')->group(function () {
     Route::controller(ViewsController::class)->group(function () {
         Route::get(RedirectEnum::ADMIN, 'admin');
         Route::get(RedirectEnum::FORMS, 'forms');
+
         Route::get(RedirectEnum::USERS, 'users');
         Route::get(RedirectEnum::USER_ID, 'user')->whereNumber('id');
+        Route::get(RedirectEnum::USER_NEW, 'newUser');
     });
 
     Route::controller(UserActionController::class)->group(function () {

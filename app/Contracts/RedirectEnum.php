@@ -19,4 +19,6 @@ class RedirectEnum
     public const USERS = '/admin/usuarios';
 
     public const USER_ID = '/admin/usuarios/{id}';
+
+    public const USER_NEW = '/admin/usuario/novo';
 }
