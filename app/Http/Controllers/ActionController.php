@@ -8,13 +8,11 @@ use App\Datas\User\UserUpdateData;
 use App\Helpers\Utils;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
-use Symfony\Component\HttpFoundation\Cookie;
 
 class ActionController
 {
     private OrganizationController $organizationController;
-    private UserController $userController;
+    protected UserController $userController;
 
     public function __construct(
         OrganizationController $organizationController,
