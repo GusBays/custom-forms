@@ -133,7 +133,7 @@ class ViewsController
             ->map($toResource)
             ->all();
 
-        return view('users', ['users' => $users]);
+        return view('sidebar.users.users-list', ['users' => $users]);
     }
 
     public function user(Request $request): View
@@ -144,6 +144,6 @@ class ViewsController
             return view('error', ['error' => $th->getMessage()]);
         }
 
-        return view('user-detail', ['user' => $user->resource]);
+        return view('sidebar.users.user-detail', ['user' => $user->resource]);
     }
 }
