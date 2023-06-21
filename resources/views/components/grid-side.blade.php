@@ -18,19 +18,19 @@
         @if ($showButtons)
             <div class="mt-3">
                 <div class="col-12 text-center mb-1">
-                    <a href="/action/{{ $resource }}/new" type="button" class="btn btn-success w-50">
+                    <a href="/admin/{{ $pathResource }}/novo" type="button" class="btn btn-success w-50">
                         <img src="{{ env('APP_URL') }}/assets/img/add-icon.svg" alt="" width="25" height="25">
-                        Adicionar novo {{ $registro }}
+                        Adicionar novo {{ $buttonResource }}
                     </a>
                 </div>
                 <div class="col-12 text-center mb-1">
-                    <a href="/action/{{ $resource }}/delete/id" type="button" class="btn btn-danger w-50">
+                    <a href="/action/{{ $pathResource }}/delete" type="button" class="btn btn-danger w-50">
                         <img src="{{ env('APP_URL') }}/assets/img/trash-icon.svg" alt="" width="25" height="25">
                         Deleter registros
                     </a>
                 </div>
                 <div class="col-12 text-center">
-                    <a href="/action/{{ $resource }}/filter" type="button" class="btn btn-primary w-50">
+                    <a href="/action/{{ $pathResource }}/filter" type="button" class="btn btn-primary w-50">
                         Filtrar
                     </a>
                 </div>

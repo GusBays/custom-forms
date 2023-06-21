@@ -10,8 +10,8 @@ class GridSide extends Component
     public ?string $iconUrl;
     public ?string $extraImageUrl;
     public bool $showButtons;
-    public ?string $resource;
-    public ?string $registro;
+    public ?string $buttonResource;
+    public ?string $pathResource;
 
     /**
      * Create a new component instance.
@@ -23,16 +23,16 @@ class GridSide extends Component
         string $iconUrl = null,
         string $extraImageUrl = null,
         bool $showButtons = false,
-        string $resource = null,
-        string $registro = null
+        string $buttonResource = null,
+        string $pathResource = null
     )
     {
         $this->title = $title;
         $this->iconUrl = $iconUrl;
         $this->extraImageUrl = $extraImageUrl;
         $this->showButtons = $showButtons;
-        $this->resource = $resource;
-        $this->registro = $registro;
+        $this->buttonResource = $buttonResource;
+        $this->pathResource = $pathResource;
     }
 
     /**
@@ -51,8 +51,8 @@ class GridSide extends Component
             'title' => $this->title,
             'iconUrl' => $this->iconUrl,
             'extraImageUrl' => $this->extraImageUrl,
-            'resource' => $this->resource,
-            'registro' => $this->registro
+            'buttonResource' => $this->buttonResource,
+            'pathResource' => $this->pathResource
         ];
     }
 }
