@@ -18,7 +18,7 @@ class UserRequestAdapter extends UserData
             $request->input('last_name'),
             $request->input('email'),
             $request->input('password'),
-            $request->input('type'),
+            $request->input('type', 'employee'),
         );
     }
 
