@@ -11,10 +11,13 @@
         <x-grid-side 
             title="Lista de usuários"
             iconUrl="{{ env('APP_URL') }}/assets/img/user-icon.svg"
-            showButtons="{{ true }}"
+            addButton="{{ true }}"
+            deleteButton="{{ true }}"
+            filterButton="{{ true }}"
+            sortButton="{{ true }}"
             buttonResource="usuário"
             pathResource="usuario"
-            >
+        >
         </x-grid-side>
 
         <div class="col-12 col-lg-7">
@@ -25,8 +28,4 @@
             @endforeach
         </div>
 
-@endsection
-
-@section('footer')
-    @include('snippets/footer')
 @endsection

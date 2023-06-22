@@ -15,25 +15,40 @@
             </div>
         @endif
 
-        @if ($showButtons)
+        @if ($shouldShowButton)
             <div class="mt-3">
-                <div class="col-12 text-center mb-1">
-                    <a href="/admin/{{ $pathResource }}/novo" type="button" class="btn btn-success w-50">
-                        <img src="{{ env('APP_URL') }}/assets/img/add-icon.svg" alt="" width="25" height="25">
-                        Adicionar novo {{ $buttonResource }}
-                    </a>
-                </div>
-                <div class="col-12 text-center mb-1">
-                    <a href="/action/{{ $pathResource }}/delete" type="button" class="btn btn-danger w-50">
-                        <img src="{{ env('APP_URL') }}/assets/img/trash-icon.svg" alt="" width="25" height="25">
-                        Deleter registros
-                    </a>
-                </div>
+                @if ($addButton)
+                    <div class="col-12 text-center mb-1">
+                        <a href="/admin/{{ $pathResource }}/novo" type="button" class="btn btn-success w-50">
+                            <img src="{{ env('APP_URL') }}/assets/img/add-icon.svg" alt="" width="25" height="25">
+                            Adicionar {{ $buttonResource }}
+                        </a>
+                    </div>
+                @endif
+                @if ($deleteButton)
+                    <div class="col-12 text-center mb-1">
+                        <a href="/action/{{ $pathResource }}/delete" type="button" class="btn btn-danger w-50">
+                            <img src="{{ env('APP_URL') }}/assets/img/trash-icon.svg" alt="" width="25" height="25">
+                            Deletar
+                        </a>
+                    </div>
+                @endif
+                @if ($filterButton)
+                    <div class="col-12 text-center mb-1">
+                        <a href="/action/{{ $pathResource }}/filter" type="button" class="btn btn-primary w-50">
+                            <img src="{{ env('APP_URL') }}/assets/img/filter-icon.svg" alt="" width="25" height="20">
+                            Filtrar
+                        </a>
+                    </div>
+                @endif
+                @if ($sortButton)
                 <div class="col-12 text-center">
-                    <a href="/action/{{ $pathResource }}/filter" type="button" class="btn btn-primary w-50">
-                        Filtrar
+                    <a href="/action/{{ $pathResource }}/sort" type="button" class="btn btn-warning w-50" style="color:white">
+                        <img src="{{ env('APP_URL') }}/assets/img/sort-icon.svg" alt="" width="25" height="20">
+                        Ordernar
                     </a>
                 </div>
+            @endif
             </div>
         @endif
 

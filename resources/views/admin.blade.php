@@ -14,6 +14,6 @@
 
 <div class="container">
 
-    @yield('footer')
+    @include('snippets/footer')
 
 </div>

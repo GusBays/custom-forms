@@ -10,8 +10,18 @@
 @endsection
 
 @section('admin-content')
-    <div class="row justify-content-center align-items-center">
-        <div class="col-12 col-sm-10 col-md-8 col-lg-6">
+    <div class="row justify-content-beetwen align-items-center">
+
+        <x-grid-side 
+        title="Edição de usuário"
+        iconUrl="{{ env('APP_URL') }}/assets/img/user-icon.svg"
+        deleteButton="{{ true }}"
+        buttonResource="usuário"
+        pathResource="usuario"
+        >
+        </x-grid-side>
+
+        <div class="col-12 col-lg-7">
             <form action="/action/update-user/{{ $user->getId() }}" method="PUT" class="shadow p-3 mb-5 bg-body-tertiary rounded">
                 <div class="col">
                     <div class="mb-3">
