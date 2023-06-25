@@ -146,4 +146,9 @@ class ViewsController
 
         return view('sidebar.users.user-detail', ['user' => $user->resource]);
     }
+
+    public function newUser(Request $request): View
+    {
+        return view('sidebar/users/user-new');
+    }
 }

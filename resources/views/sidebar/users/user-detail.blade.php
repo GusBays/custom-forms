@@ -22,7 +22,7 @@
         </x-grid-side>
 
         <div class="col-12 col-lg-7">
-            <form action="/action/update-user/{{ $user->getId() }}" method="PUT" class="shadow p-3 mb-5 bg-body-tertiary rounded">
+            <form action="/action/user/update" method="POST" class="shadow p-3 mb-5 bg-body-tertiary rounded">
                 <div class="col">
                     <div class="mb-3">
                         <label for="name" class="form-label">Nome completo</label>
