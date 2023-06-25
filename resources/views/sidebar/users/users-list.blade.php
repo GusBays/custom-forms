@@ -6,7 +6,7 @@
 
 @section('admin-content')
 
-    <div class="row justify-content-between align-items-center">
+    <div class="row justify-content-between align-items-top">
 
         <x-grid-side 
             title="Lista de usuários"
@@ -17,7 +17,8 @@
             filterButton="{{ true }}"
             sortButton="{{ true }}"
             buttonResource="usuário"
-            pathResource="usuario"
+            pathResource="usuarios"
+            apiResource="users"
         >
         </x-grid-side>
 

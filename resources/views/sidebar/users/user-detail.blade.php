@@ -17,7 +17,8 @@
         iconUrl="{{ env('APP_URL') }}/assets/img/user-icon.svg"
         deleteButton="{{ true }}"
         buttonResource="usuário"
-        pathResource="usuario"
+        pathResource="usuarios"
+        apiResource="users"
         >
         </x-grid-side>
 
@@ -58,6 +59,7 @@
                             <a class="btn btn-secondary w-100" href="/admin/usuarios?sort=id&limit=100&page=1" type="button">Voltar</a>
                         </div>
                     </div>
+                    <input id="delete-checkbox" type="checkbox" hidden>
                 </div>
 
                 @csrf

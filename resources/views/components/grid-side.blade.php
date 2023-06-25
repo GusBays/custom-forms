@@ -38,11 +38,12 @@
                 @endif
                 @if ($deleteButton)
                     <div class="col-12 text-center mb-1">
-                        <a href="/action/{{ $pathResource }}/delete" type="button" class="btn btn-danger w-50">
+                        <button onclick="deleteRegisters({{ json_encode($apiResource) }}, {{ json_encode($pathResource)}})" type="button" class="btn btn-danger w-50">
                             <img src="{{ env('APP_URL') }}/assets/img/trash-icon.svg" alt="" width="25" height="25">
                             Deletar
-                        </a>
+                        </button>
                     </div>
+                    <script src="{{ env('APP_URL') }}/assets/js/buttons/delete.js"></script>
                 @endif
                 @if ($filterButton)
                     <div class="col-12 text-center mb-1">

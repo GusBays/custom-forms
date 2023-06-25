@@ -16,6 +16,7 @@ class GridSide extends Component
     public bool $sortButton;
     public ?string $buttonResource;
     public ?string $pathResource;
+    public ?string $apiResource;
 
     /**
      * Create a new component instance.
@@ -32,7 +33,8 @@ class GridSide extends Component
         bool $filterButton = false,
         bool $sortButton = false,
         string $buttonResource = null,
-        string $pathResource = null
+        string $pathResource = null,
+        string $apiResource = null
     )
     {
         $this->title = $title;
@@ -45,6 +47,7 @@ class GridSide extends Component
         $this->sortButton = $sortButton;
         $this->buttonResource = $buttonResource;
         $this->pathResource = $pathResource;
+        $this->apiResource = $apiResource;
     }
 
     /**
@@ -74,7 +77,8 @@ class GridSide extends Component
             'filterButton' => $this->filterButton,
             'sortButton' => $this->sortButton,
             'buttonResource' => $this->buttonResource,
-            'pathResource' => $this->pathResource
+            'pathResource' => $this->pathResource,
+            'apiResource' => $this->apiResource
         ];
     }
 }

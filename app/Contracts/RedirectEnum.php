@@ -20,5 +20,5 @@ class RedirectEnum
 
     public const USER_ID = '/admin/usuarios/{id}';
 
-    public const USER_NEW = '/admin/usuario/novo';
+    public const USER_NEW = '/admin/usuarios/novo';
 }
