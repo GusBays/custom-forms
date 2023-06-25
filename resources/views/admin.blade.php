@@ -12,8 +12,10 @@
 
 @endsection
 
-<div class="container">
+<footer>
+    <div class="container">
 
-    @include('snippets/footer')
+        @include('snippets/footer')
 
-</div>
+    </div>
+</footer>
