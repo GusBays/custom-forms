@@ -17,6 +17,17 @@
 
         @if ($shouldShowButton)
             <div class="mt-3">
+                @if ($searchField)
+                    <div class="col-12 text-center mb-1">
+                        <div class="d-inline-flex w-50">
+                            <input class="form-control" type="text" id="search-input" placeholder="Buscar">
+                            <button class="btn" onclick="search()">
+                                <img src="{{ env('APP_URL') }}/assets/img/search-icon.svg" width="30" height="30" alt="">
+                            </button>
+                        </div>
+                    </div>
+                    <script onload="insertValue()" src="{{ env('APP_URL') }}/assets/js/buttons/search.js"></script>
+                @endif 
                 @if ($addButton)
                     <div class="col-12 text-center mb-1">
                         <a href="/admin/{{ $pathResource }}/novo" type="button" class="btn btn-success w-50">

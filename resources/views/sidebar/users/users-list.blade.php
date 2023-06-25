@@ -11,6 +11,7 @@
         <x-grid-side 
             title="Lista de usuários"
             iconUrl="{{ env('APP_URL') }}/assets/img/user-icon.svg"
+            searchField="{{ true }}"
             addButton="{{ true }}"
             deleteButton="{{ true }}"
             filterButton="{{ true }}"

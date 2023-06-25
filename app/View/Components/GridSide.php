@@ -9,6 +9,7 @@ class GridSide extends Component
     public string $title;
     public ?string $iconUrl;
     public ?string $extraImageUrl;
+    public bool $searchField;
     public bool $addButton;
     public bool $deleteButton;
     public bool $filterButton;
@@ -25,6 +26,7 @@ class GridSide extends Component
         string $title,
         string $iconUrl = null,
         string $extraImageUrl = null,
+        bool $searchField = false,
         bool $addButton = false,
         bool $deleteButton = false,
         bool $filterButton = false,
@@ -36,6 +38,7 @@ class GridSide extends Component
         $this->title = $title;
         $this->iconUrl = $iconUrl;
         $this->extraImageUrl = $extraImageUrl;
+        $this->searchField = $searchField;
         $this->addButton = $addButton;
         $this->deleteButton = $deleteButton;
         $this->filterButton = $filterButton;
@@ -56,7 +59,7 @@ class GridSide extends Component
 
     public function shouldShowButton(): bool
     {
-        return $this->addButton || $this->deleteButton || $this->filterButton || $this->sortButton;
+        return $this->addButton || $this->deleteButton || $this->filterButton || $this->sortButton || $this->searchField;
     }
 
     private function getArgs(): array
@@ -65,6 +68,7 @@ class GridSide extends Component
             'title' => $this->title,
             'iconUrl' => $this->iconUrl,
             'extraImageUrl' => $this->extraImageUrl,
+            'searchField' => $this->searchField,
             'addButton' => $this->addButton,
             'deleteButton' => $this->deleteButton,
             'filterButton' => $this->filterButton,
