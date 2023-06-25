@@ -43,11 +43,32 @@
                 @endif
                 @if ($sortButton)
                     <div class="col-12 text-center">
-                        <a href="/action/{{ $pathResource }}/sort" type="button" class="btn btn-warning w-50" style="color:white">
-                            <img src="{{ env('APP_URL') }}/assets/img/sort-icon.svg" alt="" width="25" height="20">
-                            Ordernar
-                        </a>
+                        <div class="dropdown">
+                            <button class="btn btn-warning dropdown-toggle w-50" type="button" style="color:white" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="{{ env('APP_URL') }}/assets/img/sort-icon.svg" alt="" width="25" height="20">
+                              Ordenar
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-dark">
+                                <div class="form-check">
+                                    <li>
+                                        <input class="form-check-input" onclick="sortByAsc()" type="radio" name="flexRadioDefault" id="older-first">
+                                        <label class="form-check-label ms-1" for="flexRadioDefault1">
+                                          Criados em: (antigos primeiro)
+                                        </label>
+                                    </li>
+                                </div>
+                                <div class="form-check">
+                                    <li>
+                                        <input class="form-check-input" onclick="sortByDesc()" type="radio" name="flexRadioDefault" id="newer-first">
+                                        <label class="form-check-label ms-1" for="flexRadioDefault1">
+                                          Criados em: (novos primeiro)
+                                        </label>
+                                    </li>
+                                </div>
+                            </ul>
+                          </div>
                     </div>
+                    <script onload="checkButtons()" src="{{ env('APP_URL') }}/assets/js/buttons/order.js"></script>
                 @endif
             </div>
         @endif
