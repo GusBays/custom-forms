@@ -42,13 +42,13 @@
                     </div>
                 @endif
                 @if ($sortButton)
-                <div class="col-12 text-center">
-                    <a href="/action/{{ $pathResource }}/sort" type="button" class="btn btn-warning w-50" style="color:white">
-                        <img src="{{ env('APP_URL') }}/assets/img/sort-icon.svg" alt="" width="25" height="20">
-                        Ordernar
-                    </a>
-                </div>
-            @endif
+                    <div class="col-12 text-center">
+                        <a href="/action/{{ $pathResource }}/sort" type="button" class="btn btn-warning w-50" style="color:white">
+                            <img src="{{ env('APP_URL') }}/assets/img/sort-icon.svg" alt="" width="25" height="20">
+                            Ordernar
+                        </a>
+                    </div>
+                @endif
             </div>
         @endif
 
