@@ -72,6 +72,8 @@ class UserRepository
     {
         $user = $this->getUserQuery($filter)->firstOrFail();
 
+        if ('owner' === $user->type) throw new \Throwable('cannot_delete_owner_user');
+
         $user->delete();
     }
 
