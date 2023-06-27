@@ -18,23 +18,26 @@
                 <div class="col">
                     <div class="mb-3">
                         <label for="first_name" class="form-label">Primeiro nome</label>
-                        <input type="text" class="form-control" value="" id="first_name" placeholder="Ex.: Ana" required>
+                        <input type="text" name="first_name" class="form-control" value="" id="first_name" placeholder="Ex.: Ana" required>
                     </div>
                     <div class="mb-3">
                         <label for="last_name" class="form-label">Sobrenome</label>
-                        <input type="text" class="form-control" value="" id="last_name" placeholder="Ex.: Flores">
+                        <input type="text" name="last_name" class="form-control" value="" id="last_name" placeholder="Ex.: Flores">
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">E-mail</label>
-                        <input type="text" class="form-control" value="" id="email" placeholder="Ex.: email@exemplo.com.br" required>
+                        <input type="email" name="email" class="form-control" value="" id="email" placeholder="Ex.: email@exemplo.com.br" required>
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Senha: </label>
-                        <input type="password" class="form-control" value="" id="password" placeholder="Ex.: 123@ABC" required>
+                        <input type="password" name="password" class="form-control" value="" id="password" placeholder="Ex.: 123@ABC" minlength="6" required>
                     </div>
                     <div class="mb-3">
                         <label for="password-repeat" class="form-label">Confirme sua senha: </label>
-                        <input type="password" class="form-control" value="" id="password-repeat" placeholder="Ex.: 123@Abc" required>
+                        <input type="password" class="form-control" value="" id="password-repeat" placeholder="Ex.: 123@Abc" minlength="6" required>
+                    </div>
+                    <div>
+                        <input type="text" name="type" value="employee" hidden>
                     </div>
                 </div>
                 <div class="row">
