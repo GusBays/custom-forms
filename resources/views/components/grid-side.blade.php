@@ -38,7 +38,7 @@
                 @endif
                 @if ($deleteButton)
                     <div class="col-12 text-center mb-1">
-                        <button onclick="deleteRegisters({{ json_encode($apiResource) }}, {{ json_encode($pathResource)}})" type="button" class="btn btn-danger w-50">
+                        <button type="button" class="btn btn-danger w-50" data-bs-toggle="modal" data-bs-target="#deleteModal">
                             <img src="{{ env('APP_URL') }}/assets/img/trash-icon.svg" alt="" width="25" height="25">
                             Deletar
                         </button>
@@ -85,6 +85,24 @@
             </div>
         @endif
 
+    </div>
+</div>
+
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Deletar registros</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            Você confirma a deleção dos registros selecionados?
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" onclick="deleteRegisters({{ json_encode($apiResource) }}, {{ json_encode($pathResource)}})">Deletar</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        </div>
+        </div>
     </div>
 </div>
 <!-- End grid-side component -->
