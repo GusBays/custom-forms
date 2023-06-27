@@ -9,13 +9,17 @@ function insertValue() {
 function search() {
     const search = document.getElementById('search-input').value
 
-    if ('' === search) return;
-
     const urlParams = getUrlParams();
 
-    urlParams.set('q', search);
+    if ('' === search) {
+        urlParams.delete('q');
 
-    window.location.search = urlParams
+        window.location.search = urlParams
+    } else {
+        urlParams.set('q', search);
+
+        window.location.search = urlParams
+    }
 }
 
 function getUrlParams() {

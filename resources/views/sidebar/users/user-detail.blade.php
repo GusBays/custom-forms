@@ -59,7 +59,7 @@
                             <a class="btn btn-secondary w-100" href="/admin/usuarios?sort=id&limit=100&page=1" type="button">Voltar</a>
                         </div>
                     </div>
-                    <input id="delete-checkbox" type="checkbox" hidden>
+                    <input id="delete-checkbox" type="checkbox" value="{{ $user->getId() }}" hidden>
                 </div>
 
                 @csrf

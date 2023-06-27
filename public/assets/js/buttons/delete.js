@@ -3,7 +3,7 @@ function deleteRegisters(resource, pagePath) {
 
     selectedRegisters.forEach(input => {
         if (false === input.checked && false === isSingleRegister()) return;
-        else if (isSingleRegister()) deleteResource(resource, getIdFromPath())
+
         else deleteResource(resource, input.value)
     });
 
