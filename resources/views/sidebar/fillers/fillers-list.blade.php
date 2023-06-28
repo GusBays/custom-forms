@@ -23,7 +23,9 @@
 
             <div class="col-12 col-lg-7">
                 @foreach ($fillers as $filler)
-                    @include('snippets/filler-card-list')
+                    <div class="mb-2">
+                        @include('snippets/filler-card-list')
+                    </div>
                 @endforeach
             </div>
         </div>
