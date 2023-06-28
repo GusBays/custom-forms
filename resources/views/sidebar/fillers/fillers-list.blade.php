@@ -23,7 +23,7 @@
 
             <div class="col-12 col-lg-7">
                 @foreach ($fillers as $filler)
-
+                    @include('snippets/filler-card-list')
                 @endforeach
             </div>
         </div>
