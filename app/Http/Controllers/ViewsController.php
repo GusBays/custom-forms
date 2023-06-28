@@ -139,6 +139,11 @@ class ViewsController
         return view('sidebar/fillers/filler-detail', ['filler' => $filler->resource]);
     }
 
+    public function newFiller(Request $request): View
+    {
+        return view('sidebar/fillers/filler-new');
+    }
+
     public function users(Request $request): View
     {
         try {
