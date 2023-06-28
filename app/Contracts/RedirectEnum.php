@@ -16,6 +16,12 @@ class RedirectEnum
 
     public const FORMS = '/admin/formularios';
 
+    public const FILLERS = '/admin/preenchedores';
+
+    public const FILLER_ID = '/admin/preenchedores/{id}';
+
+    public const FILLER_NEW = '/admin/preenchedores/novo';
+
     public const USERS = '/admin/usuarios';
 
     public const USER_ID = '/admin/usuarios/{id}';

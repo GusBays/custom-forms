@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Datas\Form\FormUpdateData;
 use App\Datas\Organization\OrganizationUpdateData;
 use App\Datas\User\UserUpdateData;
+use App\Resources\FillerResource;
 use App\Resources\FormResource;
 use App\Resources\UserResource;
 use Illuminate\Contracts\View\View;
@@ -15,16 +16,19 @@ class ViewsController
 {
     private OrganizationController $organizationController;
     private FormController $formController;
+    private FillerController $fillerController;
     private UserController $userController;
 
     public function __construct(
         OrganizationController $organizationController,
         FormController $formController,
+        FillerController $fillerController,
         UserController $userController
     )
     {
         $this->organizationController = $organizationController;
         $this->formController = $formController;
+        $this->fillerController = $fillerController;
         $this->userController = $userController;
     }
 
@@ -108,16 +112,20 @@ class ViewsController
         return view('form', ['form' => $form]);
     }
 
-    public function formFieldsAnswer(Request $request): View
+    public function fillers(Request $request): View
     {
         try {
-            /** @var FormUpdateData */
-            $form = $this->formController->getOneBySlug($request)->resource;
-        } catch (ModelNotFoundException $th) {
-            return view('error', ['error' => $th->getMessage()]);
+            $fillers = $this->fillerController->index($request);
+        } catch (\Throwable $th) {
+            dd('fillers', $th);
         }
 
-        return view('formFieldsAnswer', ['form' => $form]);
+        $toResource = fn (FillerResource $filler) => $filler->resource;
+        $fillers = $fillers->collection
+            ->map($toResource)
+            ->all();
+
+        return view('sidebar.fillers.fillers-list', ['fillers' => $fillers]);
     }
 
     public function users(Request $request): View
