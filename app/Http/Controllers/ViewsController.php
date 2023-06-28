@@ -128,6 +128,17 @@ class ViewsController
         return view('sidebar.fillers.fillers-list', ['fillers' => $fillers]);
     }
 
+    public function filler(Request $request): View
+    {
+        try {
+            $filler = $this->fillerController->show($request);
+        } catch (ModelNotFoundException $e) {
+            dd($e, 'filler');
+        }
+
+        return view('sidebar/fillers/filler-detail', ['filler' => $filler->resource]);
+    }
+
     public function users(Request $request): View
     {
         try {
