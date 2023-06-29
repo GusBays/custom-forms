@@ -8,7 +8,7 @@ use Illuminate\Contracts\Support\Arrayable;
 
 abstract class FormData implements Arrayable
 {
-    private string $name;
+    private ?string $name = null;
     private ?string $available_until = null;
     private ?int $fill_limit = null;
     private bool $should_notify_each_fill = true;
@@ -19,7 +19,7 @@ abstract class FormData implements Arrayable
     private ?array $form_fields = [];
 
     public function __construct(
-        string $name,
+        string $name = null,
         string $available_until = null,
         int $fill_limit = null,
         bool $should_notify_each_fill = true,
@@ -37,7 +37,7 @@ abstract class FormData implements Arrayable
         $this->form_fields = $form_fields;
     }
 
-    public function getName(): string
+    public function getName(): ?string
     {
         return $this->name;
     }

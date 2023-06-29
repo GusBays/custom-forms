@@ -21,7 +21,7 @@ abstract class FormUpdateData extends FormData
     public function __construct(
         int $id,
         int $organization_id,
-        string $name,
+        string $name = null,
         string $available_until = null,
         int $fill_limit = null,
         bool $should_notify_each_fill = true,
