@@ -97,7 +97,7 @@ class ViewsController
             ->map($toResource)
             ->all();
 
-        return view('forms', ['forms' => $forms]);
+        return view('sidebar/forms/forms-list', ['forms' => $forms]);
     }
 
     public function form(Request $request): View
