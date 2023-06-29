@@ -23,8 +23,8 @@ class FormUpdateRequestAdapter extends FormUpdateData
             $request->input('should_notify_each_fill', true),
             $request->input('active', true),
             $request->input('slug'),
-            FormUserUpdateRequestAdapter::createFromFormUpdateRequest($request->form_users),
-            FormFieldUpdateRequestAdapter::createFromFormUpdateRequest($request->form_fields),
+            $request->has('form_users') ? FormUserUpdateRequestAdapter::createFromFormUpdateRequest($request->form_users) : [],
+            $request->has('form_fields') ? FormFieldUpdateRequestAdapter::createFromFormUpdateRequest($request->form_fields) : [],
             $request->input('created_at'),
             $request->input('updated_at')
         );
