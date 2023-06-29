@@ -13,14 +13,16 @@ function search() {
 
     const urlParams = getUrlParams();
 
-    if ('' === search) {
+    if (search) {
+        urlParams.set('q', search);
+
+        window.location.search = urlParams
+    } else if ('' === search && urlParams.get('q')) {
         urlParams.delete('q');
 
         window.location.search = urlParams
     } else {
-        urlParams.set('q', search);
-
-        window.location.search = urlParams
+        return;
     }
 }
 
