@@ -1,3 +1,5 @@
+onload=insertValue();
+
 function insertValue() {
     const search = getUrlParams().get('q');
 

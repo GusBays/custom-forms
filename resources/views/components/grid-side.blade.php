@@ -26,7 +26,7 @@
                             </button>
                         </div>
                     </div>
-                    <script onload="insertValue()" src="{{ env('APP_URL') }}/assets/js/buttons/search.js"></script>
+                    <script src="{{ env('APP_URL') }}/assets/js/buttons/search.js"></script>
                 @endif 
                 @if ($addButton)
                     <div class="col-12 text-center mb-1">
@@ -80,7 +80,7 @@
                             </ul>
                           </div>
                     </div>
-                    <script onload="checkButtons()" src="{{ env('APP_URL') }}/assets/js/buttons/order.js"></script>
+                    <script src="{{ env('APP_URL') }}/assets/js/buttons/order.js"></script>
                 @endif
             </div>
         @endif

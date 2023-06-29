@@ -1,3 +1,5 @@
+onload=checkButtons();
+
 function checkButtons() {
     const sort = getUrlParams().get('sort');
 
