@@ -32,5 +32,5 @@ class ApiRoutesEnum
 
     public const FILLERS_ID = '/fillers/{id}';
 
-    public const FORM_FIELDS_ANSWERS = '/forms/fields/answers';
+    public const FORM_ANSWERS = '/form-answers';
 }

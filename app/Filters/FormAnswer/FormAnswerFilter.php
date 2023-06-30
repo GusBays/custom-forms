@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Filters\FormFieldAnswer;
+namespace App\Filters\FormAnswer;
 
 use App\Contracts\Filter;
 
-class FormFieldAnswerFilter implements Filter
+class FormAnswerFilter implements Filter
 {
     private ?int $id = null;
     private ?int $formId = null;

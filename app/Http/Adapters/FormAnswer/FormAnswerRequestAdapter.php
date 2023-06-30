@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Adapters\FormFieldAnswer;
+namespace App\Http\Adapters\FormAnswer;
 
-use App\Datas\FormFieldAnswer\FormFieldAnswerData;
-use App\Http\Adapters\Filler\FillerRequestAdapter;
+use App\Datas\FormAnswer\FormAnswerData;
 use Illuminate\Http\Request;
 
-class FormFieldAnswerRequestAdapter extends FormFieldAnswerData
+class FormAnswerRequestAdapter extends FormAnswerData
 {
     public function __construct(
         Request $request
@@ -14,10 +13,8 @@ class FormFieldAnswerRequestAdapter extends FormFieldAnswerData
     {
         parent::__construct(
             $request->input('form_id'),
-            $request->input('field_id'),
             $request->input('filler_id'),
-            $request->input('answer'),
-            new FillerRequestAdapter($request)
+            $request->input('answers'),
         );
     }
 

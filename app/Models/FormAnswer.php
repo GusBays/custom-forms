@@ -6,20 +6,18 @@ use App\Scopes\OrganizationScope;
 use App\Traits\InsertOrganizationId;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class FormFieldAnswer extends BaseModel
+class FormAnswer extends BaseModel
 {
     use InsertOrganizationId;
 
     protected $fillable = [
         'form_id',
-        'field_id',
         'filler_id',
-        'answer',
+        'answers',
     ];
 
     protected array $filter = [
         'form_id',
-        'field_id',
         'filler_id'
     ];
 
@@ -28,7 +26,7 @@ class FormFieldAnswer extends BaseModel
     ];
 
     protected $casts = [
-        'answer' => 'array'
+        'answers' => 'array'
     ];
 
     public static function boot()
@@ -41,11 +39,6 @@ class FormFieldAnswer extends BaseModel
     public function form(): HasOne
     {
         return $this->hasOne(Form::class, 'id', 'form_id');
-    }
-
-    public function formField(): HasOne
-    {
-        return $this->hasOne(FormField::class, 'id', 'field_id');
     }
 
     public function filler(): HasOne

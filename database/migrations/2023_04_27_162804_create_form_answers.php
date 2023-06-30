@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFormFieldAnswers extends Migration
+class CreateFormAnswers extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class CreateFormFieldAnswers extends Migration
      */
     public function up()
     {
-        Schema::create('form_field_answers', function (Blueprint $table) {
+        Schema::create('form_answers', function (Blueprint $table) {
             $table->id();
             $table->foreignId('organization_id');
             $table->foreignId('form_id');
-            $table->foreignId('field_id');
             $table->foreignId('filler_id');
-            $table->json('answer');
+            $table->json('answers');
             $table->timestamps();
 
             $table->foreign('organization_id')
@@ -31,12 +30,6 @@ class CreateFormFieldAnswers extends Migration
             $table->foreign('form_id')
                 ->references('id')
                 ->on('forms')
-                ->cascadeOnUpdate()
-                ->cascadeOnDelete();
-
-            $table->foreign('field_id')
-                ->references('id')
-                ->on('form_fields')
                 ->cascadeOnUpdate()
                 ->cascadeOnDelete();
 
@@ -55,6 +48,6 @@ class CreateFormFieldAnswers extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('form_field_answers');
+        Schema::dropIfExists('form_answers');
     }
 }

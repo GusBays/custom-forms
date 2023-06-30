@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filters\FormFieldAnswer;
+namespace App\Filters\FormAnswer;
 
-class FormFieldAnswerFormIdFillerIdFilter extends FormFieldAnswerFilter
+class FormAnswerFormIdFillerIdFilter extends FormAnswerFilter
 {
     public function __construct(
         int $formId,

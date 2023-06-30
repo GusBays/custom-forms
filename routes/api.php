@@ -3,7 +3,7 @@
 use App\Contracts\ApiRoutesEnum;
 use App\Http\Controllers\FillerController;
 use App\Http\Controllers\FormController;
-use App\Http\Controllers\FormFieldAnswerController;
+use App\Http\Controllers\FormAnswerController;
 use App\Http\Controllers\FormFieldController;
 use App\Http\Controllers\FormUserController;
 use App\Http\Controllers\OrganizationController;
@@ -75,7 +75,7 @@ Route::middleware('auth:api')->group(function() {
         Route::delete(ApiRoutesEnum::FILLERS_ID, 'destroy')->whereNumber('id');
     });
 
-    Route::controller(FormFieldAnswerController::class)->group(function () {
-        Route::post(ApiRoutesEnum::FORM_FIELDS_ANSWERS, 'store');
+    Route::controller(FormAnswerController::class)->group(function () {
+        Route::post(ApiRoutesEnum::FORM_ANSWERS, 'store');
     });
 });

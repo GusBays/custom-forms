@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Interpreters\FormFieldAnswer;
+namespace App\Interpreters\FormAnswer;
 
-use App\Filters\FormFieldAnswer\FormFieldAnswerFilter;
+use App\Filters\FormAnswer\FormAnswerFilter;
 use App\Interpreters\DbInterpreter;
 use Illuminate\Database\Eloquent\Builder;
 
-class FormFieldAnswerFillerIdInterpreter extends DbInterpreter
+class FormAnswerFillerIdInterpreter extends DbInterpreter
 {
-    private FormFieldAnswerFilter $filter;
+    private FormAnswerFilter $filter;
 
     public function __construct(
-        FormFieldAnswerFilter $filter
+        FormAnswerFilter $filter
     )
     {
         $this->filter = $filter;

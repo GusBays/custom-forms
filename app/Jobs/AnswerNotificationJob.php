@@ -5,10 +5,10 @@ namespace App\Jobs;
 use App\Datas\Filler\FillerUpdateData;
 use App\Datas\Form\FormUpdateData;
 use App\Filters\Filler\FillerIdFilter;
-use App\Filters\FormFieldAnswer\FormFieldAnswerFormIdFillerIdFilter;
+use App\Filters\FormAnswer\FormAnswerFormIdFillerIdFilter;
 use App\Notifications\Front\AnswerNotification;
 use App\Repositories\FillerRepository;
-use App\Repositories\FormFieldAnswerRepository;
+use App\Repositories\FormAnswerRepository;
 use Barryvdh\DomPDF\PDF;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -25,7 +25,7 @@ class AnswerNotificationJob implements ShouldQueue
     private FormUpdateData $form;
     private FillerUpdateData $filler;
     private FillerRepository $fillerRepository;
-    private FormFieldAnswerRepository $formFieldAnswerRepository;
+    private FormAnswerRepository $formAnswerRepository;
 
     public function __construct(
         FormUpdateData $form,
@@ -35,7 +35,7 @@ class AnswerNotificationJob implements ShouldQueue
         $this->form = $form;
         $this->filler = $filler;
         $this->fillerRepository = app(FillerRepository::class);
-        $this->formFieldAnswerRepository = app(FormFieldAnswerRepository::class);
+        $this->formAnswerRepository = app(FormAnswerRepository::class);
     }
 
     public function handle(): void
@@ -67,8 +67,8 @@ class AnswerNotificationJob implements ShouldQueue
 
     private function getData(): array
     {
-        $answers = $this->formFieldAnswerRepository->getAnswersBy(
-            new FormFieldAnswerFormIdFillerIdFilter(
+        $answer = $this->formAnswerRepository->getOne(
+            new FormAnswerFormIdFillerIdFilter(
                 $this->form->getId(),
                 $this->filler->getId()
             )
@@ -77,7 +77,7 @@ class AnswerNotificationJob implements ShouldQueue
         return [
             'filler' => $this->filler,
             'form' => $this->form,
-            'answers' => $answers
+            'answer' => $answer
         ];
     }
 
