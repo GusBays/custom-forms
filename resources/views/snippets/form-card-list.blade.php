@@ -20,7 +20,7 @@
         </a>
         <div class="form-check form-switch align-self-center ms-2">
             <input class="form-check-input active-switch" id="active-switch-{{$form->getId()}}" onclick="updateActive({{ json_encode('forms') }}, {{ $form->getId() }}, {{ json_encode($form->getActive()) }})" value="{{ $form->getActive() }}" type="checkbox" role="switch">
-            <label class="form-check-label" for="flexSwitchCheckDefault">Ativo</label>
+            <label class="d-none d-md-block form-check-label" for="flexSwitchCheckDefault">Ativo</label>
         </div>
     </div>
 </div>

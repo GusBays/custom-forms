@@ -1,5 +1,3 @@
-// import createToast from "../notifications/toast.js";
-
 onload=checkActive();
 
 function checkActive() {
@@ -30,21 +28,25 @@ function updateActive(resource, id, active) {
         active: active
     }
     
-    try {
-        fetch(uri, 
-            { 
-                method: 'PUT',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(data)
-            })
-    } catch (e) {
-        return alert(e)
-    }
+    fetch(uri, 
+        { 
+            method: 'PUT',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        }).then((res) => {
+            if (res.ok) window.location = window.location.search
+            else {
+                input.classList.add('bg-warning')
+                const toastEl = document.querySelector('.toast')
+                const toast = bootstrap.Toast.getOrCreateInstance(toastEl)
+                toast.show()
+            }
+        })
 
-    window.location = window.location.search
+    enableButtons()
 }
 
 function disableButtons() {
