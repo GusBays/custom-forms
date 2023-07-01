@@ -7,6 +7,7 @@ use App\Datas\Filler\FillerUpdateData;
 use App\Filters\Filler\FillerFilter;
 use App\Filters\Filler\FillerGetAllFilter;
 use App\Filters\Filler\FillerIdFilter;
+use App\Filters\FormAnswer\FormAnswerFillerIdFilter;
 use App\Http\Adapters\Filler\FillerModelAdapter;
 use App\Interpreters\Filler\FillerEmailInterpreter;
 use App\Interpreters\Filler\FillerIdInterpreter;
@@ -15,6 +16,7 @@ use App\Interpreters\SearchInterpreter;
 use App\Interpreters\SortInterpreter;
 use App\Models\Filler;
 use App\Traits\PerPage;
+use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
@@ -23,12 +25,15 @@ class FillerRepository
     use PerPage;
 
     protected Filler $model;
+    private FormAnswerRepository $formAnswerRepository;
 
     public function __construct(
-        Filler $model
+        Filler $model,
+        FormAnswerRepository $formAnswerRepository
     )
     {
         $this->model = $model;
+        $this->formAnswerRepository = $formAnswerRepository;
     }
 
     public function create(FillerData $data): FillerUpdateData
@@ -69,6 +74,10 @@ class FillerRepository
     public function delete(FillerFilter $filter): void
     {
         $filler = $this->getFillerQuery($filter)->firstOrFail();
+
+        $answer = $this->formAnswerRepository->getOne(new FormAnswerFillerIdFilter($filler->id));
+
+        if (filled($answer)) throw new Exception('cannot_delete_filler_with_answers_registered');
 
         $filler->delete();
     }

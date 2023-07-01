@@ -10,6 +10,7 @@
         <x-grid-side 
             title="Edição de preenchedor"
             iconUrl="{{ env('APP_URL') }}/assets/img/filler-icon.svg"
+            deleteButton="{{ true }}"
             buttonResource="preenchedor"
             pathResource="preenchedores"
             apiResource="fillers"
@@ -45,6 +46,7 @@
                             <a class="btn btn-secondary w-100" href="/admin/preenchedores?sort=-id&limit=25&page=1" type="button">Voltar</a>
                         </div>
                     </div>
+                    <input id="delete-checkbox" type="checkbox" value="{{ $filler->getId() }}" hidden>
                 </div>
 
                 @csrf

@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Datas\Form\FormUpdateData;
 use App\Datas\FormAnswer\FormAnswerData;
 use App\Datas\FormAnswer\FormAnswerUpdateData;
+use App\Filters\Filler\FillerEmailFilter;
 use App\Filters\Filler\FillerIdFilter;
 use App\Filters\Form\FormIdFilter;
 use App\Filters\FormAnswer\FormAnswerFormIdFilter;
@@ -15,6 +16,7 @@ use App\Repositories\FillerRepository;
 use App\Repositories\FormAnswerRepository;
 use App\Repositories\FormRepository;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -37,8 +39,11 @@ class FormAnswerService
 
     public function create(FormAnswerData $data, string $email): FormAnswerUpdateData
     {
-        if ($data->getFillerId()) $filler = $this->fillerRepository->getOne(new FillerIdFilter($data->getFillerId()));
-        else $filler = $this->fillerRepository->create(new FillerRequestAdapter(new Request(['email' => $email])));
+        try {
+            $filler = $this->fillerRepository->getOne(new FillerEmailFilter($email));
+        } catch (ModelNotFoundException $th) {
+            $filler = $this->fillerRepository->create(new FillerRequestAdapter(new Request(['email' => $email])));
+        }
 
         $data->setFillerId($filler->getId());
 

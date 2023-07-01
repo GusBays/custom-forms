@@ -13,6 +13,7 @@
                 iconUrl="{{ env('APP_URL') }}/assets/img/filler-icon.svg"
                 searchField="{{ true }}"
                 addButton="{{ true }}"
+                deleteButton="{{ true }}"
                 filterButton="{{ true }}"
                 sortButton="{{ true }}"
                 buttonResource="preenchedor"
