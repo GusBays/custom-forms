@@ -18,6 +18,7 @@ use App\Models\Filler;
 use App\Traits\PerPage;
 use Exception;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 
 class FillerRepository
@@ -75,7 +76,11 @@ class FillerRepository
     {
         $filler = $this->getFillerQuery($filter)->firstOrFail();
 
-        $answer = $this->formAnswerRepository->getOne(new FormAnswerFillerIdFilter($filler->id));
+        try {
+            $answer = $this->formAnswerRepository->getOne(new FormAnswerFillerIdFilter($filler->id));
+        } catch (ModelNotFoundException $e) {
+            $answer = null;
+        }
 
         if (filled($answer)) throw new Exception('cannot_delete_filler_with_answers_registered');
 
