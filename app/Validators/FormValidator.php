@@ -8,7 +8,7 @@ class FormValidator extends RequestValidator
     {
         return [
             'name' => 'required|max:255',
-            'available_until' => 'nullable|date|date_format:Y-m-d|after_or_equal:today',
+            'available_until' => 'nullable|date|date_format:Y-m-d H:i:s|after_or_equal:today',
             'fill_limt' => 'nullable|integer',
             'should_notify_each_fill' => 'boolean',
             'active' => 'boolean',

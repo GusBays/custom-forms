@@ -22,6 +22,7 @@ class FormUserRepository
     use PerPage;
 
     protected FormUser $model;
+    private const RELATIONS = ['form', 'user'];
 
     public function __construct(
         FormUser $model

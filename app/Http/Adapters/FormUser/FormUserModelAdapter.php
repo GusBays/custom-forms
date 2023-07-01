@@ -3,6 +3,7 @@
 namespace App\Http\Adapters\FormUser;
 
 use App\Datas\FormUser\FormUserUpdateData;
+use App\Http\Adapters\User\UserModelAdapter;
 use App\Models\FormUser;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -19,7 +20,8 @@ class FormUserModelAdapter extends FormUserUpdateData
             $formUser->user_id,
             $formUser->type,
             $formUser->created_at,
-            $formUser->updated_at
+            $formUser->updated_at,
+            new UserModelAdapter($formUser->user)
         );
     }
 

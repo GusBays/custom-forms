@@ -109,7 +109,7 @@ class ViewsController
             return view('error', ['error' => $th->getMessage()]);
         }
 
-        return view('form', ['form' => $form]);
+        return view('sidebar/forms/form-detail', ['form' => $form]);
     }
 
     public function fillers(Request $request): View

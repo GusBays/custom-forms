@@ -2,6 +2,7 @@
 
 namespace App\Datas\Form;
 
+use App\Datas\FOrmUser\FormUserUpdateData;
 use App\Traits\GetOrganizationId;
 use App\Traits\GetTimestamps;
 use App\Traits\SetModifiedFields;
@@ -14,6 +15,8 @@ abstract class FormUpdateData extends FormData
 
     private int $id;
     private int $organization_id;
+    /** @var FormUserUpdateData[] */
+    private ?array $formUsers = null;
     private ?string $slug = null;
     private ?string $created_at = null;
     private ?string $updated_at = null;
@@ -27,7 +30,7 @@ abstract class FormUpdateData extends FormData
         bool $should_notify_each_fill = true,
         bool $active = true,
         string $slug = null,
-        array $form_users = [],
+        array $formUsers = [],
         array $form_fields = [],
         string $created_at = null,
         string $updated_at = null
@@ -36,6 +39,7 @@ abstract class FormUpdateData extends FormData
         $this->id = $id;
         $this->organization_id = $organization_id;
         $this->slug = $slug;
+        $this->formUsers = $formUsers;
         $this->created_at = $created_at;
         $this->updated_at = $updated_at;
         parent::__construct(
@@ -44,7 +48,6 @@ abstract class FormUpdateData extends FormData
             $fill_limit,
             $should_notify_each_fill,
             $active,
-            $form_users,
             $form_fields
         );
     }
@@ -57,6 +60,14 @@ abstract class FormUpdateData extends FormData
     public function getSlug(): ?string
     {
         return $this->slug;
+    }
+
+    /**
+     * @return FormUserUpdateData[]
+     */
+    public function getFormUsers(): ?array
+    {
+        return $this->formUsers;
     }
 
     public function toArray(): array
