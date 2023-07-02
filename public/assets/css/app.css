@@ -11,3 +11,11 @@ body {
 .theme-color:hover {
     background-color: #6500b1;
 }
+
+[data-tab-info] {
+    display: none;
+}
+  
+.active-tab[data-tab-info] {
+    display: block;
+}

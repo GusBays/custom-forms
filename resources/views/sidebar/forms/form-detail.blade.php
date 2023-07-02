@@ -20,20 +20,21 @@
         <div class="col-12 col-lg-7">
             <div class="shadow p-3 mb-5 bg-body-tertiary rounded">
                 <div class="d-flex justify-content-end">
-                    <nav>
-                        <a class="btn active">Formulário</a>
-                        <a type="button" class="btn" data-bs-toggle="modal" data-bs-target="#formUsersModal">Usuários</a>
-                        <a class="btn" href="#fields">Campos</a>
-                        <a class="btn" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="{{ env('APP_URL') }}/assets/img/down-arrow.svg" alt="" width="25" height="20">
-                            Mais opções
-                        </a>
+                    <nav class="tabs">
+                        <a type="button" class="btn active" data-tab-value="#form">Formulário</a>
+                        <a type="button" class="btn" data-tab-value="#users">Usuários</a>
+                        <a type="button" class="btn" data-tab-value="#fields">Campos</a>
+                    </nav>
+                    <a type="button" class="btn" data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="{{ env('APP_URL') }}/assets/img/down-arrow.svg" alt="" width="25" height="20">
+                        Mais opções
+                    </a>
                         <ul class="dropdown-menu dropdown-menu-dark">
                             <li><a class="list-group-item list-group-item-action ms-2" target="_blank" href="{{ env('APP_URL') }}/responder/{{ $form->getSlug() }}">Pré visualizar</a></li>
                         </ul>
-                    </nav>
                 </div>
-                <form action="/action/form/update" method="POST" id="form" class="tab">
+
+                <form action="/action/form/update" method="POST" id="form" class="active-tab" data-tab-info>
                     <div class="col">
                         <div class="mb-3">
                             <label for="name" class="form-label">Título</label>
@@ -76,67 +77,55 @@
                         </div>
 
                         @csrf
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
+                    </div>
+                </form>
 
-    <div class="modal fade" id="formUsersModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5">Editar usuários</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <table class="table table-striped">
-                    <thead>
-                      <tr>
-                        <th scope="col">Nome</th>
-                        <th scope="col">Email</th>
-                        <th scope="col">Tipo</th>
-                        <th scope="col">Deletar</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($form->getFormUsers() as $formUser)
-                            <tr class="col">
-                                <td>{{ $formUser->getUser()->getName() }}</td>
-                                <td>{{ $formUser->getUser()->getEmail() }}</td>
-                                <td>
-                                    <select class="form-select">
-                                        <option 
-                                            @if ('creator' === $formUser->getType()) 
-                                                selected 
-                                            @else
-                                                disabled
-                                            @endif 
-                                        value="creator">Criador</option>
-                                        <option
-                                            @if ('editor' === $formUser->getType())
-                                                selected
-                                            @endif
-                                        value="editor">Editor</option>
-                                        <option
-                                            @if ('viewer' === $formUser->getType())
-                                                selected
-                                            @endif
-                                            value="viewer">Visualizador</option>
-                                    </select>
-                                </td>
-                                <td><button class="btn btn-danger">Deletar</button></td>
+                <div id="users" data-tab-info>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Nome</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Tipo</th>
+                                <th scope="col">Deletar</th>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-success border-0 theme-color" id="confirm-button">Atualizar</button>
-                <button type="button" class="btn btn-secondary border-0" data-bs-dismiss="modal">Voltar</button>
+                        </thead>
+                        <tbody>
+                            @foreach ($form->getFormUsers() as $formUser)
+                                <tr class="col">
+                                    <td>{{ $formUser->getUser()->getName() }}</td>
+                                    <td>{{ $formUser->getUser()->getEmail() }}</td>
+                                    <td>
+                                        <select class="form-select">
+                                            <option 
+                                                @if ('creator' === $formUser->getType()) 
+                                                    selected 
+                                                @else
+                                                    disabled
+                                                @endif 
+                                            value="creator">Criador</option>
+                                            <option
+                                                @if ('editor' === $formUser->getType())
+                                                    selected
+                                                @endif
+                                            value="editor">Editor</option>
+                                            <option
+                                                @if ('viewer' === $formUser->getType())
+                                                    selected
+                                                @endif
+                                                value="viewer">Visualizador</option>
+                                        </select>
+                                    </td>
+                                    <td><button class="btn btn-danger">Deletar</button></td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+
             </div>
         </div>
-      </div>
     </div>
 
+    <script src="{{ env('APP_URL') }}/assets/js/buttons/tabs.js"></script>
 @endsection
