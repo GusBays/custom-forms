@@ -128,6 +128,8 @@
                         <div class="border-bottom mb-3">
                             @if ('text' === $field->getType())
                                 @include('snippets/form-fields/text')
+                            @elseif ('blocked' === $field->getType())
+                                @include('snippets/form-fields/blocked')
                             @endif
                         </div>
                     @endforeach

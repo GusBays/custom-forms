@@ -9,14 +9,11 @@
     </div>
     <div class="mb-3">
         <label for="type" class="form-label">Tipo</label>
-        <input type="text" class="form-control" value="Texto" disabled>
+        <input type="text" class="form-control" value="Bloqueado" disabled>
     </div>
     <div class="form-check form-switch align-self-center mb-3">
-        <label for="active" class="form-label">Obrigatório</label>
-        <input class="form-check-input active-switch" value="{{ $field->getRequired() }}" type="checkbox" role="switch"
-            @if($field->getRequired())
-                checked
-            @endif
-        >
+        <label for="type" class="form-label">Obrigatório</label>
+        <input class="form-check-input active-switch" value="{{ false }}" type="checkbox" role="switch" disabled>
     </div>
+
 </div>
