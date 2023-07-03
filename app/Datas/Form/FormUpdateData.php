@@ -17,6 +17,8 @@ abstract class FormUpdateData extends FormData
     private int $organization_id;
     /** @var FormUserUpdateData[] */
     private ?array $formUsers = null;
+    /** @var FormFieldUpdateData[] */
+    private ?array $formFields = null;
     private ?string $slug = null;
     private ?string $created_at = null;
     private ?string $updated_at = null;
@@ -31,7 +33,7 @@ abstract class FormUpdateData extends FormData
         bool $active = true,
         string $slug = null,
         array $formUsers = [],
-        array $form_fields = [],
+        array $formFields = [],
         string $created_at = null,
         string $updated_at = null
     )
@@ -40,6 +42,7 @@ abstract class FormUpdateData extends FormData
         $this->organization_id = $organization_id;
         $this->slug = $slug;
         $this->formUsers = $formUsers;
+        $this->formFields = $formFields;
         $this->created_at = $created_at;
         $this->updated_at = $updated_at;
         parent::__construct(
@@ -47,8 +50,7 @@ abstract class FormUpdateData extends FormData
             $available_until,
             $fill_limit,
             $should_notify_each_fill,
-            $active,
-            $form_fields
+            $active
         );
     }
 
@@ -68,6 +70,14 @@ abstract class FormUpdateData extends FormData
     public function getFormUsers(): ?array
     {
         return $this->formUsers;
+    }
+
+    /**
+     * @return FormFieldUpdateData[]
+     */
+    public function getFormFields(): ?array
+    {
+        return $this->formFields;
     }
 
     public function toArray(): array
