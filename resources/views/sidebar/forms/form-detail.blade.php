@@ -123,6 +123,16 @@
                     </table>
                 </div>
 
+                <div id="fields" data-tab-info>
+                    @foreach ($form->getFormFields() as $field)
+                        <div class="border-bottom mb-3">
+                            @if ('text' === $field->getType())
+                                @include('snippets/form-fields/text')
+                            @endif
+                        </div>
+                    @endforeach
+                </div>
+
             </div>
         </div>
     </div>
