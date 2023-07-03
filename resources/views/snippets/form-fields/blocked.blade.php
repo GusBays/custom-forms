@@ -15,5 +15,4 @@
         <label for="type" class="form-label">Obrigatório</label>
         <input class="form-check-input active-switch" value="{{ false }}" type="checkbox" role="switch" disabled>
     </div>
-
 </div>

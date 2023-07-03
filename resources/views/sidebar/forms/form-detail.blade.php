@@ -5,7 +5,7 @@
 @endsection
 
 @section('admin-content')
-    <div class="row justify-content-beetwen align-items-center">
+    <div class="row justify-content-beetwen align-items-top">
 
         <x-grid-side 
         title="Edição de formulário"
@@ -130,6 +130,8 @@
                                 @include('snippets/form-fields/text')
                             @elseif ('blocked' === $field->getType())
                                 @include('snippets/form-fields/blocked')
+                            @elseif ('select' === $field->getType())
+                                @include('snippets/form-fields/select')
                             @endif
                         </div>
                     @endforeach
