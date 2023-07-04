@@ -124,14 +124,48 @@
                 </div>
 
                 <div id="fields" data-tab-info>
+                    <div class="text-muted my-3 border-bottom " id="count-fields">Você tem um total de {{ count($form->getFormFields()) }} campos cadastrados neste formulário.</div>
                     @foreach ($form->getFormFields() as $field)
                         <div class="border-bottom mb-3">
-                            @if ('text' === $field->getType())
-                                @include('snippets/form-fields/text')
-                            @elseif ('blocked' === $field->getType())
-                                @include('snippets/form-fields/blocked')
-                            @elseif ('select' === $field->getType())
-                                @include('snippets/form-fields/select')
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Nome do campo</label>
+                                <input type="text" class="form-control" value="{{ $field->getName() }}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="description" class="form-label">Descrição do campo</label>
+                                <input type="text" class="form-control" value="{{ $field->getDescription() }}">
+                            </div>
+                            <div class="mb-3">
+                                <label for="type" class="form-label">Tipo</label>
+                                <input type="text" class="form-control" value=
+                                @if ('text' === $field->getType())
+                                    "Texto"
+                                @elseif ('blocked' === $field->getType())
+                                    "Bloqueado"
+                                @elseif ('select' === $field->getType())
+                                    "Seleção"
+                                @elseif ('checkbox' === $field->getType())
+                                    "Checkbox"
+                                @endif
+                                disabled>
+                            </div>
+                            <div class="form-check form-switch align-self-center mb-3">
+                                <label for="active" class="form-label">Obrigatório</label>
+                                <input class="form-check-input active-switch" value="{{ $field->getRequired() }}" type="checkbox" role="switch"
+                                    @if('blocked' === $field->getType())
+                                        disabled
+                                    @elseif ($field->getRequired())
+                                        checked
+                                    @endif
+                                >
+                            </div>
+                            @if ($field->getContent())
+                                <div class="mb-3">
+                                    <label for="content" class="form-label">Opções</label>
+                                    @foreach ($field->getContent() as $option)
+                                        <input class="col-12 form-control mb-1" type="text" value="{{ $option }}">
+                                    @endforeach
+                                </div>
                             @endif
                         </div>
                     @endforeach
