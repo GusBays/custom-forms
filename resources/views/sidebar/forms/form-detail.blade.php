@@ -34,7 +34,7 @@
                         </ul>
                 </div>
 
-                <form action="/action/form/update" method="POST" id="form" class="active-tab" data-tab-info>
+                <form action="/action/form/update" method="POST" id="form" class="active-tab my-3" data-tab-info>
                     <div class="col">
                         <div class="mb-3">
                             <label for="name" class="form-label">Título</label>
@@ -64,23 +64,12 @@
                                 @endif
                             >
                         </div>
-                        <div class="row">
-                            <div class="col-12 col-md-6">
-                                <button type="submit" class="btn btn-success border-0 w-100 theme-color">Salvar alterações</button>
-                            </div>
-                            <div class="col-12 col-md-6">
-                                <div class="mt-1 mt-md-0">
-                                    <a class="btn btn-secondary w-100" href="/admin/formularios?sort=-id&limit=25&page=1" type="button">Voltar</a>
-                                </div>
-                            </div>
-                            <input id="delete-checkbox" type="checkbox" value="{{ $form->getId() }}" hidden>
-                        </div>
 
                         @csrf
                     </div>
                 </form>
 
-                <div id="users" data-tab-info>
+                <div id="users" class="my-3" data-tab-info>
                     <table class="table table-striped">
                         <thead>
                             <tr>
@@ -159,16 +148,36 @@
                                     @endif
                                 >
                             </div>
+
+
                             @if ($field->getContent())
-                                <div class="mb-3">
+                                <div class="mb-3 p-2 rounded" style="background-color: #e9ecef;">
                                     <label for="content" class="form-label">Opções</label>
                                     @foreach ($field->getContent() as $option)
-                                        <input class="col-12 form-control mb-1" type="text" value="{{ $option }}">
+                                        <div class="input-group mb-1">
+                                            <input type="text" class="form-control" value="{{ $option }}" aria-describedby="basic-addon1">
+                                            <button class="input-group-text btn btn-danger" id="basic-addon1"><img src="{{ env('APP_URL') }}/assets/img/trash-icon.svg" alt="" width="25" height="32"></button>
+                                        </div>
                                     @endforeach
+                                    <div class="col-12 mt-3">
+                                        <button class="btn btn-success">Adicionar nova opção</button>
+                                    </div>
                                 </div>
                             @endif
                         </div>
                     @endforeach
+                </div>
+
+                <div class="row">
+                    <div class="col-12 col-md-6">
+                        <button type="submit" class="btn btn-success border-0 w-100 theme-color">Salvar alterações</button>
+                    </div>
+                    <div class="col-12 col-md-6">
+                        <div class="mt-1 mt-md-0">
+                            <a class="btn btn-secondary w-100" href="/admin/formularios?sort=-id&limit=25&page=1" type="button">Voltar</a>
+                        </div>
+                    </div>
+                    <input id="delete-checkbox" type="checkbox" value="{{ $form->getId() }}" hidden>
                 </div>
 
             </div>
