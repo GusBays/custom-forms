@@ -14,7 +14,7 @@
         </x-grid-side>
 
         <div class="col-12 col-lg-7">
-            <form action="/action/user/new" method="POST" class="shadow p-3 mb-5 bg-body-tertiary rounded">
+            <div class="shadow p-3 mb-5 bg-body-tertiary rounded">
                 <div class="col">
                     <div class="mb-3">
                         <label for="first_name" class="form-label">Primeiro nome</label>
@@ -37,12 +37,12 @@
                         <input type="password" class="form-control" value="" id="password-repeat" placeholder="Ex.: 123@Abc" minlength="6" required>
                     </div>
                     <div>
-                        <input type="text" name="type" value="employee" hidden>
+                        <input type="text" name="type" id="type" value="employee" hidden>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-12 col-md-6">
-                        <button type="submit" class="btn btn-success border-0 w-100 theme-color">Criar</button>
+                        <button type="submit" class="btn btn-success border-0 w-100 theme-color" id="create-user">Criar</button>
                     </div>
                     <div class="col-12 col-md-6">
                         <div class="mt-1 mt-md-0">
@@ -50,9 +50,8 @@
                         </div>
                     </div>
                 </div>
-
-                @csrf
-            </form>
+            </div>
         </div>
     </div>
+    <script type="module" src="{{ env('APP_URL') }}/assets/js/services/userService.js"></script>
 @endsection

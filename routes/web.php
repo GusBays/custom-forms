@@ -59,7 +59,6 @@ Route::middleware('auth:web')->group(function () {
     });
 
     Route::controller(UserActionController::class)->group(function () {
-        Route::post(UserActionEnum::NEW_USER, 'create');
         Route::post(UserActionEnum::UPDATE_USER, 'update');
     });
 

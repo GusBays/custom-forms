@@ -9,20 +9,6 @@ use Illuminate\Http\RedirectResponse;
 
 class UserActionController extends ActionController
 {
-    public function create(Request $request): RedirectResponse
-    {
-        try {
-            $user = $this->userController->store($request);
-        } catch (\Throwable $th) {
-            dump($th->getMessage());
-        }
-
-        /** @var UserUpdateData */
-        $data = $user->getOriginalContent()->resource;
-
-        return redirect(RedirectEnum::USERS . '/' . $data->getId());
-    }
-
     public function update(Request $request): RedirectResponse
     {
         try {
