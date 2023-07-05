@@ -16,7 +16,9 @@
             </x-grid-side>
 
             <div class="col-12 col-md-5 col-lg-4">
-                <form method="POST" action="/action/login" class="shadow p-3 mb-5 bg-body-tertiary rounded">
+                <div class="shadow p-3 mb-5 bg-body-tertiary rounded">
+
+                    <div class="col alert alert-danger" id="error-message" hidden></div>
 
                     <div class="row">
                         <div class="col">
@@ -56,7 +58,7 @@
 
                     <div class="row">
                         <div class="col-12 col-md-6">
-                            <button type="submit" class="btn btn-success border-0 w-100 theme-color">Entrar</button>
+                            <button type="submit" id="login" class="btn btn-success border-0 w-100 theme-color">Entrar</button>
                         </div>
                         <div class="col-12 col-md-6">
                             <div class="mt-1 mt-md-0">
@@ -65,9 +67,11 @@
                         </div>
                     </div>
 
-                    @csrf
-                </form>
+                </div>
             </div>
+
         </div>
     </div>
+
+    <script type="module" src="{{ env('APP_URL') }}/assets/js/services/loginService.js"></script>
 @endsection

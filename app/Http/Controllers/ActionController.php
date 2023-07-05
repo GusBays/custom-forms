@@ -39,23 +39,6 @@ class ActionController
         return redirect(RedirectEnum::ADMIN);
     }
 
-    public function login(Request $request): RedirectResponse
-    {
-        try {
-            /** @var UserUpdateData */
-            $user = $this->userController->login($request)->resource;
-        } catch (\Throwable $th) {
-            return view('error', ['error' => $th->getMessage()]);
-        }
-
-        if ($request->has('keep_connected')) $daysToExpire = 7;
-        else $daysToExpire = 0;
-
-        $cookie = Utils::addCookieAndReturnInstance(CookieEnum::ADM_TOKEN, $user->getToken(), $daysToExpire);
-
-        return redirect(RedirectEnum::ADMIN)->withCookie($cookie);
-    }
-
     public function recoverPassword(Request $request): RedirectResponse
     {
         try {
