@@ -10,13 +10,8 @@ if (loginButton) registerLoginEvent()
 const emailInput = document.getElementById('email')
 const passwordInput = document.getElementById('password')
 
-emailInput.addEventListener('input', () => {
-    data.email = emailInput.value
-})
-
-passwordInput.addEventListener('input', () => {
-    data.password = passwordInput.value
-})
+emailInput.addEventListener('input', () => data.email = emailInput.value)
+passwordInput.addEventListener('input', () => data.password = passwordInput.value)
 
 const data = {
     email: null,
@@ -35,9 +30,10 @@ function registerLoginEvent() {
             
             let days = 1
             if (document.getElementById('keep_connected').checked) days = 7
-            cookie.set('adm_token', response.data.token, days)
-            window.location = `${window.origin}/admin`
 
+            cookie.set('adm_token', response.data.token, days)
+
+            window.location = `${window.origin}/admin`
         })
         .catch((e) => {
             const errorInput = document.getElementById('error-message')
