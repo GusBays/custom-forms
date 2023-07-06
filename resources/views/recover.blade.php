@@ -42,7 +42,7 @@
                         </div>
                         <div class="col-12 mt-2 col-md-6">
                             <div class="mt-1 mt-md-0">
-                                <a type="button" href="/admin/entrar" class="btn btn-secondary border-0 w-100">Voltar</a>
+                                <a class="btn btn-secondary border-0 w-100" type="back-button" type="button">Voltar</a>
                             </div>
                         </div>
                     </div>

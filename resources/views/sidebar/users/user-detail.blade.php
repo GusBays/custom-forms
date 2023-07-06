@@ -58,7 +58,7 @@
                     </div>
                     <div class="col-12 col-md-6">
                         <div class="mt-1 mt-md-0">
-                            <a class="btn btn-secondary w-100" href="/admin/usuarios?sort=id&limit=100&page=1" type="button">Voltar</a>
+                            <a class="btn btn-secondary w-100" id="back-button" type="button">Voltar</a>
                         </div>
                     </div>
                     <input id="delete-checkbox" type="checkbox" value="{{ $user->getId() }}" hidden>
