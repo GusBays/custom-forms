@@ -10,11 +10,14 @@ if (loginButton) registerLoginEvent()
 const logoffButton = document.getElementById('logoff')
 if (logoffButton) registerLogoffEvent()
 
+const recoverButton = document.querySelector('[recover]')
+if (recoverButton) registerRecoverpasswordEvent()
+
 const emailInput = document.getElementById('email')
 const passwordInput = document.getElementById('password')
 
-emailInput.addEventListener('input', () => data.email = emailInput.value)
-passwordInput.addEventListener('input', () => data.password = passwordInput.value)
+if (emailInput) emailInput.addEventListener('input', () => data.email = emailInput.value)
+if (passwordInput) passwordInput.addEventListener('input', () => data.password = passwordInput.value)
 
 const data = {
     email: null,
@@ -54,3 +57,25 @@ function registerLogoffEvent() {
     })
 }
 
+function registerRecoverpasswordEvent() {
+    recoverButton.addEventListener('click', () => {
+        const recoverRequest = new Api('users/recover-password')
+        recoverRequest.post(data)
+        .then((res) => {
+            if (!res.ok) throw Error(res.statusText)
+            else return res.status
+        })
+        .then(status => {
+            const alert = document.getElementById('alert')
+            alert.hidden = false
+            alert.classList.add('alert-success')
+            alert.innerHTML = 'Email enviado com sucesso, confira sua caixa de entrada!'
+        })
+        .catch((e) => {
+            const alert = document.getElementById('alert')
+            alert.hidden = false
+            alert.classList.add('alert-danger')
+            alert.innerHTML = 'Verifique o email digitado e tente novamente.'
+        })
+    })
+}

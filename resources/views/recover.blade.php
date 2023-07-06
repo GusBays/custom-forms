@@ -13,7 +13,9 @@
     <div class="container">
         <div class="row align-items-center justify-content-center vh-100">
             <div class="col-10 col-md-8 col-lg-6">
-                <form method="POST" action="/action/recover-password" class="shadow p-3 mb-5 bg-body-tertiary rounded">
+                <div class="shadow p-3 mb-5 bg-body-tertiary rounded">
+
+                    <div class="col alert" id="alert" hidden></div>
 
                     <div class="row">
                         <div class="col-12">
@@ -38,18 +40,18 @@
                     <div class="row">
                         <div id="recaptcha"></div>
                         <div class="col-12 mt-2 col-md-6">
-                            <button type="submit" id="confirm-button" class="btn btn-success border-0 w-100" style="background-color:#7800D2" disabled>Confirmar</button>
+                            <button type="submit" id="confirm-button" class="btn btn-success border-0 w-100" style="background-color:#7800D2" recover disabled>Confirmar</button>
                         </div>
                         <div class="col-12 mt-2 col-md-6">
                             <div class="mt-1 mt-md-0">
-                                <a class="btn btn-secondary border-0 w-100" type="back-button" type="button">Voltar</a>
+                                <a class="btn btn-secondary border-0 w-100" id="back-button" type="button">Voltar</a>
                             </div>
                         </div>
                     </div>
-
-                    @csrf
-                </form>
+                </div>
             </div>
         </div>
     </div>
+
+    <script type="module" src="{{ env('APP_URL') }}/assets/js/services/loginService.js"></script>
 @endsection

@@ -38,15 +38,4 @@ class ActionController
 
         return redirect(RedirectEnum::ADMIN);
     }
-
-    public function recoverPassword(Request $request): RedirectResponse
-    {
-        try {
-            $this->userController->recoverPassword($request);
-        } catch (\Throwable $th) {
-            return view('error', ['error' => $th->getMessage()]);
-        }
-
-        return redirect(RedirectEnum::ENTRAR);
-    }
 }
