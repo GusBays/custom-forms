@@ -3,10 +3,8 @@
 use App\Contracts\ActionEnum;
 use App\Contracts\FillerActionEnum;
 use App\Contracts\RedirectEnum;
-use App\Contracts\UserActionEnum;
 use App\Http\Controllers\ActionController;
 use App\Http\Controllers\FillerActionController;
-use App\Http\Controllers\UserActionController;
 use App\Http\Controllers\ViewsController;
 use Illuminate\Support\Facades\Route;
 
@@ -54,10 +52,4 @@ Route::middleware('auth:web')->group(function () {
     Route::controller(FillerActionController::class)->group(function () {
         Route::post(FillerActionEnum::NEW_FILLER, 'create');
     });
-
-    Route::controller(UserActionController::class)->group(function () {
-        Route::post(UserActionEnum::UPDATE_USER, 'update');
-    });
-
-
 });
