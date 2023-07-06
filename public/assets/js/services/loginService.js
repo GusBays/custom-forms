@@ -4,8 +4,11 @@ import Cookie from "../utils/cookie.js";
 const api = new Api('users/login')
 const cookie = new Cookie()
 
-const loginButton = document.getElementById('login');
+const loginButton = document.getElementById('login')
 if (loginButton) registerLoginEvent()
+
+const logoffButton = document.getElementById('logoff')
+if (logoffButton) registerLogoffEvent()
 
 const emailInput = document.getElementById('email')
 const passwordInput = document.getElementById('password')
@@ -40,6 +43,14 @@ function registerLoginEvent() {
             errorInput.hidden = false
             errorInput.innerHTML = 'Usuário ou senha inválidos, tente novamente.'
         })
+    })
+}
+
+function registerLogoffEvent() {
+    logoffButton.addEventListener('click', () => {
+        window.localStorage.removeItem('adm_token')
+        cookie.remove('adm_token')
+        window.location = `${window.origin}/admin/entrar`
     })
 }
 

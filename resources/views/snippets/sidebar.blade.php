@@ -80,9 +80,11 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-          <a type="button" class="btn btn-danger" href="/action/logoff">Sair</a>
+          <a class="btn btn-danger" id="logoff" type="button" >Sair</a>
         </div>
       </div>
     </div>
   </div>
 </nav>
+
+<script type="module" src="{{ env('APP_URL') }}/assets/js/services/loginService.js"></script>

@@ -20,4 +20,11 @@ export default class Cookie
       }
       document.cookie = name + "=" + (value || "")  + expires + "; path=/";
     }
+
+    remove(name, domain, path) {
+        document.cookie = encodeURIComponent(name) + 
+          "=; expires=Thu, 01 Jan 1970 00:00:00 GMT" + 
+          (domain ? "; domain=" + domain : "") + 
+          (path ? "; path=" + path : "");
+    }
 }
