@@ -23,8 +23,9 @@
         </x-grid-side>
 
         <div class="col-12 col-lg-7">
-            <form action="/action/user/update" method="POST" class="shadow p-3 mb-5 bg-body-tertiary rounded">
+            <div class="shadow p-3 mb-5 bg-body-tertiary rounded">
                 <div class="col">
+                        <input type="text" id="id" value="{{ $user->getId() }}" hidden>
                     <div class="mb-3">
                         <label for="name" class="form-label">Nome completo</label>
                         <input class="form-control" type="text" value="{{ $user->getName() }}" disabled readonly>
@@ -47,12 +48,13 @@
                     </div>
                     <div class="mb-3">
                         <label for="type" class="form-label">Tipo de cadastro</label>
-                        <input type="text" class="form-control" id="type" value="{{ 'owner' === $user->getType() ? 'Proprietário' : 'Integrante'}}" disabled readonly>
+                        <input type="text" class="form-control" id="type" value="{{ $user->getType() }}" hidden>
+                        <input type="text" class="form-control" value="{{ 'owner' === $user->getType() ? 'Proprietário' : 'Integrante'}}" disabled readonly>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-12 col-md-6">
-                        <button type="submit" class="btn btn-success border-0 w-100 theme-color">Salvar alterações</button>
+                        <button type="submit" class="btn btn-success border-0 w-100 theme-color" id="update-user">Salvar alterações</button>
                     </div>
                     <div class="col-12 col-md-6">
                         <div class="mt-1 mt-md-0">
@@ -61,9 +63,7 @@
                     </div>
                     <input id="delete-checkbox" type="checkbox" value="{{ $user->getId() }}" hidden>
                 </div>
-
-                @csrf
-            </form>
+            </div>
         </div>
     </div>
 
@@ -96,4 +96,6 @@
     </div>
   </div>
 </div>
+
+<script type="module" src="{{ env('APP_URL') }}/assets/js/services/userService.js"></script>
 @endsection
