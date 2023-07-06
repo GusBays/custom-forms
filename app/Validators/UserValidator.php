@@ -11,7 +11,7 @@ class UserValidator extends RequestValidator
             'last_name' => 'nullable|max:255',
             'email' => 'required|unique:users',
             'password' => 'required|min:6|max:255',
-            'type' => 'required|in:employee'
+            'type' => 'required|in:employee,owner'
         ];
     }
 }

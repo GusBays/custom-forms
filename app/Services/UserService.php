@@ -7,7 +7,6 @@ use App\Datas\User\UserUpdateData;
 use App\Filters\User\UserEmailFilter;
 use App\Filters\User\UserFilter;
 use App\Http\Adapters\User\UserPasswordUpdateAdapter;
-use App\Http\Adapters\User\UserRequestUpdateAdapter;
 use App\Jobs\RecoverPasswordJob;
 use App\Repositories\UserRepository;
 use Exception;
