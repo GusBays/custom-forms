@@ -78,11 +78,11 @@
             <form>
                 <div class="mb-3">
                     <label for="password" class="col-form-label">Nova senha: </label>
-                    <input type="password" class="form-control" id="password" placeholder="Ex.: 123@Abc">
+                    <input type="password" class="form-control" id="password" placeholder="Ex.: 123@Abc" minlength="6">
                 </div>
                 <div class="mb-3">
                     <label for="password-repeat" class="col-form-label">Repita a nova senha: </label>
-                    <input type="password" class="form-control" id="password-repeat" placeholder="Ex.: 123@Abc"></textarea>
+                    <input type="password" class="form-control" id="password-repeat" placeholder="Ex.: 123@Abc" minlength="6"></textarea>
                 </div>
 
                 @csrf
