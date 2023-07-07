@@ -1,9 +1,7 @@
 <?php
 
-use App\Contracts\ActionEnum;
 use App\Contracts\FillerActionEnum;
 use App\Contracts\RedirectEnum;
-use App\Http\Controllers\ActionController;
 use App\Http\Controllers\FillerActionController;
 use App\Http\Controllers\ViewsController;
 use Illuminate\Support\Facades\Route;
@@ -25,10 +23,6 @@ Route::controller(ViewsController::class)->group(function () {
     Route::get(RedirectEnum::ENTRAR, 'entrar');
     Route::get(RedirectEnum::CADASTRO, 'cadastro');
     Route::get(RedirectEnum::RECUPERAR, 'recuperar');
-});
-
-Route::controller(ActionController::class)->group(function () {
-    Route::post(ActionEnum::CREATE_ORGANIZATION, 'createOrganization');
 });
 
 Route::middleware('auth:web')->group(function () {

@@ -4,27 +4,25 @@ export default class Api
         uri
     ) {
         this.uri = `/api/${uri}`
+        this.headers = {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+        }
+        this.token = window.localStorage.getItem('adm_token')
+        if (this.token) this.headers.Authorization = `Bearer ${this.token}`
     }
 
     get() {
         return fetch(this.uri, {
             method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${window.localStorage.getItem('adm_token')}`
-            }
+            headers: this.headers
         })
     }
 
     post(body) {
         return fetch(this.uri, {
             method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${window.localStorage.getItem('adm_token')}`
-            },
+            headers: this.headers,
             body: JSON.stringify(body)
         })
     }
@@ -32,11 +30,7 @@ export default class Api
     put(id, body) {
         return fetch(`${this.uri}/${id}`, {
             method: 'PUT',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${window.localStorage.getItem('adm_token')}`
-            },
+            headers: this.headers,
             body: JSON.stringify(body)
         })
     }
@@ -44,11 +38,7 @@ export default class Api
     delete(id) {
         return fetch(`${this.uri}/${id}`, {
             method: 'DELETE',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${window.localStorage.getItem('adm_token')}`
-            }
+            headers: this.headers
         })
     }
 }
