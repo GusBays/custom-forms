@@ -42,8 +42,4 @@ Route::middleware('auth:web')->group(function () {
         Route::get(RedirectEnum::USER_ID, 'user')->whereNumber('id');
         Route::get(RedirectEnum::USER_NEW, 'newUser');
     });
-
-    Route::controller(FillerActionController::class)->group(function () {
-        Route::post(FillerActionEnum::NEW_FILLER, 'create');
-    });
 });
