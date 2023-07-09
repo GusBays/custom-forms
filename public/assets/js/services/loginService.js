@@ -11,7 +11,7 @@ const logoffButton = document.getElementById('logoff')
 if (logoffButton) registerLogoffEvent()
 
 const recoverButton = document.querySelector('[recover]')
-if (recoverButton) registerRecoverpasswordEvent()
+if (recoverButton) registerRecoverPasswordEvent()
 
 const emailInput = document.getElementById('email')
 const passwordInput = document.getElementById('password')
@@ -57,7 +57,7 @@ function registerLogoffEvent() {
     })
 }
 
-function registerRecoverpasswordEvent() {
+function registerRecoverPasswordEvent() {
     recoverButton.addEventListener('click', () => {
         const recoverRequest = new Api('users/recover-password')
         recoverRequest.post(data)

@@ -1,4 +1,5 @@
 import Api from "../utils/api.js";
+import Toast from "../utils/toast.js";
 
 const api = new Api('users')
 
@@ -40,9 +41,8 @@ function registerCreateEventListener() {
             window.location = window.origin + `/admin/usuarios/${data.id}`
         })
         .catch((e) => {
-            const toastEl = document.querySelector('.toast')
-            const toast = bootstrap.Toast.getOrCreateInstance(toastEl)
-            toast.show()
+            return new Toast()
+                .show('Ocorreu um erro ao criar o registro, tente novamente')
         })
     })
 }
@@ -58,9 +58,8 @@ function registerUpdateEventListener() {
             window.location.reload()
         })
         .catch((e) => {
-            const toastEl = document.querySelector('.toast')
-            const toast = bootstrap.Toast.getOrCreateInstance(toastEl)
-            toast.show()
+            return new Toast()
+                .show('Ocorreu um erro ao atualizar o registro, tente novamente.')
         })
     })
 }
