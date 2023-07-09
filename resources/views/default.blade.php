@@ -16,7 +16,7 @@
     </title>
 </head>
 <body class="bg-light">
-    @include('snippets/update-error')
+    @include('snippets/toast')
     @yield('content')
 </body>
 </html>
