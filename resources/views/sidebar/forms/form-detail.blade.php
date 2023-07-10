@@ -34,19 +34,28 @@
                         </ul>
                 </div>
 
-                <form action="/action/form/update" method="POST" id="form" class="active-tab my-3" data-tab-info>
+                <div id="form" class="active-tab my-3" data-tab-info>
                     <div class="col">
+                        <input type="text" id="id" value="{{ $form->getId() }}" hidden>
                         <div class="mb-3">
                             <label for="name" class="form-label">Título</label>
                             <input type="text" class="form-control" value="{{ $form->getName() }}" id="name" placeholder="Ex.: Formulário de cadastro">
                         </div>
                         <div class="mb-3">
                             <label for="available_until" class="form-label">Disponível até</label>
-                            <input type="datetime-local" class="form-control" value="{{ $form->getAvailableUntil() }}" name="available_until">
+                            <input type="text" id="available-until" class="form-control" 
+                                value="
+                                    @if ($form->getAvailableUntil())
+                                        {{ Carbon\Carbon::parse($form->getAvailableUntil())->format('Y-m-d H:i:s') }}
+                                    @endif
+                                "
+                                name="available_until"
+                                placeholder="Ex.: 2023-10-25 10:00"
+                            >
                         </div>
                         <div class="form-check form-switch align-self-center mb-3">
                             <label for="active" class="form-label">Ativo</label>
-                            <input class="form-check-input active-switch" value="{{ $form->getActive() }}" type="checkbox" role="switch"
+                            <input class="form-check-input active-switch" id="active" value="{{ $form->getActive() }}" type="checkbox" role="switch"
                                 @if($form->getActive())
                                     checked
                                 @endif
@@ -54,20 +63,18 @@
                         </div>
                         <div class="mb-3">
                             <label for="fill_limit" class="form-label">Limite de preenchimento</label>
-                            <input type="number" class="form-control" value="{{ $form->getFilllimit() }}" name="fill_limit" placeholder="Sem limite">
+                            <input type="number" class="form-control" id="fill-limit" value="{{ $form->getFilllimit() }}" name="fill_limit" placeholder="Sem limite">
                         </div>
                         <div class="form-check form-switch align-self-center mb-3">
                             <label for="active" class="form-label">Notificar administradores a cada preenchimento</label>
-                            <input class="form-check-input active-switch" value="{{ $form->getShouldNotifyEachFill() }}" type="checkbox" role="switch"
+                            <input class="form-check-input active-switch" id="should-notify-each-fill" value="{{ $form->getShouldNotifyEachFill() }}" type="checkbox" role="switch"
                                 @if($form->getShouldNotifyEachFill())
                                     checked
                                 @endif
                             >
                         </div>
-
-                        @csrf
                     </div>
-                </form>
+                </div>
 
                 <div id="users" class="my-3" data-tab-info>
                     <table class="table table-striped">
@@ -170,7 +177,7 @@
 
                 <div class="row">
                     <div class="col-12 col-md-6">
-                        <button type="submit" class="btn btn-success border-0 w-100 theme-color">Salvar alterações</button>
+                        <button type="submit" id="update-form" class="btn btn-success border-0 w-100 theme-color">Salvar alterações</button>
                     </div>
                     <div class="col-12 col-md-6">
                         <div class="mt-1 mt-md-0">
@@ -185,4 +192,5 @@
     </div>
 
     <script src="{{ env('APP_URL') }}/assets/js/buttons/tabs.js"></script>
+    <script type="module" src="{{ env('APP_URL') }}/assets/js/services/formService.js"></script>
 @endsection
