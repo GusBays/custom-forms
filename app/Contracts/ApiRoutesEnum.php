@@ -20,9 +20,9 @@ class ApiRoutesEnum
 
     public const FORMS_SLUG = '/forms/{slug}';
 
-    public const FORM_USERS = '/forms/users';
+    public const FORM_USERS = '/form-users';
 
-    public const FORM_USERS_ID = '/forms/users/{id}';
+    public const FORM_USERS_ID = '/form-users/{id}';
 
     public const FORM_FIELDS = '/forms/fields';
 
