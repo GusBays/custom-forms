@@ -163,12 +163,12 @@
                                     <label for="content" class="form-label">Opções</label>
                                     @foreach ($field->getContent() as $option)
                                         <div class="input-group mb-1">
-                                            <input type="text" class="form-control" value="{{ $option }}" aria-describedby="basic-addon1">
+                                            <input type="text" class="form-control" id="field-content" value="{{ $option }}" aria-describedby="basic-addon1" data-field-id="{{ $field->getId() }}">
                                             <button class="input-group-text btn btn-danger" id="basic-addon1"><img src="{{ env('APP_URL') }}/assets/img/trash-icon.svg" alt="" width="25" height="32"></button>
                                         </div>
                                     @endforeach
                                     <div class="col-12 mt-3">
-                                        <button class="btn btn-success">Adicionar nova opção</button>
+                                        <button class="btn btn-success"><img src="{{ env('APP_URL') }}/assets/img/add-icon.svg" width="25" height="25" alt="add-icon"></button>
                                     </div>
                                 </div>
                             @endif

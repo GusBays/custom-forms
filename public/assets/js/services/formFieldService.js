@@ -3,6 +3,9 @@ const fieldsNameInput = document.querySelectorAll('#field-name')
 const fieldsDescriptionInput = document.querySelectorAll('#field-description')
 const fieldsTypeInput = document.querySelectorAll('#field-type')
 const fieldsRequiredInput = document.querySelectorAll('#field-required')
+const fieldsContentOptions = document.querySelectorAll('#field-content')
+
+const addFieldButton = document.getElementById('add-field')
 
 export function getFormFields() {
     const formFields = []
@@ -25,7 +28,7 @@ export function getFormFields() {
     
         const requiredInput = Array.from(fieldsRequiredInput).find(byId)
         requiredInput.addEventListener('change', () => requiredInput.checked ? fieldData.required = true : fieldData.required = false)
-    
+
         formFields.push(fieldData)
     }
 
