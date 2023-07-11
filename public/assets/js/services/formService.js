@@ -1,5 +1,7 @@
 import Api from "../utils/api.js";
 import Toast from "../utils/toast.js";
+import { getFormFields } from "./formFieldService.js";
+import { getFormUsers } from "./formUserService.js";
 
 const api = new Api('forms')
 
@@ -20,7 +22,10 @@ const activeInput = document.getElementById('active')
 const fillLimitInput = document.getElementById('fill-limit')
 const shouldNotifyEachFillInput = document.getElementById('should-notify-each-fill')
 
-const data = {}
+const data = {
+    form_fields: getFormFields(),
+    form_users: getFormUsers()
+}
 
 if (idInput) data.id = idInput.value
 nameInput.addEventListener('input', () => data.name = nameInput.value)

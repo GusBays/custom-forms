@@ -11,7 +11,7 @@ abstract class FormFieldData implements Arrayable
     private ?string $description = null;
     private ?bool $required = true;
     private ?string $type = null;
-    private ?array $content = [];
+    private ?array $content = null;
 
     public function __construct(
         int $form_id = null,
@@ -19,7 +19,7 @@ abstract class FormFieldData implements Arrayable
         string $description = null,
         bool $required = true,
         string $type = null,
-        array $content = []
+        array $content = null
     )
     {
         $this->form_id = $form_id;

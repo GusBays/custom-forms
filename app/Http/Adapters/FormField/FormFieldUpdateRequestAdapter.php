@@ -12,7 +12,7 @@ class FormFieldUpdateRequestAdapter extends FormFieldUpdateData
     )
     {
         parent::__construct(
-            $request->route('id'),
+            $request->route('id') ?? $request->input('id'),
             $request->input('organization_id', config('organization_id')),
             $request->input('form_id'),
             $request->input('name'),

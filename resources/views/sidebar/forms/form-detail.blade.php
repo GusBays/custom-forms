@@ -89,10 +89,11 @@
                         <tbody>
                             @foreach ($form->getFormUsers() as $formUser)
                                 <tr class="col">
+                                    <input type="text" id="form-user-id" value="{{ $formUser->getId() }}" hidden>
                                     <td>{{ $formUser->getUser()->getName() }}</td>
                                     <td>{{ $formUser->getUser()->getEmail() }}</td>
                                     <td>
-                                        <select class="form-select">
+                                        <select id="form-user-type" class="form-select" data-form-user-id="{{ $formUser->getId() }}">
                                             <option 
                                                 @if ('creator' === $formUser->getType()) 
                                                     selected 
@@ -123,16 +124,18 @@
                     <div class="text-muted my-3 border-bottom " id="count-fields">Você tem um total de {{ count($form->getFormFields()) }} campos cadastrados neste formulário.</div>
                     @foreach ($form->getFormFields() as $field)
                         <div class="border-bottom mb-3">
+                            <input type="text" id="field-id" value="{{ $field->getId() }}" hidden>
                             <div class="mb-3">
                                 <label for="name" class="form-label">Nome do campo</label>
-                                <input type="text" class="form-control" value="{{ $field->getName() }}">
+                                <input type="text" class="form-control" id="field-name" value="{{ $field->getName() }}" data-field-id={{ $field->getId() }}>
                             </div>
                             <div class="mb-3">
                                 <label for="description" class="form-label">Descrição do campo</label>
-                                <input type="text" class="form-control" value="{{ $field->getDescription() }}">
+                                <input type="text" class="form-control" id="field-description" value="{{ $field->getDescription() }}" data-field-id={{ $field->getId() }}>
                             </div>
                             <div class="mb-3">
                                 <label for="type" class="form-label">Tipo</label>
+                                <input type="text" id="field-type" value="{{ $field->getType() }}" data-field-id={{ $field->getId() }} hidden>
                                 <input type="text" class="form-control" value=
                                 @if ('text' === $field->getType())
                                     "Texto"
@@ -147,16 +150,14 @@
                             </div>
                             <div class="form-check form-switch align-self-center mb-3">
                                 <label for="active" class="form-label">Obrigatório</label>
-                                <input class="form-check-input active-switch" value="{{ $field->getRequired() }}" type="checkbox" role="switch"
+                                <input class="form-check-input active-switch" id="field-required" value="{{ $field->getRequired() }}" type="checkbox" role="switch"
                                     @if('blocked' === $field->getType())
                                         disabled
                                     @elseif ($field->getRequired())
                                         checked
                                     @endif
-                                >
+                                data-field-id={{ $field->getId() }}>
                             </div>
-
-
                             @if ($field->getContent())
                                 <div class="mb-3 p-2 rounded" style="background-color: #e9ecef;">
                                     <label for="content" class="form-label">Opções</label>
@@ -173,6 +174,7 @@
                             @endif
                         </div>
                     @endforeach
+                    <button id="add-field" type="button" class="btn btn-success mb-3">Adicionar novo campo</button>
                 </div>
 
                 <div class="row">
