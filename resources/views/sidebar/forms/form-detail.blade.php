@@ -135,18 +135,28 @@
                             </div>
                             <div class="mb-3">
                                 <label for="type" class="form-label">Tipo</label>
-                                <input type="text" id="field-type" value="{{ $field->getType() }}" data-field-id={{ $field->getId() }} hidden>
-                                <input type="text" class="form-control" value=
-                                @if ('text' === $field->getType())
-                                    "Texto"
-                                @elseif ('blocked' === $field->getType())
-                                    "Bloqueado"
-                                @elseif ('select' === $field->getType())
-                                    "Seleção"
-                                @elseif ('checkbox' === $field->getType())
-                                    "Checkbox"
-                                @endif
-                                disabled>
+                                <select id="field-type" class="form-select" data-field-id="{{ $field->getId() }}">
+                                    <option 
+                                        @if ('text' === $field->getType()) 
+                                            selected 
+                                        @endif
+                                    value="text">Texto</option>
+                                    <option
+                                        @if ('checkbox' === $field->getType())
+                                            selected
+                                        @endif
+                                    value="checkbox">Checkbox</option>
+                                    <option
+                                        @if ('select' === $field->getType())
+                                            selected
+                                        @endif
+                                        value="select">Seletor</option>
+                                    <option
+                                        @if ('blocked' === $field->getType())
+                                            selected
+                                        @endif
+                                        value="blocked">Bloqueado</option>
+                                </select>
                             </div>
                             <div class="form-check form-switch align-self-center mb-3">
                                 <label for="active" class="form-label">Obrigatório</label>
@@ -158,20 +168,18 @@
                                     @endif
                                 data-field-id={{ $field->getId() }}>
                             </div>
-                            @if ($field->getContent())
-                                <div class="mb-3 p-2 rounded" style="background-color: #e9ecef;">
-                                    <label for="content" class="form-label">Opções</label>
-                                    @foreach ($field->getContent() as $option)
-                                        <div class="input-group mb-1">
-                                            <input type="text" class="form-control" id="field-content" value="{{ $option }}" aria-describedby="basic-addon1" data-field-id="{{ $field->getId() }}">
-                                            <button class="input-group-text btn btn-danger" id="basic-addon1"><img src="{{ env('APP_URL') }}/assets/img/trash-icon.svg" alt="" width="25" height="32"></button>
-                                        </div>
-                                    @endforeach
-                                    <div class="col-12 mt-3">
-                                        <button class="btn btn-success"><img src="{{ env('APP_URL') }}/assets/img/add-icon.svg" width="25" height="25" alt="add-icon"></button>
+                            <div class="mb-3 p-2 rounded" style="background-color: #e9ecef;" id="group-field-content" data-field-id="{{ $field->getId() }}">
+                                <label for="content" class="form-label">Opções</label>
+                                @foreach ($field->getContent() as $option)
+                                    <div class="input-group mb-1">
+                                        <input type="text" class="form-control" id="field-content" value="{{ $option }}" aria-describedby="basic-addon1" data-field-id="{{ $field->getId() }}">
+                                        <button class="input-group-text btn btn-danger" id="basic-addon1"><img src="{{ env('APP_URL') }}/assets/img/trash-icon.svg" alt="" width="25" height="32"></button>
                                     </div>
-                                </div>
-                            @endif
+                                @endforeach
+                                <div class="col-12">
+                                    <button class="btn btn-success"><img src="{{ env('APP_URL') }}/assets/img/add-icon.svg" width="25" height="25" alt="add-icon"></button>
+                                 </div>
+                            </div>
                         </div>
                     @endforeach
                     <button id="add-field" type="button" class="btn btn-success mb-3">Adicionar novo campo</button>

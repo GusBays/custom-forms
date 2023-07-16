@@ -61,8 +61,7 @@ function registerUpdateEventListener() {
         })
         .then(response => {
             // criar os form users e fields aqui, antes de fazer o redirecionamento.
-            return new Toast()
-                .show('Registro atualizado com sucesso!')
+            window.location = `${window.origin}/admin/formularios/${response.data.id}`
         })
         .catch((e) => {
             return new Toast()
