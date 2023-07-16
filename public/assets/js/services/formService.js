@@ -30,15 +30,9 @@ const data = {
 if (idInput) data.id = idInput.value
 nameInput.addEventListener('input', () => data.name = nameInput.value)
 availableUntilInput.addEventListener('input', () => data.available_until = formatAvailableUntil())
-activeInput.addEventListener('change', () => {
-    if (activeInput.checked) data.active = true
-    else data.active = false
-})
+activeInput.addEventListener('change', () => activeInput.checked ? data.active = true : data.active = false)
 fillLimitInput.addEventListener('input', () => data.fill_limit = fillLimitInput.value)
-shouldNotifyEachFillInput.addEventListener('change', () => {
-    if (shouldNotifyEachFillInput.checked) data.should_notify_each_fill = true
-    else data.should_notify_each_fill = false
-})
+shouldNotifyEachFillInput.addEventListener('change', () => shouldNotifyEachFillInput.checked ? data.should_notify_each_fill = true : data.should_notify_each_fill = false)
 
 function registerCreateEventListener() {
     createButton.addEventListener('click', () => {
@@ -67,7 +61,8 @@ function registerUpdateEventListener() {
         })
         .then(response => {
             // criar os form users e fields aqui, antes de fazer o redirecionamento.
-            window.location = `${window.origin}/admin/formularios/${response.data.id}`
+            return new Toast()
+                .show('Registro atualizado com sucesso!')
         })
         .catch((e) => {
             return new Toast()

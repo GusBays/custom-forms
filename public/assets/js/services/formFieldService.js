@@ -29,6 +29,11 @@ export function getFormFields() {
         const requiredInput = Array.from(fieldsRequiredInput).find(byId)
         requiredInput.addEventListener('change', () => requiredInput.checked ? fieldData.required = true : fieldData.required = false)
 
+        const contentInputs = Array.from(fieldsContentOptions).filter(byId)
+        contentInputs.forEach(element => element.addEventListener('input', () => {
+            fieldData.content = contentInputs.map(element => element.value)
+        }))
+
         formFields.push(fieldData)
     }
 
