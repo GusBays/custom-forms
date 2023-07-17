@@ -40,6 +40,11 @@ class Form extends BaseModel
         parent::boot();
 
         static::addGlobalScope(new OrganizationScope);
+
+        $incrementFormsCount = fn (Form $model) => Organization::query()
+            ->where('id', $model->getAttribute('forms.organization_id'))
+            ->increment('forms_count');
+        static::created($incrementFormsCount);
     }
 
     public function formUsers(): HasMany

@@ -56,6 +56,11 @@ class User extends BaseModel
         parent::boot();
 
         static::addGlobalScope(new OrganizationScope);
+
+        $incrementUserCount = fn (User $model) => Organization::query()
+            ->where('id', $model->getAttribute('users.organization_id'))
+            ->increment('users_count');
+        static::created($incrementUserCount);
     }
 
     public function setPasswordAttribute($value): void

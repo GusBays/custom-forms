@@ -18,6 +18,12 @@ class Organization extends BaseModel
         'slug'
     ];
 
+    /** @var array */
+    protected $attributes = [
+        'forms_count' => 0,
+        'users_count' => 0
+    ];
+
     public function users(): HasMany
     {
         return $this->hasMany(User::class);
