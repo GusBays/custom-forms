@@ -2,7 +2,6 @@ import Api from "../utils/api.js"
 import Toast from "../utils/toast.js"
 
 const api = new Api('form-fields')
-const toast = new Toast()
 
 const divFieldsGroup = document.querySelectorAll('#group-field-content')
 const fieldsIdInput = document.querySelectorAll('#field-id')

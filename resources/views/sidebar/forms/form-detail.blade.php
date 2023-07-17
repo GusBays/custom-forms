@@ -83,7 +83,7 @@
                                 <th scope="col">Nome</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">Tipo</th>
-                                <th scope="col">Deletar</th>
+                                <th scope="col"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -113,7 +113,7 @@
                                                 value="viewer">Visualizador</option>
                                         </select>
                                     </td>
-                                    <td><button class="btn btn-danger">Deletar</button></td>
+                                    <td><button class="btn btn-danger" id="delete-user" data-form-user-id="{{ $formUser->getId() }}">Remover usuário</button></td>
                                 </tr>
                             @endforeach
                         </tbody>
