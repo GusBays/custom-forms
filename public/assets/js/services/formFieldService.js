@@ -1,3 +1,9 @@
+import Api from "../utils/api.js"
+import Toast from "../utils/toast.js"
+
+const api = new Api('form-fields')
+const toast = new Toast()
+
 const divFieldsGroup = document.querySelectorAll('#group-field-content')
 const fieldsIdInput = document.querySelectorAll('#field-id')
 const fieldsNameInput = document.querySelectorAll('#field-name')
@@ -7,6 +13,8 @@ const fieldsRequiredInput = document.querySelectorAll('#field-required')
 const fieldsContentOptions = document.querySelectorAll('#field-content')
 
 const addFieldButton = document.getElementById('add-field')
+
+const deleteButtons = document.querySelectorAll('#delete-field')
 
 $('document').ready(function() {
     Array.from(fieldsTypeInput).forEach(element => {
@@ -47,6 +55,19 @@ export function getFormFields() {
             const divGroup = Array.from(divFieldsGroup).find(byId)
             if ('text' === fieldData.type || 'blocked' === fieldData.type) divGroup.hidden = true
             else divGroup.hidden = false
+        })
+
+        const deleteButton = Array.from(deleteButtons).find(byId)
+        deleteButton.addEventListener('click', () => {
+            api.delete(deleteButton.dataset.fieldId)
+            .then(res => {
+                if (!res.ok) throw Error(res.statusText)
+                else window.location.reload()
+            })
+            .catch(e => {
+                return new Toast()
+                    .show('Ocorreu um erro ao deletar o campo, tente novamente.')
+            })
         })
 
         formFields.push(fieldData)

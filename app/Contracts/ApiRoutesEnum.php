@@ -24,9 +24,9 @@ class ApiRoutesEnum
 
     public const FORM_USERS_ID = '/form-users/{id}';
 
-    public const FORM_FIELDS = '/forms/fields';
+    public const FORM_FIELDS = '/form-fields';
 
-    public const FORM_FIELDS_ID = '/forms/fields/{id}';
+    public const FORM_FIELDS_ID = '/form-fields/{id}';
 
     public const FILLERS = '/fillers';
 
