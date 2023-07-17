@@ -19,3 +19,7 @@ body {
 .active-tab[data-tab-info] {
     display: block;
 }
+
+.description-input {
+    height: 75px;
+}

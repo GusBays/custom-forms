@@ -131,7 +131,7 @@
                             </div>
                             <div class="mb-3">
                                 <label for="description" class="form-label">Descrição do campo</label>
-                                <input type="text" class="form-control" id="field-description" value="{{ $field->getDescription() }}" data-field-id={{ $field->getId() }}>
+                                <textarea class="form-control text-top description-input" id="field-description" data-field-id={{ $field->getId() }}>{{ $field->getDescription() }}</textarea>
                             </div>
                             <div class="mb-3">
                                 <label for="type" class="form-label">Tipo</label>
