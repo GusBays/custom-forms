@@ -12,9 +12,9 @@ class FillerRequestAdapter extends FillerData
     )
     {
         parent::__construct(
-            $request->input('first_name'),
-            $request->input('last_name'),
-            $request->input('email')
+            firstName: $request->input('first_name'),
+            lastName: $request->input('last_name'),
+            email: $request->input('email')
         );
     }
 }

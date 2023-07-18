@@ -12,9 +12,9 @@ class FormUserRequestAdapter extends FormUserData
     )
     {
         parent::__construct(
-            $request->input('form_id'),
-            $request->input('user_id'),
-            $request->input('type')
+            formId: $request->input('form_id'),
+            userId: $request->input('user_id'),
+            type: $request->input('type')
         );
     }
 

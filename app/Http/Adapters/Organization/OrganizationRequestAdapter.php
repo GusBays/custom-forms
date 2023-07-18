@@ -13,10 +13,10 @@ class OrganizationRequestAdapter extends OrganizationData
     )
     {
         parent::__construct(
-            $request->input('name'),
-            $request->input('users_count'),
-            $request->input('forms_count'),
-            UserRequestAdapter::fromOrganizationRequest($request)
+            name: $request->input('name'),
+            usersCount: $request->input('users_count'),
+            formsCount: $request->input('forms_count'),
+            users: UserRequestAdapter::fromOrganizationRequest($request)
         );
     }
 }

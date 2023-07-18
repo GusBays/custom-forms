@@ -12,13 +12,13 @@ class UserRequestAdapter extends UserData
     )
     {
         parent::__construct(
-            $request->input('organization_id', config('organization_id')),
-            $request->input('name'),
-            $request->input('first_name'),
-            $request->input('last_name'),
-            $request->input('email'),
-            $request->input('password'),
-            $request->input('type', 'employee'),
+            organizationId: $request->input('organization_id', config('organization_id')),
+            name: $request->input('name'),
+            firstName: $request->input('first_name'),
+            lastName: $request->input('last_name'),
+            email: $request->input('email'),
+            password: $request->input('password'),
+            type: $request->input('type', 'employee'),
         );
     }
 

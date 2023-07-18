@@ -6,29 +6,21 @@ use Illuminate\Contracts\Support\Arrayable;
 
 abstract class FillerData implements Arrayable
 {
-    private ?string $first_name = null;
-    private ?string $last_name = null;
-    private ?string $email = null;
-
     public function __construct(
-        string $first_name = null,
-        string $last_name = null,
-        string $email = null
+        private ?string $firstName = null,
+        private ?string $lastName = null,
+        private ?string $email = null
     )
-    {
-        $this->first_name = $first_name;
-        $this->last_name = $last_name;
-        $this->email = $email;
-    }
+    {}
 
     public function getFirstName(): ?string
     {
-        return $this->first_name;
+        return $this->firstName;
     }
 
     public function getLastName(): ?string
     {
-        return $this->last_name;
+        return $this->lastName;
     }
 
     public function getEmail(): ?string

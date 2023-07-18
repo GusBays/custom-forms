@@ -11,31 +11,22 @@ abstract class FormFieldUpdateData extends FormFieldData
     use GetOrganizationId;
     use GetTimestamps;
     use SetModifiedFields;
-    
-    private int $id;
-    private int $organization_id;
-    private ?string $created_at = null;
-    private ?string $updated_at = null;
 
     public function __construct(
-        int $id,
-        int $organization_id,
-        int $form_id = null,
-        string $name = null,
-        string $description = null,
-        bool $required = true,
-        string $type = null,
-        array $content = null,
-        string $created_at = null,
-        string $updated_at = null
+        private int $id,
+        private int $organizationId,
+        private ?int $formId = null,
+        private ?string $name = null,
+        private ?string $description = null,
+        private bool $required = true,
+        private ?string $type = null,
+        private ?array $content = null,
+        private ?string $createdAt = null,
+        private ?string $updatedAt = null
     )
     {
-        $this->id = $id;
-        $this->organization_id = $organization_id;
-        $this->created_at = $created_at;
-        $this->updated_at = $updated_at;
         parent::__construct(
-            $form_id,
+            $formId,
             $name,
             $description,
             $required,

@@ -14,18 +14,18 @@ class FormModelAdapter extends FormUpdateData
     )
     {
         parent::__construct(
-            $form->id,
-            $form->getAttribute('organization_id') ?? $form->getAttribute('forms.organization_id'),
-            $form->name,
-            $form->available_until,
-            $form->fill_limit,
-            $form->should_notify_each_fill,
-            $form->active,
-            $form->slug,
-            FormUserModelAdapter::createFromFormModel($form->formUsers),
-            FormFieldModelAdapter::createFromFormModel($form->formFields),
-            $form->created_at,
-            $form->updated_at
+            id: $form->id,
+            organizationId: $form->getAttribute('organization_id') ?? $form->getAttribute('forms.organization_id'),
+            name: $form->name,
+            availableUntil: $form->available_until,
+            fillLimit: $form->fill_limit,
+            shouldNotifyEachFill: $form->should_notify_each_fill,
+            active: $form->active,
+            slug: $form->slug,
+            formUsers: FormUserModelAdapter::createFromFormModel($form->formUsers),
+            formFields: FormFieldModelAdapter::createFromFormModel($form->formFields),
+            createdAt: $form->created_at,
+            updatedAt: $form->updated_at
         );
     }
 

@@ -12,16 +12,16 @@ class FormFieldUpdateRequestAdapter extends FormFieldUpdateData
     )
     {
         parent::__construct(
-            $request->route('id') ?? $request->input('id'),
-            $request->input('organization_id', config('organization_id')),
-            $request->input('form_id'),
-            $request->input('name'),
-            $request->input('description'),
-            $request->input('required', true),
-            $request->input('type'),
-            $request->input('content'),
-            $request->input('created_at'),
-            $request->input('updated_at')
+            id: $request->route('id') ?? $request->input('id'),
+            organizationId: $request->input('organization_id', config('organization_id')),
+            formId: $request->input('form_id'),
+            name: $request->input('name'),
+            description: $request->input('description'),
+            required: $request->input('required', true),
+            type: $request->input('type'),
+            content: $request->input('content'),
+            createdAt: $request->input('created_at'),
+            updatedAt: $request->input('updated_at')
         );
 
         foreach ($request->all() as $key => $value) {

@@ -6,6 +6,6 @@ trait GetOrganizationId
 {
     public function getOrganizationId(): ?int
     {
-        return $this->organization_id;
+        return $this->organizationId;
     }
 }

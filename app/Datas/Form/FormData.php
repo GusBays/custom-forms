@@ -8,34 +8,18 @@ use Illuminate\Contracts\Support\Arrayable;
 
 abstract class FormData implements Arrayable
 {
-    private ?string $name = null;
-    private ?string $available_until = null;
-    private ?int $fill_limit = null;
-    private bool $should_notify_each_fill = true;
-    private bool $active = true;
-    /** @var FormUserData[] */
-    private ?array $form_users = null;
-    /** @var FormFieldData[] */
-    private ?array $form_fields = [];
-
     public function __construct(
-        string $name = null,
-        string $available_until = null,
-        int $fill_limit = null,
-        bool $should_notify_each_fill = true,
-        bool $active = true,
-        array $form_users = [],
-        array $form_fields = []
+        private ?string $name = null,
+        private ?string $availableUntil = null,
+        private ?int $fillLimit = null,
+        private bool $shouldNotifyEachFill = true,
+        private bool $active = true,
+        /** @var FormUserData[] */
+        private array $formUsers = [],
+        /** @var FormFieldData[] */
+        private array $formFields = []
     )
-    {
-        $this->name = $name;
-        $this->available_until = $available_until;
-        $this->fill_limit = $fill_limit;
-        $this->should_notify_each_fill = $should_notify_each_fill;
-        $this->active = $active;
-        $this->form_users = $form_users;
-        $this->form_fields = $form_fields;
-    }
+    {}
 
     public function getName(): ?string
     {
@@ -44,17 +28,17 @@ abstract class FormData implements Arrayable
 
     public function getAvailableUntil(): ?string
     {
-        return $this->available_until;
+        return $this->availableUntil;
     }
 
     public function getFillLimit(): ?int
     {
-        return $this->fill_limit;
+        return $this->fillLimit;
     }
 
     public function getShouldNotifyEachFill(): bool
     {
-        return $this->should_notify_each_fill;
+        return $this->shouldNotifyEachFill;
     }
 
     public function getActive(): bool
@@ -67,7 +51,7 @@ abstract class FormData implements Arrayable
      */
     public function getFormUsers(): ?array
     {
-        return $this->form_users;
+        return $this->formUsers;
     }
 
     /**
@@ -75,7 +59,7 @@ abstract class FormData implements Arrayable
      */
     public function getFormFields(): ?array
     {
-        return $this->form_fields;
+        return $this->formFields;
     }
 
     public function toArray(): array

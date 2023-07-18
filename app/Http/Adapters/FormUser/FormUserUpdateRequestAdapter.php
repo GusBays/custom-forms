@@ -12,13 +12,13 @@ class FormUserUpdateRequestAdapter extends FormUserUpdateData
     )
     {
         parent::__construct(
-            $request->route('id') ?? $request->input('id'),
-            $request->input('organization_id', config('organization_id')),
-            $request->input('form_id'),
-            $request->input('user_id'),
-            $request->input('type'),
-            $request->input('created_at'),
-            $request->input('updated_at')
+            id: $request->route('id') ?? $request->input('id'),
+            organizationId: $request->input('organization_id', config('organization_id')),
+            formId: $request->input('form_id'),
+            userId: $request->input('user_id'),
+            type: $request->input('type'),
+            createdAt: $request->input('created_at'),
+            updatedAt: $request->input('updated_at')
         );
 
         foreach($request->all() as $key => $value) {

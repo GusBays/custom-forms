@@ -13,14 +13,14 @@ class FormAnswerModelAdapter extends FormAnswerUpdateData
     )
     {
         parent::__construct(
-            $formAnswer->id,
-            $formAnswer->organization_id,
-            $formAnswer->form_id,
-            $formAnswer->filler_id,
-            $formAnswer->answers,
-            $formAnswer->created_at,
-            $formAnswer->updated_at,
-            new FillerModelAdapter($formAnswer->filler)
+            id: $formAnswer->id,
+            organizationId: $formAnswer->organization_id,
+            formId: $formAnswer->form_id,
+            fillerId:$formAnswer->filler_id,
+            answers: $formAnswer->answers,
+            createdAt: $formAnswer->created_at,
+            updatedAt: $formAnswer->updated_at,
+            filler: new FillerModelAdapter($formAnswer->filler)
         );
     }
 }

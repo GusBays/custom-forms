@@ -1,11 +1,17 @@
 {
-    "name": "laravel/laravel",
+    "name": "Formulando",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "description": "Aplicativo desenvolvido para criação de fomulários customizados.",
     "keywords": ["framework", "laravel"],
     "license": "MIT",
+    "authors": [
+        {
+            "name": "Gustavo Bays de Oliveira",
+            "email": "gustavo_boliv@hotmail.com"
+        }
+    ],
     "require": {
-        "php": "^7.3|^8.0",
+        "php": "^8.0",
         "barryvdh/laravel-dompdf": "^2.0",
         "firebase/php-jwt": "^6.4",
         "fruitcake/laravel-cors": "^2.0",

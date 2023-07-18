@@ -11,31 +11,20 @@ abstract class FormAnswerUpdateData extends FormAnswerData
     use GetOrganizationId;
     use GetTimestamps;
 
-    private ?int $id = null;
-    private ?int $organization_id = null;
-    private ?string $created_at = null;
-    private ?string $updated_at = null;
-    private ?FillerUpdateData $filler = null;
-
     public function __construct(
-        int $id = null,
-        int $organization_id = null,
-        int $form_id,
-        int $filler_id,
-        array $answers = null,
-        string $created_at = null,
-        string $updated_at = null,
-        FillerUpdateData $filler = null
+        private ?int $id = null,
+        private ?int $organizationId = null,
+        private int $formId,
+        private int $fillerId,
+        private ?array $answers = null,
+        private ?string $createdAt = null,
+        private ?string $updatedAt = null,
+        private ?FillerUpdateData $filler = null
     )
     {
-        $this->id = $id;
-        $this->organization_id = $organization_id;
-        $this->created_at = $created_at;
-        $this->updated_at = $updated_at;
-        $this->filler = $filler;
         parent::__construct(
-            $form_id,
-            $filler_id,
+            $formId,
+            $fillerId,
             $answers,
         );
     }

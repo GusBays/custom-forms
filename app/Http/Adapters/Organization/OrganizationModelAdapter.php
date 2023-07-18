@@ -13,14 +13,14 @@ class OrganizationModelAdapter extends OrganizationUpdateData
     )
     {
         parent::__construct(
-            $organization->id,
-            $organization->name,
-            $organization->slug,
-            $organization->forms_count,
-            $organization->users_count,
-            $organization->created_at,
-            $organization->updated_at,
-            UserModelAdapter::fromOrganizationModel($organization->users)
+            id: $organization->id,
+            name: $organization->name,
+            slug: $organization->slug,
+            formsCount: $organization->forms_count,
+            usersCount: $organization->users_count,
+            createdAt: $organization->created_at,
+            updatedAt:$organization->updated_at,
+            users: UserModelAdapter::fromOrganizationModel($organization->users)
         );
     }
 }

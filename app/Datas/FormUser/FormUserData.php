@@ -6,29 +6,21 @@ use Illuminate\Contracts\Support\Arrayable;
 
 abstract class FormUserData implements Arrayable
 {
-    private ?int $form_id = null;
-    private ?int $user_id = null;
-    private ?string $type = null;
-
     public function __construct(
-        int $form_id = null,
-        int $user_id = null,
-        string $type = null
+        private ?int $formId = null,
+        private ?int $userId = null,
+        private ?string $type = null
     )
-    {
-        $this->form_id = $form_id;
-        $this->user_id = $user_id;
-        $this->type = $type;
-    }
+    {}
 
     public function getFormId(): ?int
     {
-        return $this->form_id;
+        return $this->formId;
     }
 
     public function getUserId(): ?int
     {
-        return $this->user_id;
+        return $this->userId;
     }
 
     public function getType(): ?string
@@ -38,14 +30,14 @@ abstract class FormUserData implements Arrayable
 
     public function setFormId(int $formId): self
     {
-        $this->form_id = $formId;
+        $this->formId = $formId;
 
         return $this;
     }
 
     public function setUserId(int $userId): self
     {
-        $this->user_id = $userId;
+        $this->userId = $userId;
 
         return $this;
     }

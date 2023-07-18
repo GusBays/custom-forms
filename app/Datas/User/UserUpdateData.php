@@ -10,32 +10,25 @@ abstract class UserUpdateData extends UserData
     use SetModifiedFields;
     use GetTimestamps;
 
-    private int $id;
-    private ?string $created_at = null;
-    private ?string $updated_at = null;
-
     public function __construct(
-        int $id,
-        int $organization_id = null,
-        string $name = null,
-        string $first_name = null,
-        string $last_name = null,
-        string $email = null,
-        string $password = null,
-        string $type = null,
-        string $token = null,
-        string $created_at = null,
-        string $updated_at = null
+        private int $id,
+        private ?int $organizationId = null,
+        private ?string $name = null,
+        private ?string $firstName = null,
+        private ?string $lastName = null,
+        private ?string $email = null,
+        private ?string $password = null,
+        private ?string $type = null,
+        private ?string $token = null,
+        private ?string $createdAt = null,
+        private ?string $updatedAt = null
     )
     {
-        $this->id = $id;
-        $this->created_at = $created_at;
-        $this->updated_at = $updated_at;
         parent::__construct(
-            $organization_id,
+            $organizationId,
             $name,
-            $first_name,
-            $last_name,
+            $firstName,
+            $lastName,
             $email,
             $password,
             $type,

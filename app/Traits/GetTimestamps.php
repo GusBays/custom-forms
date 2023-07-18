@@ -6,11 +6,11 @@ trait GetTimestamps
 {
     public function getCreatedAt(): ?string
     {
-        return $this->created_at;
+        return $this->createdAt;
     }
 
     public function getUpdatedAt(): ?string
     {
-        return $this->updated_at;
+        return $this->updatedAt;
     }
 }

@@ -12,9 +12,9 @@ class FormAnswerRequestAdapter extends FormAnswerData
     )
     {
         parent::__construct(
-            $request->input('form_id'),
-            $request->input('filler_id'),
-            $request->input('answers'),
+            formId: $request->input('form_id'),
+            fillerId: $request->input('filler_id'),
+            answers: $request->input('answers'),
         );
     }
 

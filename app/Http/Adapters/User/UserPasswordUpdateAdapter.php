@@ -12,13 +12,8 @@ class UserPasswordUpdateAdapter extends UserUpdateData
     )
     {
         parent::__construct(
-            $id,
-            null,
-            null,
-            null,
-            null,
-            null,
-            $password
+            id: $id,
+            password: $password
         );
 
         $this->setField('password', $password);

@@ -15,18 +15,18 @@ class FormUpdateRequestAdapter extends FormUpdateData
     )
     {
         parent::__construct(
-            $request->route('id'),
-            $request->input('organization_id', config('organization_id')),
-            $request->input('name'),
-            $request->input('available_until'),
-            $request->input('fill_limit'),
-            $request->input('should_notify_each_fill', true),
-            $request->input('active', true),
-            $request->input('slug'),
-            $request->has('form_users') ? FormUserUpdateRequestAdapter::createFromFormUpdateRequest($request->form_users) : [],
-            $request->has('form_fields') ? FormFieldUpdateRequestAdapter::createFromFormUpdateRequest($request->form_fields) : [],
-            $request->input('created_at'),
-            $request->input('updated_at')
+            id: $request->route('id'),
+            organizationId: $request->input('organization_id', config('organization_id')),
+            name: $request->input('name'),
+            availableUntil: $request->input('available_until'),
+            fillLimit: $request->input('fill_limit'),
+            shouldNotifyEachFill: $request->input('should_notify_each_fill', true),
+            active: $request->input('active', true),
+            slug: $request->input('slug'),
+            formUsers: $request->has('form_users') ? FormUserUpdateRequestAdapter::createFromFormUpdateRequest($request->form_users) : [],
+            formFields: $request->has('form_fields') ? FormFieldUpdateRequestAdapter::createFromFormUpdateRequest($request->form_fields) : [],
+            createdAt: $request->input('created_at'),
+            updatedAt: $request->input('updated_at')
         );
 
         foreach ($request->all() as $key => $value) {

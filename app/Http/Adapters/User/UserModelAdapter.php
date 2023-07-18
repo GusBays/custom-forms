@@ -13,17 +13,17 @@ class UserModelAdapter extends UserUpdateData
     )
     {
         parent::__construct(
-            $user->id,
-            $user->getAttribute('organization_id') ?? $user->getAttribute('users.organization_id'),
-            $user->name,
-            $user->first_name,
-            $user->last_name,
-            $user->email,
-            $user->password,
-            $user->type,
-            $user->token,
-            $user->created_at,
-            $user->updated_at
+            id: $user->id,
+            organizationId: $user->getAttribute('organization_id') ?? $user->getAttribute('users.organization_id'),
+            name: $user->name,
+            firstName: $user->first_name,
+            lastName: $user->last_name,
+            email: $user->email,
+            password: $user->password,
+            type: $user->type,
+            token: $user->token,
+            createdAt: $user->created_at,
+            updatedAt: $user->updated_at
         );
     }
 

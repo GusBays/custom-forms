@@ -13,43 +13,28 @@ abstract class FormUpdateData extends FormData
     use GetTimestamps;
     use SetModifiedFields;
 
-    private int $id;
-    private int $organization_id;
-    /** @var FormUserUpdateData[] */
-    private ?array $formUsers = null;
-    /** @var FormFieldUpdateData[] */
-    private ?array $formFields = null;
-    private ?string $slug = null;
-    private ?string $created_at = null;
-    private ?string $updated_at = null;
-
     public function __construct(
-        int $id,
-        int $organization_id,
-        string $name = null,
-        string $available_until = null,
-        int $fill_limit = null,
-        bool $should_notify_each_fill = true,
-        bool $active = true,
-        string $slug = null,
-        array $formUsers = [],
-        array $formFields = [],
-        string $created_at = null,
-        string $updated_at = null
+        private int $id,
+        private int $organizationId,
+        private ?string $name = null,
+        private ?string $availableUntil = null,
+        private ?int $fillLimit = null,
+        private bool $shouldNotifyEachFill = true,
+        private bool $active = true,
+        private ?string $slug = null,
+        /** @var FormUserUpdateData[] */
+        private array $formUsers = [],
+        /** @var FormFieldUpdateData[] */
+        private array $formFields = [],
+        private ?string $createdAt = null,
+        private ?string $updatedAt = null
     )
     {
-        $this->id = $id;
-        $this->organization_id = $organization_id;
-        $this->slug = $slug;
-        $this->formUsers = $formUsers;
-        $this->formFields = $formFields;
-        $this->created_at = $created_at;
-        $this->updated_at = $updated_at;
         parent::__construct(
             $name,
-            $available_until,
-            $fill_limit,
-            $should_notify_each_fill,
+            $availableUntil,
+            $fillLimit,
+            $shouldNotifyEachFill,
             $active
         );
     }

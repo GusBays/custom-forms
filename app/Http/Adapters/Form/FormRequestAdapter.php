@@ -14,13 +14,13 @@ class FormRequestAdapter extends FormData
     )
     {
         parent::__construct(
-            $request->input('name'),
-            $request->input('available_until'),
-            $request->input('fill_limit'),
-            $request->input('should_notify_each_fill'),
-            $request->input('active'),
-            filled($request->form_users) ? FormUserRequestAdapter::createFromFormRequest($request->form_users) : [],
-            filled($request->form_fields) ? FormFieldRequestAdapter::createFromFormRequest($request->form_fields) : []
+            name: $request->input('name'),
+            availableUntil: $request->input('available_until'),
+            fillLimit: $request->input('fill_limit'),
+            shouldNotifyEachFill: $request->input('should_notify_each_fill'),
+            active: $request->input('active'),
+            formUsers: filled($request->form_users) ? FormUserRequestAdapter::createFromFormRequest($request->form_users) : [],
+            formFields: filled($request->form_fields) ? FormFieldRequestAdapter::createFromFormRequest($request->form_fields) : []
         );
     }
 }

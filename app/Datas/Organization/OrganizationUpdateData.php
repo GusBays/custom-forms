@@ -8,30 +8,22 @@ abstract class OrganizationUpdateData extends OrganizationData
 {
     use GetTimestamps;
 
-    private int $id;
-    private ?string $slug = null;
-    private ?string $created_at = null;
-    private ?string $updated_at = null;
-
     public function __construct(
-        int $id,
-        string $name = null,
-        string $slug = null,
-        int $forms_count = null,
-        int $users_count = null,
-        string $created_at = null,
-        string $updated_at = null,
-        array $users = []
+        private int $id,
+        private ?string $name = null,
+        private ?string $slug = null,
+        private ?int $formsCount = null,
+        private ?int $usersCount = null,
+        private ?string $createdAt = null,
+        private ?string $updatedAt = null,
+        /** @var UserData[] */
+        private ?array $users = []
     )
     {
-        $this->id = $id;
-        $this->slug = $slug;
-        $this->created_at = $created_at;
-        $this->updated_at = $updated_at;
         parent::__construct(
             $name,
-            $forms_count,
-            $users_count,
+            $formsCount,
+            $usersCount,
             $users
         );
     }

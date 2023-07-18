@@ -11,9 +11,9 @@ class FormUserCreatorAdapter extends FormUserData
     )
     {
         parent::__construct(
-            $formId,
-            config('user_id'),
-            'creator'
+            formId: $formId,
+            userId: config('user_id'),
+            type: 'creator'
         );
     }
 }

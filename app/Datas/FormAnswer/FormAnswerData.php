@@ -6,20 +6,12 @@ use Illuminate\Contracts\Support\Arrayable;
 
 abstract class FormAnswerData implements Arrayable
 {
-    private int $formId;
-    private ?int $fillerId = null;
-    private ?array $answers = null;
-
     public function __construct(
-        int $formId,
-        int $fillerId = null,
-        array $answers = null
+        private int $formId,
+        private ?int $fillerId = null,
+        private ?array $answers = null
     )
-    {
-        $this->formId = $formId;
-        $this->fillerId = $fillerId;
-        $this->answers = $answers;
-    }
+    {}
 
     public function getFormId(): int
     {

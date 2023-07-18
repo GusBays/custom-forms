@@ -9,35 +9,17 @@ abstract class UserData implements Arrayable
 {
     use GetOrganizationId;
 
-    private ?int $organization_id = null;
-    private ?string $name = null;
-    private ?string $first_name = null;
-    private ?string $last_name = null;
-    private ?string $email = null;
-    private ?string $password = null;
-    private ?string $type = null;
-    private ?string $token = null;
-
     public function __construct(
-        ?int $organization_id = null,
-        ?string $name = null,
-        ?string $first_name = null,
-        ?string $last_name = null,
-        ?string $email = null,
-        ?string $password = null,
-        ?string $type = null,
-        ?string $token = null
+        private ?int $organizationId = null,
+        private ?string $name = null,
+        private ?string $firstName = null,
+        private ?string $lastName = null,
+        private ?string $email = null,
+        private ?string $password = null,
+        private ?string $type = null,
+        private ?string $token = null
     )
-    {
-        $this->organization_id = $organization_id;
-        $this->name = $name;
-        $this->first_name = $first_name;
-        $this->last_name = $last_name;
-        $this->email = $email;
-        $this->password = $password;
-        $this->type = $type;
-        $this->token = $token;
-    }
+    {}
 
     public function getName(): ?string
     {
@@ -46,12 +28,12 @@ abstract class UserData implements Arrayable
 
     public function getFirstName(): ?string
     {
-        return $this->first_name;
+        return $this->firstName;
     }
 
     public function getLastName(): ?string
     {
-        return $this->last_name;
+        return $this->lastName;
     }
 
     public function getEmail(): ?string

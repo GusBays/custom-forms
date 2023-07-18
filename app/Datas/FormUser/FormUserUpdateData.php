@@ -13,31 +13,20 @@ abstract class FormUserUpdateData extends FormUserData
     use GetTimestamps;
     use SetModifiedFields;
 
-    private int $id;
-    private int $organization_id;
-    private ?string $created_at = null;
-    private ?string $updated_at = null;
-    private ?UserUpdateData $user = null;
-
     public function __construct(
-        int $id,
-        int $organization_id,
-        int $form_id = null,
-        int $user_id = null,
-        string $type = null,
-        string $created_at = null,
-        string $updated_at = null,
-        UserUpdateData $user = null
+        private int $id,
+        private int $organizationId,
+        private ?int $formId = null,
+        private ?int $userId = null,
+        private ?string $type = null,
+        private ?string $createdAt = null,
+        private ?string $updatedAt = null,
+        private ?UserUpdateData $user = null
     )
     {
-        $this->id = $id;
-        $this->organization_id = $organization_id;
-        $this->created_at = $created_at;
-        $this->updated_at = $updated_at;
-        $this->user = $user;
         parent::__construct(
-            $form_id,
-            $user_id,
+            $formId,
+            $userId,
             $type
         );
     }

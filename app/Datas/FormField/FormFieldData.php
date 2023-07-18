@@ -6,33 +6,19 @@ use Illuminate\Contracts\Support\Arrayable;
 
 abstract class FormFieldData implements Arrayable
 {
-    private ?int $form_id = null;
-    private ?string $name = null;
-    private ?string $description = null;
-    private ?bool $required = true;
-    private ?string $type = null;
-    private ?array $content = null;
-
     public function __construct(
-        int $form_id = null,
-        string $name = null,
-        string $description = null,
-        bool $required = true,
-        string $type = null,
-        array $content = null
+        private ?int $formId = null,
+        private ?string $name = null,
+        private ?string $description = null,
+        private bool $required = true,
+        private ?string $type = null,
+        private ?array $content = null
     )
-    {
-        $this->form_id = $form_id;
-        $this->name = $name;
-        $this->description = $description;
-        $this->required = $required;
-        $this->type = $type;
-        $this->content = $content;
-    }
+    {}
 
     public function getFormId(): ?int
     {
-        return $this->form_id;
+        return $this->formId;
     }
 
     public function getName(): ?string
@@ -60,9 +46,9 @@ abstract class FormFieldData implements Arrayable
         return $this->content;
     }
 
-    public function setFormId(int $form_id): self
+    public function setFormId(int $formId): self
     {
-        $this->form_id = $form_id;
+        $this->formId = $formId;
 
         return $this;
     }

@@ -13,16 +13,16 @@ class FormFieldModelAdapter extends FormFieldUpdateData
     )
     {
         parent::__construct(
-            $formField->id,
-            $formField->getAttribute('organization_id') ?? $formField->getAttribute('form_fields.organization_id'),
-            $formField->form_id,
-            $formField->name,
-            $formField->description,
-            $formField->required,
-            $formField->type,
-            $formField->content,
-            $formField->created_at,
-            $formField->updated_at
+            id: $formField->id,
+            organizationId: $formField->getAttribute('organization_id') ?? $formField->getAttribute('form_fields.organization_id'),
+            formId: $formField->form_id,
+            name: $formField->name,
+            description: $formField->description,
+            required: $formField->required,
+            type: $formField->type,
+            content: $formField->content,
+            createdAt: $formField->created_at,
+            updatedAt: $formField->updated_at
         );
     }
 

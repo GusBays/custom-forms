@@ -14,14 +14,14 @@ class FormUserModelAdapter extends FormUserUpdateData
     )
     {
         parent::__construct(
-            $formUser->id,
-            $formUser->getAttribute('organization_id') ?? $formUser->getAttribute('form_users.organization_id'),
-            $formUser->form_id,
-            $formUser->user_id,
-            $formUser->type,
-            $formUser->created_at,
-            $formUser->updated_at,
-            new UserModelAdapter($formUser->user)
+            id: $formUser->id,
+            organizationId: $formUser->getAttribute('organization_id') ?? $formUser->getAttribute('form_users.organization_id'),
+            formId: $formUser->form_id,
+            userId: $formUser->user_id,
+            type: $formUser->type,
+            createdAt: $formUser->created_at,
+            updatedAt: $formUser->updated_at,
+            user: new UserModelAdapter($formUser->user)
         );
     }
 

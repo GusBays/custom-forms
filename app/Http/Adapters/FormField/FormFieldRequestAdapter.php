@@ -12,12 +12,12 @@ class FormFieldRequestAdapter extends FormFieldData
     )
     {
         parent::__construct(
-            $request->input('form_id'),
-            $request->input('name'),
-            $request->input('description'),
-            $request->input('required', true),
-            $request->input('type'),
-            $request->input('content', [])
+            formId: $request->input('form_id'),
+            name: $request->input('name'),
+            description: $request->input('description'),
+            required: $request->input('required', true),
+            type: $request->input('type'),
+            content: $request->input('content', [])
         );
     }
 

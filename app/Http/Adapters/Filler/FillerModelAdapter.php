@@ -12,14 +12,14 @@ class FillerModelAdapter extends FillerUpdateData
     )
     {
         parent::__construct(
-            $filler->id,
-            $filler->getAttribute('organization_id') ?? $filler->getAttribute('fillers.organization_id'),
-            $filler->name,
-            $filler->first_name,
-            $filler->last_name,
-            $filler->email,
-            $filler->created_at,
-            $filler->updated_at
+            id: $filler->id,
+            organizationId: $filler->getAttribute('organization_id') ?? $filler->getAttribute('fillers.organization_id'),
+            name: $filler->name,
+            firstName: $filler->first_name,
+            lastName: $filler->last_name,
+            email: $filler->email,
+            createdAt: $filler->created_at,
+            updatedAt: $filler->updated_at
         );
     }
 
