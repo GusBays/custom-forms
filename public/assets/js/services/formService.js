@@ -1,6 +1,6 @@
 import Api from "../utils/api.js";
 import Toast from "../utils/toast.js";
-import { getFormFields } from "./formFieldService.js";
+import { createNewFields, getFormFields } from "./formFieldService.js";
 import { getFormUsers } from "./formUserService.js";
 
 const api = new Api('forms')
@@ -54,6 +54,9 @@ function registerCreateEventListener() {
 
 function registerUpdateEventListener() {
     updateButton.addEventListener('click', () => {
+
+        createNewFields()
+
         api.put(data.id, data)
         .then((res) => {
             if (!res.ok) throw Error(res.statusText)
