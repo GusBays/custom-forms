@@ -12,6 +12,16 @@ body {
     background-color: #6500b1;
 }
 
+.link-theme-color {
+    color: #7800D2;
+    text-decoration: none;
+}
+
+.link-theme-color:hover {
+    color: #6500b1;;
+    text-decoration: none;
+}
+
 [data-tab-info] {
     display: none;
 }
