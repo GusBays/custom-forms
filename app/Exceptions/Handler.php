@@ -75,14 +75,13 @@ class Handler extends ExceptionHandler
         }
 
         if ($th instanceof \Throwable) {
-
             $message = env('APP_DEBUG') ? $th->getMessage() : 'looks_like_something_wrong';
             $trace = env('APP_DEBUG') ? $th->getTrace() : 'internal_server_error';
 
             return response()->json([
                 'error' => $message,
                 'trace' => $trace
-            ], Response::HTTP_INTERNAL_SERVER_ERROR);
+            ], $th->getCode());
         }
 
         parent::render($request, $th);
