@@ -1,8 +1,6 @@
 <?php
 
-use App\Contracts\FillerActionEnum;
 use App\Contracts\RedirectEnum;
-use App\Http\Controllers\FillerActionController;
 use App\Http\Controllers\ViewsController;
 use Illuminate\Support\Facades\Route;
 
