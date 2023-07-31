@@ -7,13 +7,13 @@ use Illuminate\Contracts\Support\Arrayable;
 abstract class FormAnswerData implements Arrayable
 {
     public function __construct(
-        private int $formId,
+        private ?int $formId = null,
         private ?int $fillerId = null,
         private ?array $answers = null
     )
     {}
 
-    public function getFormId(): int
+    public function getFormId(): ?int
     {
         return $this->formId;
     }

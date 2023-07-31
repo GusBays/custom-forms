@@ -14,8 +14,8 @@ abstract class FormAnswerUpdateData extends FormAnswerData
     public function __construct(
         private ?int $id = null,
         private ?int $organizationId = null,
-        private int $formId,
-        private int $fillerId,
+        private ?int $formId = null,
+        private ?int $fillerId = null,
         private ?array $answers = null,
         private ?string $createdAt = null,
         private ?string $updatedAt = null,

@@ -12,7 +12,7 @@ class FillerUpdateRequestAdapter extends FillerUpdateData
     )
     {
         parent::__construct(
-            id: $request->route('id'),
+            id: $request->route('id') ?? $request->input('id'),
             organizationId: $request->input('organization_id', config('organization_id')),
             name: $request->input('name'),
             firstName: $request->input('first_name'),
