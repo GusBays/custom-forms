@@ -33,4 +33,6 @@ abstract class BaseNotification extends Notification implements ShouldQueue
     abstract function getReplyTo(): array;
 
     abstract function getArgs(): array;
+
+    abstract static function sample(): MailMessage;
 }

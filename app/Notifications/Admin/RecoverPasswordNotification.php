@@ -3,7 +3,9 @@
 namespace App\Notifications\Admin;
 
 use App\Datas\User\UserUpdateData;
+use App\Http\Adapters\User\UserRequestUpdateAdapter;
 use App\Notifications\BaseNotification;
+use Illuminate\Http\Request;
 use Illuminate\Notifications\Messages\MailMessage;
 
 class RecoverPasswordNotification extends BaseNotification
@@ -50,5 +52,27 @@ class RecoverPasswordNotification extends BaseNotification
             'user' => $this->user,
             'password' => $this->password
         ];
+    }
+
+    public static function sample(): MailMessage
+    {
+        $userRequest = new Request([
+            'id' => 1,
+            'name' => 'Usuário de exemplo',
+        ]);
+
+        $user = new UserRequestUpdateAdapter($userRequest);
+
+        $password = 'nova-senha-exemplo-123';
+
+        $args = [
+            'user' => $user,
+            'password' => $password
+        ];
+
+        $mail = new MailMessage();
+        $mail->view('emails.admin.recover-password', $args);
+
+        return $mail;
     }
 }

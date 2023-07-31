@@ -46,7 +46,7 @@ class AnswerNotificationJob implements ShouldQueue
 
         $file = $this->putFileToStorageAndGetPath();
 
-        $filler->notify(new AnswerNotification($this->filler, $this->form, storage_path('app/'.$file)));
+        $filler->notify(new AnswerNotification($this->filler, $this->form, $file));
     }
 
     private function putFileToStorageAndGetPath(): string
@@ -55,24 +55,20 @@ class AnswerNotificationJob implements ShouldQueue
         $formId = $this->form->getId();
         $fileName = 'fomulario-' . $formId . '-preenchido-por-' . $this->filler->getName() . '.pdf';
 
-        $path  = "public/$organizationId/forms/$formId/$fileName";
+        $pathToSaveFile  = "public/$organizationId/forms/$formId/$fileName";
 
         $pdf = $this->getPdfInstance();
         $pdf->loadView('pdf.form-filled', $this->getData());
 
-        Storage::put($path, $pdf->download("$fileName")->getOriginalContent());
+        Storage::put($pathToSaveFile, $pdf->download("$fileName")->getOriginalContent());
 
-        return $path;
+        return "/$organizationId/forms/$formId/$fileName";
     }
 
     private function getData(): array
     {
-        $answer = $this->formAnswerRepository->getOne(
-            new FormAnswerFormIdFillerIdFilter(
-                $this->form->getId(),
-                $this->filler->getId()
-            )
-        );
+        $answerFilter = new FormAnswerFormIdFillerIdFilter($this->form->getId(), $this->filler->getId());
+        $answer = $this->formAnswerRepository->getOne($answerFilter);
 
         return [
             'filler' => $this->filler,
