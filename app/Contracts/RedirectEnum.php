@@ -12,6 +12,8 @@ class RedirectEnum
 
     public const RECUPERAR = '/recuperar-senha';
 
+    public const RESPONDER = '/responder/{slug}';
+
     public const ADMIN = '/admin';
 
     public const FORMS = '/admin/formularios';

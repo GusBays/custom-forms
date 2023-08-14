@@ -52,6 +52,17 @@ class ViewsController
         return view('recover');
     }
 
+    public function responder(Request $request): View
+    {
+        try {
+            $form = $this->formController->getOneBySlug($request);
+        } catch (\Throwable $e) {
+            dd('answer', $e);
+        }
+
+        return view('answer', ['form' => $form->resource]);
+    }
+
     public function admin(Request $request): View
     {
         try {
@@ -110,6 +121,17 @@ class ViewsController
         }
 
         return view('sidebar/forms/form-detail', ['form' => $form]);
+    }
+
+    public function newForm(Request $request): View
+    {
+        try {
+            $user = $this->userController->show(new Request(['id' => config('user_id')]));
+        } catch (ModelNotFoundException $e) {
+            dd($e);
+        }
+
+        return view('sidebar/forms/form-new', ['user' => $user->resource]);
     }
 
     public function fillers(Request $request): View

@@ -96,7 +96,9 @@ function loadTable(data) {
 
     tableBody.append(html)
 
-    const formId = document.getElementById('id').value
+    const formIdInput = document.getElementById('id')
+    let formId = null;
+    if (formIdInput) formId = formIdInput.value
     const createUserCheckbox = document.querySelectorAll('#create-user-checkbox')
     const createFormUserTypeSelect = document.querySelectorAll('#create-user-type')
     

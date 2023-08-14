@@ -12,7 +12,7 @@ abstract class FormData implements Arrayable
         private ?string $name = null,
         private ?string $availableUntil = null,
         private ?int $fillLimit = null,
-        private bool $shouldNotifyEachFill = true,
+        private bool $shouldNotifyEachFill = false,
         private bool $active = true,
         /** @var FormUserData[] */
         private array $formUsers = [],

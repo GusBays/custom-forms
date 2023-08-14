@@ -35,6 +35,11 @@ class Form extends BaseModel
         'active' => 'bool'
     ];
 
+    protected $attributes = [
+        'should_notify_each_fill' => false,
+        'active' => true
+    ];
+
     public static function boot()
     {
         parent::boot();

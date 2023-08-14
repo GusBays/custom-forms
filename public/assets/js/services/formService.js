@@ -42,7 +42,6 @@ function registerCreateEventListener() {
             else return res.json()
         })
         .then(data => {
-            // criar os form users e fields aqui, antes de fazer o redirecionamento.
             window.location = `${window.origin}/admin/formularios/${data.id}`
         })
         .catch((e) => {

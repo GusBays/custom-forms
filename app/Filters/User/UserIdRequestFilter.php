@@ -11,7 +11,7 @@ class UserIdRequestFilter extends UserFilter
     )
     {
         parent::__construct(
-            $request->route('id'),
+            $request->route('id') ?? $request->input('id'),
             null,
             null
         );

@@ -21,6 +21,7 @@ Route::controller(ViewsController::class)->group(function () {
     Route::get(RedirectEnum::ENTRAR, 'entrar');
     Route::get(RedirectEnum::CADASTRO, 'cadastro');
     Route::get(RedirectEnum::RECUPERAR, 'recuperar');
+    Route::get(RedirectEnum::RESPONDER, 'responder');
 });
 
 Route::middleware('auth:web')->group(function () {
