@@ -24,6 +24,7 @@
                 <div class="shadow my-5 p-3 bg-body-tertiary rounded">
 
                     <form id="register-form">
+                        @csrf
                         <div class="col">
                             <div class="mb-3">
                                 <label for="name" class="form-label">Nome da organização</label>
