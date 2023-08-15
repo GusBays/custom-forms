@@ -26,5 +26,8 @@
     @include('scripts/admin/account/logoff')
     @include('scripts/admin/account/recover')
     @include('scripts/admin/account/register')
+
+    <!-- admin home scripts -->
+    @include('scripts/admin/home/form-card')
 </body>
 </html>
