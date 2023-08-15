@@ -86,5 +86,3 @@
     </div>
   </div>
 </nav>
-
-<script type="module" src="{{ env('APP_URL') }}/assets/js/services/loginService.js"></script>
