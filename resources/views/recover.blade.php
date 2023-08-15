@@ -14,9 +14,6 @@
         <div class="row align-items-center justify-content-center vh-100">
             <div class="col-10 col-md-8 col-lg-6">
                 <div class="shadow p-3 mb-5 bg-body-tertiary rounded">
-
-                    <div class="col alert" id="alert" hidden></div>
-
                     <div class="row">
                         <div class="col-12">
                             <div class="form-title mb-3">
@@ -31,27 +28,28 @@
                         </div>
                     </div>
 
-                    <div class="row my-3">
-                        <div class="col">
-                            <input id="email" name="email" type="email" class="form-control" placeholder="Email"/>
+                    <form id="recover-form">
+                        @csrf
+                        <div class="col mt-3">
+                            <input id="email" name="email" type="email" class="form-control" placeholder="Email" required>
                         </div>
-                    </div>
-
-                    <div class="row">
-                        <div id="recaptcha"></div>
-                        <div class="col-12 mt-2 col-md-6">
-                            <button type="submit" id="confirm-button" class="btn btn-success border-0 w-100" style="background-color:#7800D2" recover disabled>Confirmar</button>
+                        <div class="col mt-3">
+                            <div id="recaptcha"></div>
                         </div>
-                        <div class="col-12 mt-2 col-md-6">
-                            <div class="mt-1 mt-md-0">
-                                <a class="btn btn-secondary border-0 w-100" id="back-button" type="button">Voltar</a>
+                        <div class="row mt-3">
+                            <div class="col-12 col-md-6">
+                                <button type="submit" id="confirm-button" disabled class="btn btn-success w-100 border-0 theme-color">Enviar email</button>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <div class="mt-1 mt-md-0">
+                                    <a class="btn btn-secondary border-0 w-100" id="back-button" type="button">Voltar</a>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
+
                 </div>
             </div>
         </div>
     </div>
-
-    <script type="module" src="{{ env('APP_URL') }}/assets/js/services/loginService.js"></script>
 @endsection
