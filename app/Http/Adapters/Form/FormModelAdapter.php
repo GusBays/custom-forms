@@ -6,6 +6,7 @@ use App\Datas\Form\FormUpdateData;
 use App\Http\Adapters\FormField\FormFieldModelAdapter;
 use App\Http\Adapters\FormUser\FormUserModelAdapter;
 use App\Models\Form;
+use Illuminate\Database\Eloquent\Collection;
 
 class FormModelAdapter extends FormUpdateData
 {
@@ -22,14 +23,14 @@ class FormModelAdapter extends FormUpdateData
             shouldNotifyEachFill: $form->should_notify_each_fill,
             active: $form->active,
             slug: $form->slug,
-            formUsers: FormUserModelAdapter::createFromFormModel($form->formUsers),
-            formFields: FormFieldModelAdapter::createFromFormModel($form->formFields),
+            formUsers: FormUserModelAdapter::collection($form->formUsers),
+            formFields: FormFieldModelAdapter::collection($form->formFields),
             createdAt: $form->created_at,
             updatedAt: $form->updated_at
         );
     }
 
-    public static function collection(array $forms): array
+    public static function collection(Collection | array $forms): array
     {
         return collect($forms)->mapInto(self::class)->all();
     }

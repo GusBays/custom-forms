@@ -13,14 +13,11 @@ use App\Interpreters\FormUser\FormUserIdInterpreter;
 use App\Interpreters\SearchInterpreter;
 use App\Interpreters\SortInterpreter;
 use App\Models\FormUser;
-use App\Traits\PerPage;
 use Exception;
 use Illuminate\Database\Eloquent\Builder;
 
 class FormUserRepository
 {
-    use PerPage;
-
     protected FormUser $model;
     private const RELATIONS = ['form', 'user'];
 
@@ -47,9 +44,7 @@ class FormUserRepository
      */
     public function getPaginate(): array
     {
-        $formUsers = $this->getFormUserQuery(new FormUserGetAllFilter())
-            ->paginate($this->perPage())
-            ->items();
+        $formUsers = $this->getFormUserQuery(new FormUserGetAllFilter())->get();
 
         return FormUserModelAdapter::collection($formUsers);
     }

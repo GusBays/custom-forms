@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Filters\Filler\FillerIdRequestFilter;
+use App\Helpers\Paginator;
 use App\Http\Adapters\Filler\FillerRequestAdapter;
 use App\Http\Adapters\Filler\FillerUpdateRequestAdapter;
 use App\Resources\FillerResource;
@@ -36,7 +37,9 @@ class FillerController
 
     public function index(Request $request): AnonymousResourceCollection
     {
-        return FillerResource::collection($this->service->getPaginate($request));
+        return FillerResource::collection(
+            resource: Paginator::paginate($this->service->getPaginate($request))
+        );
     }
 
     public function show(Request $request): FillerResource

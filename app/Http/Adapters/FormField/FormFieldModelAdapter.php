@@ -26,12 +26,7 @@ class FormFieldModelAdapter extends FormFieldUpdateData
         );
     }
 
-    public static function createFromFormModel(Collection $formFields): array
-    {
-        return $formFields->mapInto(self::class)->all();
-    }
-
-    public static function collection(array $formFields): array
+    public static function collection(Collection | array $formFields): array
     {
         return collect($formFields)->mapInto(self::class)->all();
     }

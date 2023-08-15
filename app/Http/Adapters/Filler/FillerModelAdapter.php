@@ -4,6 +4,7 @@ namespace App\Http\Adapters\Filler;
 
 use App\Datas\Filler\FillerUpdateData;
 use App\Models\Filler;
+use Illuminate\Database\Eloquent\Collection;
 
 class FillerModelAdapter extends FillerUpdateData
 {
@@ -23,7 +24,7 @@ class FillerModelAdapter extends FillerUpdateData
         );
     }
 
-    public static function collection(array $fillers): array
+    public static function collection(Collection | array $fillers): array
     {
         return collect($fillers)->mapInto(self::class)->all();
     }

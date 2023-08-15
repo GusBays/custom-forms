@@ -20,7 +20,7 @@ class OrganizationModelAdapter extends OrganizationUpdateData
             usersCount: $organization->users_count,
             createdAt: $organization->created_at,
             updatedAt:$organization->updated_at,
-            users: UserModelAdapter::fromOrganizationModel($organization->users)
+            users: UserModelAdapter::collection($organization->users)
         );
     }
 }

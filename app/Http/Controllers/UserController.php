@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Filters\User\UserIdRequestFilter;
+use App\Helpers\Paginator;
 use App\Http\Adapters\User\UserRequestAdapter;
 use App\Http\Adapters\User\UserRequestUpdateAdapter;
 use App\Resources\UserResource;
@@ -38,7 +39,9 @@ class UserController
 
     public function index(Request $request): AnonymousResourceCollection
     {
-        return UserResource::collection($this->service->getPaginate($request)); 
+        return UserResource::collection(
+            resource: Paginator::paginate($this->service->getPaginate($request))
+        ); 
     }
 
     public function show(Request $request): UserResource

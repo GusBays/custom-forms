@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Filters\Form\FormIdRequestFilter;
 use App\Filters\Form\FormSlugRequestFilter;
+use App\Helpers\Paginator;
 use App\Http\Adapters\Form\FormRequestAdapter;
 use App\Http\Adapters\Form\FormUpdateRequestAdapter;
 use App\Resources\FormResource;
@@ -37,7 +38,9 @@ class FormController
 
     public function index(Request $request): AnonymousResourceCollection
     {
-        return FormResource::collection($this->service->getPaginate($request));
+        return FormResource::collection(
+            resource: Paginator::paginate($this->service->getPaginate($request))
+        );
     }
 
     public function show(Request $request): FormResource

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Filters\FormUser\FormUserIdRequestFilter;
+use App\Helpers\Paginator;
 use App\Http\Adapters\FormUser\FormUserRequestAdapter;
 use App\Http\Adapters\FormUser\FormUserUpdateRequestAdapter;
 use App\Resources\FormUserResource;
@@ -36,7 +37,9 @@ class FormUserController
 
     public function index(Request $request): AnonymousResourceCollection
     {
-        return FormUserResource::collection($this->service->getPaginate($request));
+        return FormUserResource::collection(
+            resource: Paginator::paginate($this->service->getPaginate($request))
+        );
     }
 
     public function update(Request $request): FormUserResource

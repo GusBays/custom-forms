@@ -13,14 +13,11 @@ use App\Interpreters\FormField\FormFieldIdInterpreter;
 use App\Interpreters\SearchInterpreter;
 use App\Interpreters\SortInterpreter;
 use App\Models\FormField;
-use App\Traits\PerPage;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 
 class FormFieldRepository
 {
-    use PerPage;
-
     protected FormField $model;
 
     public function __construct(
@@ -46,9 +43,7 @@ class FormFieldRepository
      */
     public function getPaginate(Request $request): array
     {
-        $formFields = $this->getFormFieldQuery(new FormFieldGetAllFilter())
-            ->paginate($this->perPage())
-            ->items();
+        $formFields = $this->getFormFieldQuery(new FormFieldGetAllFilter())->get();
 
         return FormFieldModelAdapter::collection($formFields);
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Filters\FormField\FormFieldIdRequestFilter;
+use App\Helpers\Paginator;
 use App\Http\Adapters\FormField\FormFieldRequestAdapter;
 use App\Http\Adapters\FormField\FormFieldUpdateRequestAdapter;
 use App\Resources\FormFieldResource;
@@ -36,7 +37,9 @@ class FormFieldController
 
     public function index(Request $request): AnonymousResourceCollection
     {
-        return FormFieldResource::collection($this->service->getPaginate($request));
+        return FormFieldResource::collection(
+            resource: Paginator::paginate($this->service->getPaginate($request))
+        );
     }
 
     public function show(Request $request): FormFieldResource

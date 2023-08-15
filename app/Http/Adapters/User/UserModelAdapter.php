@@ -27,13 +27,8 @@ class UserModelAdapter extends UserUpdateData
         );
     }
 
-    public static function collection(array $users): array
+    public static function collection(Collection | array $users): array
     {
         return collect($users)->mapInto(self::class)->all();
-    }
-
-    public static function fromOrganizationModel(Collection $users): array
-    {
-        return $users->mapInto(self::class)->all();
     }
 }

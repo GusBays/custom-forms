@@ -15,15 +15,12 @@ use App\Interpreters\User\UserEmailInterpreter;
 use App\Interpreters\User\UserIdInterpreter;
 use App\Interpreters\User\UserTokenInterpreter;
 use App\Models\User;
-use App\Traits\PerPage;
 use Firebase\JWT\JWT;
 use Illuminate\Database\Eloquent\Builder;
 use Symfony\Component\HttpFoundation\Response;
 
 class UserRepository
 {
-    use PerPage;
-
     protected User $model;
 
     public function __construct(
@@ -45,9 +42,7 @@ class UserRepository
      */
     public function getPaginate(): ?array
     {
-        $users = $this->getUserQuery(new UserGetAllFilter())
-            ->paginate($this->perPage())
-            ->items();
+        $users = $this->getUserQuery(new UserGetAllFilter())->get();
 
         return UserModelAdapter::collection($users);
     }

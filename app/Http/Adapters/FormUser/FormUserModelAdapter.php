@@ -25,12 +25,7 @@ class FormUserModelAdapter extends FormUserUpdateData
         );
     }
 
-    public static function createFromFormModel(Collection $formUsers): array
-    {
-        return $formUsers->mapInto(self::class)->all();
-    }
-
-    public static function collection(array $formUsers): array
+    public static function collection(Collection | array $formUsers): array
     {
         return collect($formUsers)->mapInto(self::class)->all();
     }

@@ -15,7 +15,6 @@ use App\Interpreters\FilterInterpreter;
 use App\Interpreters\SearchInterpreter;
 use App\Interpreters\SortInterpreter;
 use App\Models\Filler;
-use App\Traits\PerPage;
 use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -23,8 +22,6 @@ use Illuminate\Http\Request;
 
 class FillerRepository
 {
-    use PerPage;
-
     protected Filler $model;
     private FormAnswerRepository $formAnswerRepository;
 
@@ -49,9 +46,7 @@ class FillerRepository
      */
     public function getPaginate(Request $request): array
     {
-        $fillers = $this->getFillerQuery(new FillerGetAllFilter())
-            ->paginate($this->perPage())
-            ->items();
+        $fillers = $this->getFillerQuery(new FillerGetAllFilter())->get();
 
         return FillerModelAdapter::collection($fillers);
     }
