@@ -22,12 +22,8 @@
         >
         </x-grid-side>
 
-        <div class="col-12 col-lg-7">
-            @foreach($users as $user) 
-                <div class="mb-2">
-                    @include('snippets/user-card-list')
-                </div>
-            @endforeach
+        <div class="col-12 col-lg-7" id="users-card-list">
+            
         </div>
 
 @endsection

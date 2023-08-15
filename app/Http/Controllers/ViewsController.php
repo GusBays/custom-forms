@@ -158,18 +158,7 @@ class ViewsController
 
     public function users(Request $request): View
     {
-        try {
-            $users = $this->userController->index($request);
-        } catch (\Throwable $th) {
-            return view('error', ['error' => $th->getMessage()]);
-        }
-
-        $toResource = fn (UserResource $user) => $user->resource;
-        $users = $users->collection
-            ->map($toResource)
-            ->all();
-
-        return view('sidebar.users.users-list', ['users' => $users]);
+        return view('sidebar.users.users-list');
     }
 
     public function user(Request $request): View

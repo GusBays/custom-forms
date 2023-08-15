@@ -21,7 +21,7 @@
         })
     })
 
-    function createTemplate(res, formCardsListDiv) {
+    function createTemplate(res, formCardListDiv) {
         let html = ''
         
         for (let form of res.data) {

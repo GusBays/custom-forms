@@ -29,5 +29,8 @@
 
     <!-- admin home scripts -->
     @include('scripts/admin/home/form-card')
+
+    <!-- users scripts -->
+    @include('scripts/admin/users/user-card')
 </body>
 </html>
