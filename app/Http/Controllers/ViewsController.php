@@ -77,19 +77,9 @@ class ViewsController
             ->filter($byUserId)
             ->first();
 
-        $toResource = fn (FormResource $formResource) => $formResource->resource;
-        $byDate = fn (FormUpdateData $form) => $form->getCreatedAt();
-        $forms = $this->formController->index($request)
-            ->collection
-            ->map($toResource)
-            ->sort($byDate)
-            ->slice(0, 6)
-            ->all();
-
         $data = collect()
             ->merge(['organization' => $organization])
             ->merge(['user' => $user])
-            ->merge(['forms' => $forms])
             ->all();
 
         return view('admin-home', $data);

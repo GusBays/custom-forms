@@ -37,6 +37,7 @@
                         html += '<h6>' + form.active === true ? 'Ativo' : 'Inativo' + '</h6>'
                         html += '<h6>Criado em: ' + createdAt.getDate() + '/' + createdAt.getMonth() + '/' + createdAt.getFullYear() + '</h6>'
                         if (availableUntil) html+= '<h6>Disponível até: ' + availableUntil.getDate() + '/' + availableUntil.getMonth() + '/' + availableUntil.getFullYear() + '</h6>'
+                        else html += '<h6>Sem data limite</h6>'
                     html += '</a>'
 
                     html += '<a href="/admin/formularios/respostas?form_id=' + form.id + '" type="button" class="list-group-item mt-3 list-group-item-action">'
