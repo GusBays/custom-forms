@@ -7,7 +7,6 @@ use App\Datas\Organization\OrganizationUpdateData;
 use App\Datas\User\UserUpdateData;
 use App\Resources\FillerResource;
 use App\Resources\FormResource;
-use App\Resources\UserResource;
 use Illuminate\Contracts\View\View;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;

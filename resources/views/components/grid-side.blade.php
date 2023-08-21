@@ -54,7 +54,7 @@
                     </div>
                 @endif
                 @if ($sortButton)
-                    <div class="col-12 text-center">
+                    <div class="col-12 text-center mb-1">
                         <div class="dropdown">
                             <button class="btn btn-warning dropdown-toggle w-50" type="button" style="color:white" data-bs-toggle="dropdown" aria-expanded="false">
                                 <img src="{{ env('APP_URL') }}/assets/img/sort-icon.svg" alt="" width="25" height="20">
@@ -81,6 +81,15 @@
                           </div>
                     </div>
                     <script src="{{ env('APP_URL') }}/assets/js/buttons/order.js"></script>
+                @endif
+                @if ($paginationButton) 
+                    <div class="col-12 text-center">
+                        <div class="d-inline-flex w-50">
+                            <a type="button" class="btn" id="previews-page"><img src="{{ env('APP_URL') }}/assets/img/arrow-left-icon.svg" alt="" width="25" height="20"></a>
+                            <small class="form-control" id="pagination-info"></small>
+                            <a type="button" class="btn" id="next-page"><img src="{{ env('APP_URL') }}/assets/img/arrow-right-icon.svg" alt="" width="25" height="20"></a>
+                        </div>
+                    </div>
                 @endif
             </div>
         @endif

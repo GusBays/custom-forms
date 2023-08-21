@@ -1,30 +1,55 @@
 <script type="module" defer>
     import Cookie from "../../../../assets/js/utils/cookie.js";
     import Toast from "../../../../assets/js/utils/toast.js";
+    import { setPagination } from "../../../../assets/js/utils/pagination.js";
 
     $(function() {
-        $(document).ready(function () {
-            const usersCardList = $('body').find('#users-card-list')
+        $(document).ready(getUsers())
 
-            if (usersCardList.lenth === 0) return;
+        $('#previews-page').click(event => {
+            event.preventDefault()
 
-            usersCardList.empty()
+            const prevPageUrl = $('#previews-page').prop('href')
 
-            params = new URLSearchParams(window.location)
+            window.history.pushState({path: prevPageUrl}, '', prevPageUrl)
 
-            $.ajax({
-                url: "/api{{ App\Contracts\ApiRoutesEnum::USERS}}",
-                type: "get",
-                dataType: 'json',
-                beforeSend: xhr => xhr.setRequestHeader('Authorization', new Cookie().get('adm_token')),
-                success: res => createTemplate(res, usersCardList),
-                error: res => new Toast().show('Ocorreu um erro ao buscar a lista de usuários, tente novamente.')
-            })
+            getUsers()
+        })
+
+        $('#next-page').click(event => {
+            event.preventDefault()
+
+            const nextPageButtonUrl = $('#next-page').prop('href')
+
+            window.history.pushState({path: nextPageButtonUrl}, '', nextPageButtonUrl)
+
+            getUsers()
         })
     })
 
+    function getUsers() {
+        const usersCardList = $('body').find('#users-card-list')
+
+        if (usersCardList.length === 0) return;
+
+        usersCardList.empty()
+
+        const params = new URLSearchParams(window.location.search).toString()
+
+        $.ajax({
+            url: "/api{{ App\Contracts\ApiRoutesEnum::USERS}}?" + params,
+            type: "get",
+            dataType: 'json',
+            beforeSend: xhr => xhr.setRequestHeader('Authorization', new Cookie().get('adm_token')),
+            success: res => createTemplate(res, usersCardList),
+            error: res => new Toast().show('Ocorreu um erro ao buscar a lista de usuários, tente novamente.')
+        })
+    }
+
     function createTemplate(res, userCardListDiv) {
         let html = ''
+
+        setPagination(res)
 
         for (let user of res.data) {
             let createdAt = new Date(user.created_at)

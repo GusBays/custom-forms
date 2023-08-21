@@ -19,6 +19,7 @@
 </head>
 <body class="bg-light">
     @include('snippets/toast')
+
     @yield('content')
 
     <!-- account scripts -->

@@ -19,6 +19,7 @@
             buttonResource="usuário"
             pathResource="usuarios"
             apiResource="users"
+            paginationButton="{{ true }}"
         >
         </x-grid-side>
 
