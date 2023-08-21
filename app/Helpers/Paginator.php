@@ -17,7 +17,7 @@ class Paginator
 
         return new LengthAwarePaginator(
             items: $collection,
-            total: $collection->count(),
+            total: count($items),
             currentPage: $currentPage,
             perPage: $perPage,
             options: [
