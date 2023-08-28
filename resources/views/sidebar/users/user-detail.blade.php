@@ -24,45 +24,47 @@
 
         <div class="col-12 col-lg-7">
             <div class="shadow p-3 mb-5 bg-body-tertiary rounded">
-                <div class="col">
-                        <input type="text" id="id" value="{{ $user->getId() }}" hidden>
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Nome completo</label>
-                        <input class="form-control" type="text" value="{{ $user->getName() }}" disabled readonly>
-                    </div>
-                    <div class="mb-3">
-                        <label for="first_name" class="form-label">Primeiro nome</label>
-                        <input type="text" class="form-control" value="{{ $user->getFirstName() }}" id="first_name" placeholder="Ex.: Ana">
-                    </div>
-                    <div class="mb-3">
-                        <label for="last_name" class="form-label">Sobrenome</label>
-                        <input type="text" class="form-control" value="{{ $user->getLastName() }}" id="last_name" placeholder="Ex.: Flores">
-                    </div>
-                    <div class="mb-3">
-                        <label for="email" class="form-label">E-mail</label>
-                        <input type="text" class="form-control" value="{{ $user->getEmail() }}" id="email" placeholder="Ex.: email@exemplo.com.br">
-                    </div>
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Senha: </label>
-                        <button type="button" class="btn btn-danger border-0 theme-color" data-bs-toggle="modal" data-bs-target="#exampleModal">Editar senha</button>
-                    </div>
-                    <div class="mb-3">
-                        <label for="type" class="form-label">Tipo de cadastro</label>
-                        <input type="text" class="form-control" id="type" value="{{ $user->getType() }}" hidden>
-                        <input type="text" class="form-control" value="{{ 'owner' === $user->getType() ? 'Proprietário' : 'Integrante'}}" disabled readonly>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-12 col-md-6">
-                        <button type="submit" class="btn btn-success border-0 w-100 theme-color" id="update-user">Salvar alterações</button>
-                    </div>
-                    <div class="col-12 col-md-6">
-                        <div class="mt-1 mt-md-0">
-                            <a class="btn btn-secondary w-100" id="back-button" type="button">Voltar</a>
+                <form id="user-detail">
+                    <div class="col">
+                        <input type="text" id="id" name="id" value="{{ $user->getId() }}" hidden>
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Nome completo</label>
+                            <input class="form-control" name="name" type="text" value="{{ $user->getName() }}" disabled readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="first_name" class="form-label">Primeiro nome</label>
+                            <input type="text" name="first_name" class="form-control" value="{{ $user->getFirstName() }}" id="first_name" placeholder="Ex.: Ana">
+                        </div>
+                        <div class="mb-3">
+                            <label for="last_name" class="form-label">Sobrenome</label>
+                            <input type="text" name="last_name" class="form-control" value="{{ $user->getLastName() }}" id="last_name" placeholder="Ex.: Flores">
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">E-mail</label>
+                            <input type="email" name="email" class="form-control" value="{{ $user->getEmail() }}" id="email" placeholder="Ex.: email@exemplo.com.br" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Senha: </label>
+                            <button type="button" class="btn btn-danger border-0 theme-color" data-bs-toggle="modal" data-bs-target="#exampleModal">Editar senha</button>
+                        </div>
+                        <div class="mb-3">
+                            <label for="type" class="form-label">Tipo de cadastro</label>
+                            <input type="text" name="type" class="form-control" id="type" value="{{ $user->getType() }}" hidden>
+                            <input type="text" class="form-control" value="{{ 'owner' === $user->getType() ? 'Proprietário' : 'Integrante'}}" disabled readonly>
                         </div>
                     </div>
-                    <input id="delete-checkbox" type="checkbox" value="{{ $user->getId() }}" hidden>
-                </div>
+                    <div class="row">
+                        <div class="col-12 col-md-6">
+                            <button type="submit" class="btn btn-success border-0 w-100 theme-color">Salvar alterações</button>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <div class="mt-1 mt-md-0">
+                                <a class="btn btn-secondary w-100" id="back-button" type="button">Voltar</a>
+                            </div>
+                        </div>
+                        <input id="delete-checkbox" type="checkbox" value="{{ $user->getId() }}" hidden>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -96,6 +98,4 @@
     </div>
   </div>
 </div>
-
-<script type="module" src="{{ env('APP_URL') }}/assets/js/services/userService.js"></script>
 @endsection

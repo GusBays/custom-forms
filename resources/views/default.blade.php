@@ -33,5 +33,6 @@
 
     <!-- users scripts -->
     @include('scripts/admin/users/user-card')
+    @include('scripts/admin/users/user-detail')
 </body>
 </html>

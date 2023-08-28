@@ -9,9 +9,9 @@ abstract class RequestValidator
 {
     private array $rules;
     private ?int $id = null;
-    private bool $isUpdate = false;
     private array $data;
-
+    protected bool $isUpdate = false;
+    
     public function __construct(
         Request $request
     )
