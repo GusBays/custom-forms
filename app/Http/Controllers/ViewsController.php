@@ -125,18 +125,7 @@ class ViewsController
 
     public function fillers(Request $request): View
     {
-        try {
-            $fillers = $this->fillerController->index($request);
-        } catch (\Throwable $th) {
-            dd('fillers', $th);
-        }
-
-        $toResource = fn (FillerResource $filler) => $filler->resource;
-        $fillers = $fillers->collection
-            ->map($toResource)
-            ->all();
-
-        return view('sidebar.fillers.fillers-list', ['fillers' => $fillers]);
+        return view('sidebar.fillers.fillers-list');
     }
 
     public function filler(Request $request): View

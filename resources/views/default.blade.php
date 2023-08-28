@@ -34,5 +34,8 @@
     <!-- users scripts -->
     @include('scripts/admin/users/user-card')
     @include('scripts/admin/users/user-detail')
+
+    <!-- fillers scripts -->
+    @include('scripts/admin/filler/filler-card')
 </body>
 </html>
