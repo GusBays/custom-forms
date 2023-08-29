@@ -4,7 +4,7 @@
 
     $(function() {
         $(document).ready(function() {
-            const formCardsList = $('body').find('#forms-card-list')
+            const formCardsList = $('body').find('#forms-card-list-home')
 
             if (formCardsList.length === 0) return;
 

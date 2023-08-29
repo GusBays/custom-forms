@@ -36,7 +36,10 @@
     @include('scripts/admin/users/user-detail')
 
     <!-- fillers scripts -->
-    @include('scripts/admin/filler/filler-card')
-    @include('scripts/admin/filler/filler-detail')
+    @include('scripts/admin/fillers/filler-card')
+    @include('scripts/admin/fillers/filler-detail')
+
+    <!-- forms scripts -->
+    @include('scripts/admin/forms/form-card')
 </body>
 </html>

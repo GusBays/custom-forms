@@ -86,18 +86,7 @@ class ViewsController
 
     public function forms(Request $request): View
     {
-        try {
-            $forms = $this->formController->index($request);
-        } catch (ModelNotFoundException $th) {
-            return view('error', ['error' => $th->getMessage()]);
-        }
-
-        $toResource = fn (FormResource $form) => $form->resource;
-        $forms = $forms->collection
-            ->map($toResource)
-            ->all();
-
-        return view('sidebar/forms/forms-list', ['forms' => $forms]);
+        return view('sidebar/forms/forms-list');
     }
 
     public function form(Request $request): View

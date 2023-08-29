@@ -19,17 +19,13 @@
             buttonResource="formulário"
             pathResource="formularios"
             apiResource="forms"
+            paginationButton="{{ true }}"
         >
         </x-grid-side>
 
-        <div class="col-12 col-lg-7">
-            @foreach($forms as $form) 
-                <div class="mb-2">
-                    @include('snippets/form-card-list')
-                </div>
-            @endforeach
-        </div>
+        <div class="col-12 col-lg-7" id="forms-card-list">
 
-        <script src="{{ env('APP_URL') }}/assets/js/buttons/active.js"></script>
+        </div>
+    </div>
 
 @endsection
