@@ -37,5 +37,6 @@
 
     <!-- fillers scripts -->
     @include('scripts/admin/filler/filler-card')
+    @include('scripts/admin/filler/filler-detail')
 </body>
 </html>
